@@ -24,48 +24,52 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <div class="card-title">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <Link
-                                                :href="route('salaire.create')"
-                                                class="btn btn-success"
-                                                ><i class="fa fa-plus"></i
-                                                >Ajouter</Link
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <Link
+                                            :href="route('salaire.create')"
+                                            class="btn btn-success"
+                                            ><i class="fa fa-plus"></i
+                                            > Ajouter</Link
+                                        >
+                                    </div>
+                                    <div class="col-md-2">
+                                        <select
+                                            @change="search"
+                                            v-model="employeur_id"
+                                            class="form-control ml-3"
+                                        >
+                                            <option value="" selected>
+                                                Employeur...
+                                            </option>
+                                            <option
+                                                v-for="item in props.employeurs"
+                                                :value="item.id"
+                                                :key="item.id"
                                             >
-                                        </div>
-
-
-                                        <div class="col-md-4">
-                                            <select
-                                                @change="search"
-                                                v-model="employeur_id"
-                                                class="form-control ml-3"
-                                            >
-                                                <option value="" selected>
-                                                    Employeur...
-                                                </option>
-                                                <option
-                                                    v-for="item in props.employeurs"
-                                                    :value="item.id"
-                                                    :key="item.id"
-                                                >
-                                                    {{ item.name }}
-                                                </option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <select
-                                                @change="search"
-                                                v-model="per_page"
-                                                class="form-control ml-3"
-                                            >
-                                                <option value="5">5</option>
-                                                <option value="10">10</option>
-                                                <option value="50">50</option>
-                                                <option value="100">100</option>
-                                            </select>
-                                        </div>
+                                                {{ item.name }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <select
+                                            @change="search"
+                                            v-model="per_page"
+                                            class="form-control ml-3"
+                                        >
+                                            <option value="5">5</option>
+                                            <option value="10">10</option>
+                                            <option value="50">50</option>
+                                            <option value="100">100</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 ml-3">
+                                        <Link
+                                            :href="route('salaire.print')"
+                                            class="btn btn-info"
+                                            ><i class="fa fa-print"></i
+                                            > Imprimer</Link
+                                        >
                                     </div>
                                 </div>
                             </div>
@@ -88,7 +92,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-for="(salaire, index) in props.salaires.data">
+                                        <tr v-for="(salaire, index) in props.salaires.data" :key="index">
                                             <td>{{ index + 1 }}.</td>
                                             <td>{{ salaire.employeur.name }}</td>
                                             <td>{{ salaire.employeur.tel }}</td>
@@ -168,7 +172,6 @@ import {
     useSwalSuccess,
 } from "../../../composables/alert";
 import { router } from "@inertiajs/vue3";
-import EditSalaire from "./EditSalaire.vue";
 
 
 const employeur_id = ref("");

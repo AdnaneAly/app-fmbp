@@ -80,6 +80,15 @@ class SalaireController extends Controller
         return inertia('Depence/Salaire/EditSalaire', compact( 'salaire', 'employeurs'));
     }
 
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function print()
+    {
+        return inertia('Depence/Salaire/PrintSalaire');
+    }
+
     /**
      * Update the specified resource in storage.
      */

@@ -41,6 +41,7 @@ Route::group(["middleware" => "auth"], function(){
     Route::resource('salaire', SalaireController::class);
     Route::resource('avancesalaire', AvanceSalaireController::class);
     Route::get('salaireavancer/{id}', [AvanceSalaireController::class, 'getAvanceSalaire'])->name('salaireavancer');
+    Route::get('salaire/print', [SalaireController::class, 'print'])->name('salaire.print');
     Route::resource('recette', RecetteController::class);
     Route::resource('autrerecette', AutreRecetteController::class);
     Route::resource('depence', DepenceController::class);

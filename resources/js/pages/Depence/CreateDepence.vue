@@ -53,8 +53,15 @@
                                     </div>
                                     <div class="row">
                                         <table class="table no-border" id="invoice_details">
-
+                                            <tr>
+                                                    <th>Supp</th>
+                                                    <th>Type de depence</th>
+                                                    <th>Employeur beneficiaire</th>
+                                                    <th>Observations</th>
+                                                    <th> Montant</th>
+                                                </tr>
                                         <tbody id="depence_fields">
+
                                             <tr class="cloning_row " v-for="(item, index) in forms" :key="item" id="0">
                                                 <td style="width: 3%;"><button type="button"
                                                         class="btn btn-danger btn-sm delegated-btn"
