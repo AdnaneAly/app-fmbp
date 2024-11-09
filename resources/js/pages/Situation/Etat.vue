@@ -52,7 +52,7 @@
                                                     font-size: x-large;
                                                 "
                                             >
-                                                من : 23-12-2024
+                                                من : {{ props.data.dates['debutSearch'] }}
                                             </td>
                                             <td
                                                 style="
@@ -61,7 +61,7 @@
                                                 "
                                             >
                                                 <i class="fa fa-arrow-left"></i>
-                                                إلى : 20-12-2024
+                                                إلى : {{ props.data.dates['finSearch'] }}
                                             </td>
                                         </tr>
                                         <tr>
