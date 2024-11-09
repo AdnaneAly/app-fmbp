@@ -25,8 +25,7 @@ class AutreRecetteRequest extends FormRequest
             'type_recette_id' => ['required', 'integer','exists:type_recettes,id'],
             'created_by' => ['required', 'integer','exists:users,id'],
             'montant' => ['required', 'numeric','min:0','max:1000000'],
-            'quantite' => ['nullable', 'numeric','min:0','max:100000'],
-            'rapport' => ['nullable', 'numeric','min:0','max:100'],
+            'numeroFacture' => ['nullable', 'numeric','min:0','max:100'],
             'date' => ['required', 'date'],
             'description'=> ['nullable', 'string'],
             'annee'=> ['string'],
@@ -40,9 +39,6 @@ class AutreRecetteRequest extends FormRequest
             'montant' => 'La montant est obligatoire',
             'montant.min' => 'La montant est doit etre >= 0',
             'montant.max' => 'La montant est doit etre < 1000000',
-            'quantite' => 'La quantite est obligatoire',
-            'quantite.min' => 'La quantite est doit etre >= 0',
-            'quantite.max' => 'La quantite est doit etre < 100000',
             'date' => 'La date est obligatoire',
             'annee' => 'L\'annee est obligatoire'
         ];

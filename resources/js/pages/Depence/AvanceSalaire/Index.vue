@@ -98,6 +98,7 @@
                                             v-for="(
                                                 avancesalaire, index
                                             ) in props.avancesalaires.data"
+                                            :key="index"
                                         >
                                             <td>{{ index + 1 }}.</td>
                                             <td>

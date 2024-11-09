@@ -58,7 +58,7 @@ class SituationController extends Controller
                 $data['counteEmployeur']    = Employeur::counteEmployeurs();
                 $data['typeRecettes']       = TypeRecette::pluck('name', 'id');
                 $data['typeDepences']       = TypeDepence::pluck('name', 'id');;
-                //dd($data['typeDepences']);
+                //dd($data['dupMontantAutreRecette']);
 
                 return inertia('Situation/Etat', compact('data'));
             } elseif ($rapport === 'depences') {

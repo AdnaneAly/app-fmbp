@@ -126,19 +126,18 @@
                                                     >{{ montant.toLocaleString() }}</td>
                                                 </tr>
 
-                                                <tr v-for="(montant, etat) in props.data.dupAutreRecette" :key="etat" style="padding: 0">
+                                                <tr v-for="(name, i) in props.data.typeRecettes" :key="i" style="padding: 0">
                                                     <th style="width: 5%"></th>
-                                                    <th style="width: 65%">{{ etat }}</th>
+                                                    <th style="width: 65%">{{ name }}</th>
                                                     <td
                                                         dir="ltr"
                                                         style="width: 10%"
-                                                    ></td>
+                                                    >{{ props.data.dupAutreRecette[i] }}</td>
                                                     <td
                                                         dir="ltr"
                                                         style="width: 20%"
                                                         class="text-bold"
-                                                    >{{ montant }}
-                                                        UM
+                                                    >{{ props.data.dupMontantAutreRecette[i].toLocaleString() }}
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -150,7 +149,7 @@
                                                         style="width: 20%"
                                                         class="text-bold"
                                                     >
-                                                        {{ returnTotalRecette().toLocaleString() }}
+                                                        {{ (returnTotalRecette() + returnTotalAutreRecette()).toLocaleString() }}
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -279,7 +278,7 @@
                                                         style="width: 20%"
                                                         class="text-bold"
                                                     >
-                                                    {{ returnTotalRecette().toLocaleString() }}
+                                                    {{ (returnTotalRecette() + returnTotalAutreRecette()).toLocaleString() }}
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -304,7 +303,7 @@
                                                         style="width: 20%"
                                                         class="text-bold"
                                                     >
-                                                        {{ (returnTotalRecette() - returnTotalDepence()).toLocaleString() }}
+                                                        {{ ((returnTotalRecette() + returnTotalAutreRecette()) - returnTotalDepence()).toLocaleString() }}
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -427,6 +426,15 @@ const returnTotalRecette = function () {
     return total;
 };
 
+const returnTotalAutreRecette = function () {
+    var total = 0;
+    Object.entries(props.data.dupMontantAutreRecette).forEach((montant) => {
+        total += montant[1];
+    });
+    return total;
+};
+
+
 const returnTotalDepence = function () {
     var total = 0;
     Object.entries(props.data.dupMontantDepence).forEach((montant) => {
@@ -435,6 +443,5 @@ const returnTotalDepence = function () {
     return total + props.data.dupMontantDepenceSalaire + props.data.dupMontantAvanceSalaire;
 };
 
-console.log(returnTotalDepence());
 
 </script>

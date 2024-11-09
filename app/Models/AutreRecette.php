@@ -18,8 +18,7 @@ class AutreRecette extends Model
         'type_recette_id',
         'created_by',
         'montant',
-        'quantite',
-        'rapport',
+        'numeroFacture',
         'date',
         'annee',
         'description'
@@ -42,7 +41,7 @@ class AutreRecette extends Model
         return $query;
     }
 
-    public function typerecette()
+    public function typeRecette()
     {
         return $this->belongsTo(TypeRecette::class);
     }

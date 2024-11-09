@@ -26,12 +26,9 @@
                             <div class="card-header">
                                 <div class="card-title d-flex">
                                     <div class="col-md-3">
-                                            <Link
-                                                :href="route('autrerecette.create')"
-                                                class="btn btn-success"
-                                                ><i class="fa fa-plus"></i
-                                                >Ajouter</Link
-                                            >
+                                        <CreateAutreRecette
+                                            :typerecettes="props.typerecettes"
+                                        />
                                         </div>
                                     <div class="col-md-3">
                                             <select
@@ -173,6 +170,7 @@
         :autrerecette_id="editingAutreRecetteId"
         :show="showModal"
         @modal-closed="modalClosed"
+        :typerecettes="typerecettes"
     />
 </template>
 
@@ -186,6 +184,7 @@ import {
     useSwalSuccess,
 } from "../../../composables/alert";
 import { router } from "@inertiajs/vue3";
+import CreateAutreRecette from "./CreateAutreRecette.vue";
 
 const editingAutreRecetteId = ref(0);
 const showModal = ref(false);

@@ -19,7 +19,7 @@ class AutreRecetteController extends Controller
         $boulanger_id = $request->boulanger_id;
         $type_recette_id = $request->type_recette_id;
 
-        $autrerecettes = AutreRecette::with('typerecette', 'boulanger')
+        $autrerecettes = AutreRecette::with('typerecette')
             ->when($type_recette_id, function($query) use($type_recette_id){
                 $query->where("type_recette_id", $type_recette_id);
             })
@@ -38,9 +38,9 @@ class AutreRecetteController extends Controller
      */
     public function create()
     {
-        $boulangers = Boulanger::all();
+        //$boulangers = Boulanger::all();
         $typerecettes = TypeRecette::all();
-        return inertia('Recette/AutreRecette/CreateAutreRecette', compact( 'boulangers', 'typerecettes'));
+        return inertia('Recette/AutreRecette/CreateAutreRecette', compact( 'typerecettes'));
     }
 
     /**
@@ -64,19 +64,19 @@ class AutreRecetteController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(AutreRecette $autreRecette)
+    public function edit(AutreRecette $autrerecette)
     {
         $boulangers = Boulanger::all();
         $typerecettes = TypeRecette::all();
-        return inertia('Recette/AutreRecette/EditAutreRecette', compact( 'autreRecette', 'boulangers', 'typerecettes'));
+        return response()->json(["autreRecette" => $autrerecette]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(AutreRecetteRequest $request, AutreRecette $autreRecette)
+    public function update(AutreRecetteRequest $request, AutreRecette $autrerecette)
     {
-        $autreRecette->update($request->validated());
+        $autrerecette->update($request->validated());
 
         return redirect('autrerecette');
     }
@@ -84,9 +84,9 @@ class AutreRecetteController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(AutreRecette $autreRecette)
+    public function destroy(AutreRecette $autrerecette)
     {
-        $autreRecette->delete();
+        $autrerecette->delete();
         return redirect()->back();
     }
 }

@@ -40,14 +40,14 @@
                                     <select
                                         class="form-control"
                                         style="width: 100%"
-                                        v-model="form.autrerecette_id"
+                                        v-model="form.type_recette_id"
                                         :class="{
                                             'is-invalid':
-                                                form.errors.autrerecette_id,
+                                                form.errors.type_recette_id,
                                         }"
                                     >
                                         <option
-                                            v-for="item in props.autrerecettes"
+                                            v-for="item in props.typerecettes"
                                             :value="item.id"
                                             :key="item.id"
                                         >
@@ -55,9 +55,9 @@
                                         </option>
                                     </select>
                                     <span
-                                        v-if="form.errors.autrerecette_id"
+                                        v-if="form.errors.type_recette_id"
                                         class="error invalid-feedback"
-                                        >{{ form.errors.autrerecette_id }}</span
+                                        >{{ form.errors.type_recette_id }}</span
                                     >
                                 </div>
                                 <div class="form-group">
@@ -166,20 +166,21 @@
 <script setup>
 import { onMounted } from "vue";
 import { useForm } from "@inertiajs/vue3";
-import { useSwalSuccess, useSwalError } from "../../composables/alert";
+import { useSwalSuccess, useSwalError } from "../../../composables/alert";
 
 const form = useForm({
-    name: "",
-    address: "",
-    autrerecette_id: 0,
+    date: "",
+    numeroFacture: "",
+    type_recette_id: 0,
     created_by: 1,
-    etat: "",
+    montant: "",
     description: "",
+    annee: "2024",
 });
 
 
 const props = defineProps({
-    autrerecettes: Object,
+    typerecettes: Object,
 });
 
 let createModel = "";
@@ -202,6 +203,7 @@ const soumettre = () => {
             form.reset();
         },
         onError: (errors) => {
+            console.log(errors);
             useSwalError("Une erreur s'est produite");
             console.log(errors);
         },
