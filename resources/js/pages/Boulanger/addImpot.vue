@@ -56,12 +56,12 @@
                                     >
                                 </div>
                                 <div class="form-group">
-                                    <label for="InputAddress">Facture</label>
+                                    <label for="InputFacture">Facture</label>
                                     <input
                                         type="text"
                                         class="form-control"
-                                        id="InputAddress"
-                                        placeholder="Enter adresse"
+                                        id="InputFacture"
+                                        placeholder="Enter facture"
                                         v-model="form.numeroFacture"
                                         :disabled="
                                             form.type_recette === 'FERMER' ||

@@ -15,7 +15,6 @@ class AutreRecette extends Model
 
 
     protected $fillable = [
-        'boulanger_id',
         'type_recette_id',
         'created_by',
         'montant',
@@ -41,11 +40,6 @@ class AutreRecette extends Model
             return $group->count();
         });
         return $query;
-    }
-
-    public function boulanger()
-    {
-        return $this->belongsTo(Boulanger::class);
     }
 
     public function typerecette()

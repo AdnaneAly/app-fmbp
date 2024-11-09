@@ -22,7 +22,6 @@ class AutreRecetteRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'boulanger_id' => ['required', 'integer','exists:boulangers,id'],
             'type_recette_id' => ['required', 'integer','exists:type_recettes,id'],
             'created_by' => ['required', 'integer','exists:users,id'],
             'montant' => ['required', 'numeric','min:0','max:1000000'],
@@ -37,7 +36,6 @@ class AutreRecetteRequest extends FormRequest
 
     public function messages(){
         return [
-            'boulanger_id' => 'La boulangerie est obligatoire',
             'type_recette_id' => 'Le type de recette est obligatoire',
             'montant' => 'La montant est obligatoire',
             'montant.min' => 'La montant est doit etre >= 0',
