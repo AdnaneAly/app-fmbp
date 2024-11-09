@@ -72,7 +72,7 @@
                                                 "
                                             >
                                                 عدد المخابز :
-                                                <strong> 5 </strong>
+                                                <strong> {{ props.data.counteBoulanger }} </strong>
                                             </td>
                                             <td
                                                 style="
@@ -81,7 +81,7 @@
                                                 "
                                             >
                                                 عدد عمال الإدارة :
-                                                <strong> 4 </strong>
+                                                <strong> {{ props.data.counteEmployeur }} </strong>
                                             </td>
                                         </tr>
                                     </table>
