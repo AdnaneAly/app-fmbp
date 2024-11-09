@@ -1,0 +1,151 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Requests\RecetteRequest;
+use App\Models\Boulanger;
+use App\Models\Recette;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
+class RecetteController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index(Request $request)
+    {
+        $per_page = $request->per_page;
+        $numeroFacture = $request->numeroFacture;
+        $boulanger_id = $request->boulanger_id;
+        $month = $request->month;
+        $etatImpot = $request->etatImpot;
+
+        $recettes = Recette::with('boulanger')
+            ->when($numeroFacture, function($query) use($numeroFacture){
+                $query->where("numeroFacture", $numeroFacture);
+            })
+            ->when($boulanger_id, function($query) use($boulanger_id){
+                $query->where("boulanger_id", $boulanger_id);
+            })
+            ->when($month, function($query) use($month){
+                $query->where("month", $month);
+            })
+            ->when($etatImpot, function($query) use($etatImpot){
+                $query->where("type_recette", $etatImpot);
+            })
+            ->latest()
+            ->paginate($per_page ?? 10);
+        $boulangers = Boulanger::all();
+        return inertia('Recette/Index', compact('recettes', 'boulangers'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        $boulangers = Boulanger::all();
+        return inertia('Recette/CreateRecette', compact( 'boulangers'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(RecetteRequest $request)
+    {
+        try {
+            //code...
+            DB::beginTransaction();
+            //dd($request->formData);
+
+            $data = Recette::where('boulanger_id', $request->boulanger_id)->where('month', $request->month)->first();
+
+            if ( $data !== null ) {
+                return redirect()->back()->withErrors('Interdit d\'ajouter deux impots pour une meme mois!');
+            }
+
+            $option = Recette::create($request->validated());
+
+            $boulanger = Boulanger::find($request->boulanger_id);
+
+            $recettes = Recette::where('boulanger_id', $request->boulanger_id)->orderBy('month', 'asc')->get();
+
+            DB::commit();
+
+            return inertia('Boulanger/ShowBoulanger', compact('boulanger', 'recettes'));
+
+        } catch (\Exception $e) {
+            //Exception $e;
+            DB::rollBack();
+            dd($e);
+        }
+
+
+
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Recette $recette)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Recette $recette)
+    {
+        return response()->json(["recette" => $recette]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(RecetteRequest $request, Recette $recette)
+    {
+
+        try {
+            //code...
+            DB::beginTransaction();
+            //dd($request->formData);
+
+            $recette->update($request->validated());
+
+            DB::commit();
+
+            return redirect()->back();
+
+        } catch (\Exception $e) {
+            //Exception $e;
+            DB::rollBack();
+            dd($e);
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Recette $recette)
+    {
+        try {
+            //code...
+            DB::beginTransaction();
+            //dd($request->formData);
+
+            $recette->delete();
+
+            DB::commit();
+
+            return redirect()->back();
+
+        } catch (\Exception $e) {
+            //Exception $e;
+            DB::rollBack();
+            dd($e);
+        }
+
+    }
+}
