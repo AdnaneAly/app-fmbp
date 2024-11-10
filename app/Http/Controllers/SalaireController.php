@@ -17,10 +17,14 @@ class SalaireController extends Controller
     {
         $per_page = $request->per_page;
         $employeur_id = $request->employeur_id;
+        $month = $request->month;
 
         $salaires = Salaire::with( 'employeur')
             ->when($employeur_id, function($query) use($employeur_id){
                 $query->where("employeur_id", $employeur_id);
+            })
+            ->when($month, function($query) use($month){
+                $query->whereMonth("date", $month);
             })
             ->latest()
             ->paginate($per_page ?? 5);
@@ -84,9 +88,22 @@ class SalaireController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function print()
+    public function print(Request $request)
     {
-        return inertia('Depence/Salaire/PrintSalaire');
+        $per_page = $request->per_page;
+        $employeur_id = $request->employeur_id;
+        $month = $request->month;
+
+        $salaires = Salaire::with( 'employeur')
+            ->when($employeur_id, function($query) use($employeur_id){
+                $query->where("employeur_id", $employeur_id);
+            })
+            ->when($month, function($query) use($month){
+                $query->whereMonth("date", $month);
+            })
+            ->latest()
+            ->paginate($per_page ?? 5);
+        return inertia('Depence/Salaire/PrintSalaire', compact('salaires'));
     }
 
     /**

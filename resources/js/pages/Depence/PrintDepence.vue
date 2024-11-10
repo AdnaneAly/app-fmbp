@@ -19,8 +19,8 @@
                     <div class="col-sm-12">
                         <table class="table no-border">
                             <tr>
-                                <td style="text-align: center; font-size: x-large;" colspan="2"><strong> قائمة مصاريف
-                                        الرواتب الشهر  : 10 </strong></td>
+                                <td style="text-align: center; font-size: x-large;" colspan="2"><strong> قائمة المصاريف
+                                         الشهر  : 10 </strong></td>
                                 <td style="text-align: right; font-size: x-large;" colspan="2"></td>
                             </tr>
                         </table>
@@ -39,39 +39,28 @@
                             <thead>
                                 <tr>
                                     <th style="width: 50px">#</th>
-                                    <th>العمال</th>
-                                    <th>الهاتف</th>
+                                    <th>نوع المصروف</th>
+                                    <th>المستفيد</th>
                                     <th>التاريخ</th>
-                                    <th> أيام العمل</th>
-                                    <th>المبلغ المقابل</th>
-                                    <th>المبلغ المقتطع</th>
-                                    <th>المبلغ بعد الاقتطاع</th>
-                                    <th> التوقيع</th>
+                                    <th>المبلغ</th>
                                 </tr>
                             </thead>
                             <tbody>
 
-                                <tr v-for="(salaire, index) in props.salaires.data" :key="index">
+                                <tr v-for="(depence, index) in props.depences.data" :key="index">
                                             <td>{{ index + 1 }}.</td>
-                                            <td>{{ salaire.employeur.name }}</td>
-                                            <td>{{ salaire.employeur.tel }}</td>
-                                            <td>{{ salaire.date }}</td>
-                                            <td>{{ salaire.nombreJoursTravail }}</td>
-                                            <td dir="ltr">{{ salaire.montantJoursTravail.toLocaleString() }} UM</td>
-                                            <td dir="ltr">{{ salaire.montantAS.toLocaleString() }} UM</td>
-                                            <td dir="ltr">{{ salaire.montantNet.toLocaleString() }} UM</td>
-                                            <td></td>
+                                            <td>{{ depence.type_depence.name ?? '' }}</td>
+                                            <td>{{ depence.employeur.name ?? '' }}</td>
+                                            <td>{{ depence.date }}</td>
+                                            <td dir="ltr">{{ depence.montant.toLocaleString() }} UM</td>
                                         </tr>
 
 
                             </tbody>
                             <tfoot>
                                         <tr>
-                                            <th colspan="5">المجموع الكامل </th>
+                                            <th colspan="4">المجموع الكامل </th>
                                             <th dir="ltr">{{ returnTotalMJT().toLocaleString() }} UM</th>
-                                            <th dir="ltr">{{ returnTotalMAS().toLocaleString() }} UM</th>
-                                            <th dir="ltr">{{ returnTotalMNet().toLocaleString() }} UM</th>
-                                            <td></td>
                                         </tr>
                                     </tfoot>
                         </table>
@@ -105,7 +94,7 @@
 </template>
 <script>
 import { ref } from "vue";
-import AuthLayout from "../../../Layouts/PrintLayout.vue";
+import AuthLayout from "../../Layouts/PrintLayout.vue";
 
 export default {
     layout: AuthLayout,
@@ -119,31 +108,16 @@ const formattedDate = date.toISOString().slice(0, 10);
 const datePrint = ref(formattedDate);
 
 const props = defineProps({
-    salaires: Object,
+    depences: Object,
 });
 
 const returnTotalMJT = function () {
     var total = 0;
-    props.salaires.data.forEach((element) => {
-        total += element.montantJoursTravail;
+    props.depences.data.forEach((element) => {
+        total += element.montant;
     });
     return total;
 };
 
-const returnTotalMNet = function () {
-    var total = 0;
-    props.salaires.data.forEach((element) => {
-        total += element.montantNet;
-    });
-    return total;
-};
-
-const returnTotalMAS = function () {
-    var total = 0;
-    props.salaires.data.forEach((element) => {
-        total += element.montantAS;
-    });
-    return total;
-};
 
 </script>

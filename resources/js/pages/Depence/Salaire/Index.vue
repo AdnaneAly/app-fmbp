@@ -33,6 +33,7 @@
                                             > Ajouter</Link
                                         >
                                     </div>
+
                                     <div class="col-md-2">
                                         <select
                                             @change="search"
@@ -52,6 +53,51 @@
                                         </select>
                                     </div>
                                     <div class="col-md-2">
+                                            <select
+                                                @change="search"
+                                                v-model="month"
+                                                class="form-control ml-3"
+                                            >
+                                            <option value="" selected>
+                                                    Mois de salaire...
+                                                </option>
+                                                <option value="1">
+                                                    JANVIER
+                                                </option>
+                                                <option value="2">
+                                                    FEVRIER
+                                                </option>
+                                                <option value="3">
+                                                    MARS
+                                                </option>
+                                                <option value="4">
+                                                    AVRIL
+                                                </option>
+                                                <option value="5">MAI</option>
+                                                <option value="6">
+                                                    JUIN
+                                                </option>
+                                                <option value="7">
+                                                    JUILLET
+                                                </option>
+                                                <option value="8">
+                                                    AOUT
+                                                </option>
+                                                <option value="9">
+                                                    SEPTEMBRE
+                                                </option>
+                                                <option value="10">
+                                                    OCTOBRE
+                                                </option>
+                                                <option value="11">
+                                                    NOVEMBRE
+                                                </option>
+                                                <option value="12">
+                                                    DECEMENBRE
+                                                </option>
+                                            </select>
+                                    </div>
+                                    <div class="col-md-2">
                                         <select
                                             @change="search"
                                             v-model="per_page"
@@ -65,7 +111,7 @@
                                     </div>
                                     <div class="col-md-2 ml-3">
                                         <Link
-                                            :href="route('salaire.print')"
+                                            :href="route('salaire.print', {per_page, employeur_id, month })"
                                             class="btn btn-info"
                                             ><i class="fa fa-print"></i
                                             > Imprimer</Link
@@ -171,11 +217,12 @@ import {
     useSwalError,
     useSwalSuccess,
 } from "../../../composables/alert";
-import { router } from "@inertiajs/vue3";
+import { Link, router } from "@inertiajs/vue3";
 
 
 const employeur_id = ref("");
 const per_page = ref(5);
+const month = ref("");
 const editingSalaireId = ref(0);
 const showModal = ref(false);
 
@@ -245,6 +292,7 @@ const search = _.throttle(() => {
     const url = route("salaire.index", {
         employeur_id: employeur_id.value,
         per_page: per_page.value,
+        month: month.value,
     });
     router.get(
         url,

@@ -19,6 +19,7 @@ class DepenceController extends Controller
         $per_page = $request->per_page;
         $type_depence_id = $request->type_depence_id;
         $employeur_id = $request->employeur_id;
+        $month = $request->month;
 
         $depences = Depence::with('type_depence', 'employeur')
             ->when($type_depence_id, function($query) use($type_depence_id){
@@ -26,6 +27,9 @@ class DepenceController extends Controller
             })
             ->when($employeur_id, function($query) use($employeur_id){
                 $query->where("employeur_id", $employeur_id);
+            })
+            ->when($month, function($query) use($month){
+                $query->whereMonth("date", $month);
             })
             ->latest()
             ->paginate($per_page ?? 5);
@@ -93,6 +97,31 @@ class DepenceController extends Controller
     public function show(Depence $depence)
     {
         //
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function print(Request $request)
+    {
+        $per_page = $request->per_page;
+        $type_depence_id = $request->type_depence_id;
+        $employeur_id = $request->employeur_id;
+        $month = $request->month;
+
+        $depences = Depence::with('type_depence', 'employeur')
+            ->when($type_depence_id, function($query) use($type_depence_id){
+                $query->where("type_depence_id", $type_depence_id);
+            })
+            ->when($employeur_id, function($query) use($employeur_id){
+                $query->where("employeur_id", $employeur_id);
+            })
+            ->when($month, function($query) use($month){
+                $query->whereMonth("date", $month);
+            })
+            ->latest()
+            ->paginate($per_page ?? 5);
+        return inertia('Depence/PrintDepence', compact('depences'));
     }
 
     /**

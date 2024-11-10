@@ -19,6 +19,7 @@ class AvanceSalaireController extends Controller
         $per_page = $request->per_page;
         $employeur_id = $request->employeur_id;
         $etatDepence = $request->etatDepence;
+        $month = $request->month;
 
         $avancesalaires = AvanceSalaire::with('employeur')
             ->when($employeur_id, function($query) use($employeur_id){
@@ -26,6 +27,9 @@ class AvanceSalaireController extends Controller
             })
             ->when($etatDepence, function($query) use($etatDepence){
                 $query->where("etat", $etatDepence);
+            })
+            ->when($month, function($query) use($month){
+                $query->whereMonth("date", $month);
             })
             ->latest()
             ->paginate($per_page ?? 5);
@@ -72,6 +76,32 @@ class AvanceSalaireController extends Controller
     public function show(AvanceSalaire $avanceSalaire)
     {
         //
+    }
+
+
+    /**
+     * Display the specified resource.
+     */
+    public function print(Request $request)
+    {
+        $per_page = $request->per_page;
+        $employeur_id = $request->employeur_id;
+        $etatDepence = $request->etatDepence;
+        $month = $request->month;
+
+        $avancesalaires = AvanceSalaire::with('employeur')
+            ->when($employeur_id, function($query) use($employeur_id){
+                $query->where("employeur_id", $employeur_id);
+            })
+            ->when($etatDepence, function($query) use($etatDepence){
+                $query->where("etat", $etatDepence);
+            })
+            ->when($month, function($query) use($month){
+                $query->whereMonth("date", $month);
+            })
+            ->latest()
+            ->paginate($per_page ?? 5);
+        return inertia('Depence/AvanceSalaire/PrintAvanceSalaire', compact('avancesalaires'));
     }
 
 

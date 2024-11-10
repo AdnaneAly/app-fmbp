@@ -24,6 +24,10 @@ Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('hom
 Route::get('/contact', [HomeController::class, 'contact'])->middleware('auth')->name('contact');
 Route::get('/situation', [SituationController::class, 'index'])->middleware('auth')->name('situation.index');
 Route::post('/situation/etat', [SituationController::class, 'etat'])->middleware('auth')->name('situation.etat');
+Route::get('/salaire/print', [SalaireController::class, 'print'])->middleware('auth')->name('salaire.print');
+Route::get('salaireavancer/{id}', [AvanceSalaireController::class, 'getAvanceSalaire'])->middleware('auth')->name('salaireavancer');
+Route::get('avancesalaire/print', [AvanceSalaireController::class, 'print'])->middleware('auth')->name('avancesalaire.print');
+Route::get('depence/print', [DepenceController::class, 'print'])->middleware('auth')->name('depence.print');
 Route::fallback(fn() => Redirect::to('/'));
 
 
@@ -40,8 +44,6 @@ Route::group(["middleware" => "auth"], function(){
     Route::resource('employeur', EmployeurController::class);
     Route::resource('salaire', SalaireController::class);
     Route::resource('avancesalaire', AvanceSalaireController::class);
-    Route::get('salaireavancer/{id}', [AvanceSalaireController::class, 'getAvanceSalaire'])->name('salaireavancer');
-    Route::get('salaire/print', [SalaireController::class, 'print'])->name('salaire.print');
     Route::resource('recette', RecetteController::class);
     Route::resource('autrerecette', AutreRecetteController::class);
     Route::resource('depence', DepenceController::class);

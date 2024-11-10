@@ -24,57 +24,108 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <div class="card-title">
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <CreateAvanceSalaire
-                                                :employeurs="props.employeurs"
-                                            />
-                                        </div>
-
-                                        <div class="col-md-3">
-                                            <select
-                                                @change="search"
-                                                v-model="employeur_id"
-                                                class="form-control ml-3"
-                                            >
-                                                <option value="" selected>
-                                                    Employeur...
-                                                </option>
-                                                <option
-                                                    v-for="item in props.employeurs"
-                                                    :value="item.id"
-                                                    :key="item.id"
-                                                >
-                                                    {{ item.name }}
-                                                </option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <select
-                                                @change="search"
-                                                v-model="etatDepence"
-                                                class="form-control ml-3"
-                                            >
-                                                <option value="">Etat...</option>
-                                                <option value="paye">Paye</option>
-                                                <option value="noPaye">NonPaye</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <select
-                                                @change="search"
-                                                v-model="per_page"
-                                                class="form-control ml-3"
-                                            >
-                                                <option value="5">5</option>
-                                                <option value="10">10</option>
-                                                <option value="50">50</option>
-                                                <option value="100">100</option>
-                                            </select>
-                                        </div>
-
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <CreateAvanceSalaire
+                                            :employeurs="props.employeurs"
+                                        />
                                     </div>
+
+                                    <div class="col-md-2">
+                                        <select
+                                            @change="search"
+                                            v-model="employeur_id"
+                                            class="form-control ml-3"
+                                        >
+                                            <option value="" selected>
+                                                Employeur...
+                                            </option>
+                                            <option
+                                                v-for="item in props.employeurs"
+                                                :value="item.id"
+                                                :key="item.id"
+                                            >
+                                                {{ item.name }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <select
+                                            @change="search"
+                                            v-model="etatDepence"
+                                            class="form-control ml-3"
+                                        >
+                                            <option value="">Etat...</option>
+                                            <option value="paye">Paye</option>
+                                            <option value="noPaye">NonPaye</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2">
+                                            <select
+                                                @change="search"
+                                                v-model="month"
+                                                class="form-control ml-3"
+                                            >
+                                            <option value="" selected>
+                                                    Mois d'avance salaire...
+                                                </option>
+                                                <option value="1">
+                                                    JANVIER
+                                                </option>
+                                                <option value="2">
+                                                    FEVRIER
+                                                </option>
+                                                <option value="3">
+                                                    MARS
+                                                </option>
+                                                <option value="4">
+                                                    AVRIL
+                                                </option>
+                                                <option value="5">MAI</option>
+                                                <option value="6">
+                                                    JUIN
+                                                </option>
+                                                <option value="7">
+                                                    JUILLET
+                                                </option>
+                                                <option value="8">
+                                                    AOUT
+                                                </option>
+                                                <option value="9">
+                                                    SEPTEMBRE
+                                                </option>
+                                                <option value="10">
+                                                    OCTOBRE
+                                                </option>
+                                                <option value="11">
+                                                    NOVEMBRE
+                                                </option>
+                                                <option value="12">
+                                                    DECEMENBRE
+                                                </option>
+                                            </select>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <select
+                                            @change="search"
+                                            v-model="per_page"
+                                            class="form-control ml-3"
+                                        >
+                                            <option value="5">5</option>
+                                            <option value="10">10</option>
+                                            <option value="50">50</option>
+                                            <option value="100">100</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 ml-3">
+                                    <Link
+                                        :href="route('avancesalaire.print', {per_page, employeur_id, etatDepence, month })"
+                                        class="btn btn-info"
+                                        ><i class="fa fa-print"></i
+                                        > Imprimer</Link
+                                    >
+                                </div>
+
                                 </div>
                             </div>
 
@@ -209,6 +260,8 @@ const per_page = ref(5);
 const editingAvanceSalaireId = ref(0);
 const showModal = ref(false);
 const etatDepence = ref("");
+const month = ref("");
+
 
 const props = defineProps({
     avancesalaires: Object,
@@ -262,6 +315,7 @@ const search = _.throttle(() => {
         employeur_id: employeur_id.value,
         per_page: per_page.value,
         etatDepence: etatDepence.value,
+        month: month.value,
     });
     router.get(
         url,
