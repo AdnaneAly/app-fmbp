@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('created_by')->constrained('users');
             $table->foreignId('proprietaire_id')->nullable()->constrained('proprietaires');
             $table->enum('etat',['active', 'noActive'])->default('active');
+            $table->integer('arriere')->default(12);
             $table->longText('description')->nullable();
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();

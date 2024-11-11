@@ -28,6 +28,9 @@ Route::get('/salaire/print', [SalaireController::class, 'print'])->middleware('a
 Route::get('salaireavancer/{id}', [AvanceSalaireController::class, 'getAvanceSalaire'])->middleware('auth')->name('salaireavancer');
 Route::get('avancesalaire/print', [AvanceSalaireController::class, 'print'])->middleware('auth')->name('avancesalaire.print');
 Route::get('depence/print', [DepenceController::class, 'print'])->middleware('auth')->name('depence.print');
+Route::get('recette/print', [RecetteController::class, 'print'])->middleware('auth')->name('recette.print');
+Route::get('boulanger/print', [BoulangerController::class, 'print'])->middleware('auth')->name('boulanger.print');
+Route::get('boulanger/printDetail', [BoulangerController::class, 'printDetail'])->middleware('auth')->name('boulanger.printDetail');
 Route::fallback(fn() => Redirect::to('/'));
 
 

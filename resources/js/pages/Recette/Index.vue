@@ -24,108 +24,146 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <div class="card-title d-flex">
-                                        <div class="col-md-3">
-                                            <select
-                                                @change="search"
-                                                v-model="boulanger_id"
-                                                class="form-control ml-3"
-                                            >
-                                                <option value="" selected>
-                                                    Boulangeries...
-                                                </option>
-                                                <option
-                                                    v-for="item in props.boulangers"
-                                                    :value="item.id"
-                                                    :key="item.id"
-                                                >
-                                                    {{ item.name }}
-                                                </option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <select
-                                                @change="search"
-                                                v-model="month"
-                                                class="form-control ml-3"
-                                            >
+                                <div class="row">
+                                    <div class="col-md-2 ml-1">
+                                        <select
+                                            @change="search"
+                                            v-model="boulanger_id"
+                                            class="form-control"
+                                        >
                                             <option value="" selected>
-                                                    Mois d'impot...
-                                                </option>
-                                                <option value="JANVIER">
-                                                    JANVIER
-                                                </option>
-                                                <option value="FEVRIER">
-                                                    FEVRIER
-                                                </option>
-                                                <option value="MARS">
-                                                    MARS
-                                                </option>
-                                                <option value="AVRIL">
-                                                    AVRIL
-                                                </option>
-                                                <option value="MAI">MAI</option>
-                                                <option value="JUIN">
-                                                    JUIN
-                                                </option>
-                                                <option value="JUILLET">
-                                                    JUILLET
-                                                </option>
-                                                <option value="AOUT">
-                                                    AOUT
-                                                </option>
-                                                <option value="SEPTEMBRE">
-                                                    SEPTEMBRE
-                                                </option>
-                                                <option value="OCTOBRE">
-                                                    OCTOBRE
-                                                </option>
-                                                <option value="NOVEMBRE">
-                                                    NOVEMBRE
-                                                </option>
-                                                <option value="DECEMENBRE">
-                                                    DECEMENBRE
-                                                </option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <input
-                                        @keyup="search"
-                                        v-model="searchFacture"
-                                        type="text"
-                                        class="form-control ml-3"
-                                        placeholder="Search Facture"
-                                    />
-                                        </div>
-                                        <div class="col-md-3">
-                                            <select
-                                                @change="search"
-                                                v-model="etatImpot"
-                                                class="form-control ml-3"
+                                                Boulangeries...
+                                            </option>
+                                            <option
+                                                v-for="item in props.boulangers"
+                                                :value="item.id"
+                                                :key="item.id"
                                             >
+                                                {{ item.name }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-1 ml-2">
+                                        <select
+                                            @change="search"
+                                            v-model="month"
+                                            class="form-control"
+                                        >
                                             <option value="" selected>
-                                                    Etat d'impot...
-                                                </option>
-                                                <option value="PAYE">PAYE</option>
-                                                <option value="NONPAYE">NONPAYE</option>
-                                                <option value="SEMIPAYE">SEMIPAYE</option>
-                                                <option value="FERMER">FERMER</option>
-                                                <option value="EXONERER">EXONERER</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <select
-                                                @change="search"
-                                                v-model="per_page"
-                                                class="form-control ml-3"
-                                            >
-                                                <option value="5">5</option>
-                                                <option value="10">10</option>
-                                                <option value="50">50</option>
-                                                <option value="100">100</option>
-                                            </select>
-                                        </div>
-
+                                                Mois d'impot...
+                                            </option>
+                                            <option value="JANVIER">
+                                                JANVIER
+                                            </option>
+                                            <option value="FEVRIER">
+                                                FEVRIER
+                                            </option>
+                                            <option value="MARS">MARS</option>
+                                            <option value="AVRIL">AVRIL</option>
+                                            <option value="MAI">MAI</option>
+                                            <option value="JUIN">JUIN</option>
+                                            <option value="JUILLET">
+                                                JUILLET
+                                            </option>
+                                            <option value="AOUT">AOUT</option>
+                                            <option value="SEPTEMBRE">
+                                                SEPTEMBRE
+                                            </option>
+                                            <option value="OCTOBRE">
+                                                OCTOBRE
+                                            </option>
+                                            <option value="NOVEMBRE">
+                                                NOVEMBRE
+                                            </option>
+                                            <option value="DECEMENBRE">
+                                                DECEMENBRE
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-1 ml-2">
+                                        <select
+                                            @change="search"
+                                            v-model="monthPaye"
+                                            class="form-control"
+                                        >
+                                            <option value="" selected>
+                                                Mois de payement...
+                                            </option>
+                                            <option value="1">JANVIER</option>
+                                            <option value="2">FEVRIER</option>
+                                            <option value="3">MARS</option>
+                                            <option value="4">AVRIL</option>
+                                            <option value="5">MAI</option>
+                                            <option value="6">JUIN</option>
+                                            <option value="7">JUILLET</option>
+                                            <option value="8">AOUT</option>
+                                            <option value="9">SEPTEMBRE</option>
+                                            <option value="10">OCTOBRE</option>
+                                            <option value="11">NOVEMBRE</option>
+                                            <option value="12">
+                                                DECEMENBRE
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 ml-2">
+                                        <input
+                                            @keyup="search"
+                                            v-model="searchFacture"
+                                            type="text"
+                                            class="form-control"
+                                            placeholder="Search Facture"
+                                        />
+                                    </div>
+                                    <div class="col-md-2 ml-2">
+                                        <select
+                                            @change="search"
+                                            v-model="etatImpot"
+                                            class="form-control"
+                                        >
+                                            <option value="" selected>
+                                                Etat d'impot...
+                                            </option>
+                                            <option value="PAYE">PAYE</option>
+                                            <option value="SEMIPAYE">
+                                                SEMIPAYE
+                                            </option>
+                                            <option value="FERMER">
+                                                FERMER
+                                            </option>
+                                            <option value="EXONERER">
+                                                EXONERER
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-1 ml-2">
+                                        <select
+                                            @change="search"
+                                            v-model="per_page"
+                                            class="form-control"
+                                        >
+                                            <option value="5">5</option>
+                                            <option value="10">10</option>
+                                            <option value="50">50</option>
+                                            <option value="100">100</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 ml-2">
+                                        <Link
+                                            :href="
+                                                route('recette.print', {
+                                                    per_page,
+                                                    searchFacture,
+                                                    boulanger_id,
+                                                    etatImpot,
+                                                    month,
+                                                    monthPaye,
+                                                })
+                                            "
+                                            class="btn btn-info"
+                                            ><i class="fa fa-print"></i>
+                                            Imprimer</Link
+                                        >
+                                    </div>
                                 </div>
                             </div>
 
@@ -159,11 +197,34 @@
                                             <td>{{ recette.date }}</td>
                                             <td>{{ recette.numeroFacture }}</td>
                                             <td>
-                                                <span class="badge" :class="recette.type_recette === 'PAYE' ? 'bg-success' : (recette.type_recette === 'SEMIPAYE' ? 'bg-warning' : (recette.type_recette === 'FERMER' ? 'bg-secondary' : (recette.type_recette === 'EXONERER' ? 'bg-info' : 'bg-danger')))">{{
-                                                    recette.type_recette
-                                                }}</span>
+                                                <span
+                                                    class="badge"
+                                                    :class="
+                                                        recette.type_recette ===
+                                                        'PAYE'
+                                                            ? 'bg-success'
+                                                            : recette.type_recette ===
+                                                              'SEMIPAYE'
+                                                            ? 'bg-warning'
+                                                            : recette.type_recette ===
+                                                              'FERMER'
+                                                            ? 'bg-secondary'
+                                                            : recette.type_recette ===
+                                                              'EXONERER'
+                                                            ? 'bg-info'
+                                                            : 'bg-danger'
+                                                    "
+                                                    >{{
+                                                        recette.type_recette
+                                                    }}</span
+                                                >
                                             </td>
-                                            <th>{{ recette.montant.toLocaleString() }} UM</th>
+                                            <th>
+                                                {{
+                                                    recette.montant.toLocaleString()
+                                                }}
+                                                UM
+                                            </th>
                                             <td class="d-flex gap-2 text-left">
                                                 <button
                                                     @click="
@@ -197,7 +258,12 @@
                                         <tr>
                                             <th colspan="2">Total:</th>
                                             <td colspan="4"></td>
-                                            <th>{{ returnTotal().toLocaleString() }} UM</th>
+                                            <th>
+                                                {{
+                                                    returnTotal().toLocaleString()
+                                                }}
+                                                UM
+                                            </th>
                                             <td></td>
                                         </tr>
                                     </tfoot>
@@ -241,7 +307,8 @@ const showModal = ref(false);
 const searchFacture = ref("");
 const boulanger_id = ref("");
 const month = ref("");
-const per_page = ref(5);
+const monthPaye = ref("");
+const per_page = ref(10);
 const etatImpot = ref("");
 
 const props = defineProps({
@@ -280,7 +347,6 @@ const deleteConfimation = (id) => {
     });
 };
 
-
 const returnTotal = function () {
     var total = 0;
     props.recettes.data.forEach((element) => {
@@ -295,6 +361,7 @@ const search = _.throttle(() => {
         per_page: per_page.value,
         boulanger_id: boulanger_id.value,
         month: month.value,
+        monthPaye: monthPaye.value,
         etatImpot: etatImpot.value,
     });
     router.get(

@@ -7,6 +7,18 @@
                         Boulangerie : {{ props.boulanger.name }}
                     </h1>
                 </div>
+                <div class="col-sm-4 "></div>
+                <div class="col-sm-2 text-right">
+                    <Link
+                        :href="
+                            route('boulanger.printDetail', {
+                                id:props.boulanger.id
+                            })
+                        "
+                        class="btn btn-info"
+                        ><i class="fa fa-print"></i> Imprimer</Link
+                    >
+                </div>
             </div>
         </div>
     </div>
@@ -41,7 +53,8 @@
                                             <td>{{ month }}</td>
                                             <td>
                                                 {{
-                                                    recetteImpot(month).length != 1
+                                                    recetteImpot(month)
+                                                        .length != 1
                                                         ? recetteImpot(month)
                                                               .date
                                                         : ""
@@ -49,7 +62,8 @@
                                             </td>
                                             <td>
                                                 {{
-                                                    recetteImpot(month).length != 1
+                                                    recetteImpot(month)
+                                                        .length != 1
                                                         ? recetteImpot(month)
                                                               .numeroFacture
                                                         : ""
@@ -57,7 +71,29 @@
                                             </td>
                                             <td>
                                                 <span
-                                                    class="badge" :class="recetteImpot(month).type_recette === 'PAYE' ? 'bg-success' : (recetteImpot(month).type_recette === 'SEMIPAYE' ? 'bg-warning' : (recetteImpot(month).type_recette === 'FERMER' ? 'bg-secondary' : (recetteImpot(month).type_recette === 'EXONERER' ? 'bg-info' : 'bg-danger')))"
+                                                    class="badge"
+                                                    :class="
+                                                        recetteImpot(month)
+                                                            .type_recette ===
+                                                        'PAYE'
+                                                            ? 'bg-success'
+                                                            : recetteImpot(
+                                                                  month
+                                                              ).type_recette ===
+                                                              'SEMIPAYE'
+                                                            ? 'bg-warning'
+                                                            : recetteImpot(
+                                                                  month
+                                                              ).type_recette ===
+                                                              'FERMER'
+                                                            ? 'bg-secondary'
+                                                            : recetteImpot(
+                                                                  month
+                                                              ).type_recette ===
+                                                              'EXONERER'
+                                                            ? 'bg-info'
+                                                            : 'bg-danger'
+                                                    "
                                                     >{{
                                                         recetteImpot(month) !==
                                                         []
@@ -70,8 +106,12 @@
                                             </td>
                                             <th>
                                                 {{
-                                                    recetteImpot(month).length != 1
-                                                        ? recetteImpot(month).montant.toLocaleString()+ " UM"
+                                                    recetteImpot(month)
+                                                        .length != 1
+                                                        ? recetteImpot(
+                                                              month
+                                                          ).montant.toLocaleString() +
+                                                          " UM"
                                                         : ""
                                                 }}
                                             </th>
@@ -130,7 +170,12 @@
                                         <tr>
                                             <th colspan="2">Total:</th>
                                             <td colspan="3"></td>
-                                            <th>{{ returnTotal().toLocaleString() }} UM</th>
+                                            <th>
+                                                {{
+                                                    returnTotal().toLocaleString()
+                                                }}
+                                                UM
+                                            </th>
                                             <td></td>
                                         </tr>
                                     </tfoot>
@@ -168,7 +213,7 @@ import { router } from "@inertiajs/vue3";
 import addImpot from "./addImpot.vue";
 import EditImpot from "./EditImpot.vue";
 
-document.title = "Liste des impots 2024"
+document.title = "Liste des impots 2024";
 
 const editingBoulangerId = ref(0);
 const addingImpotMois = ref("");

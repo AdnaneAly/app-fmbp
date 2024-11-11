@@ -18,6 +18,7 @@ class RecetteController extends Controller
         $per_page = $request->per_page;
         $numeroFacture = $request->numeroFacture;
         $boulanger_id = $request->boulanger_id;
+        $monthPaye = $request->monthPaye;
         $month = $request->month;
         $etatImpot = $request->etatImpot;
 
@@ -27,6 +28,9 @@ class RecetteController extends Controller
             })
             ->when($boulanger_id, function($query) use($boulanger_id){
                 $query->where("boulanger_id", $boulanger_id);
+            })
+            ->when($monthPaye, function($query) use($monthPaye){
+                $query->whereMonth("date", $monthPaye);
             })
             ->when($month, function($query) use($month){
                 $query->where("month", $month);
@@ -69,6 +73,9 @@ class RecetteController extends Controller
 
             $boulanger = Boulanger::find($request->boulanger_id);
 
+            $op = DB::table('boulangers')->where('id', $request->boulanger_id)->update(['arriere' => $boulanger->arriere - 1]);
+
+
             $recettes = Recette::where('boulanger_id', $request->boulanger_id)->orderBy('month', 'asc')->get();
 
             DB::commit();
@@ -91,6 +98,41 @@ class RecetteController extends Controller
     public function show(Recette $recette)
     {
         //
+    }
+
+
+    /**
+     * Display the specified resource.
+     */
+    public function print(Request $request)
+    {
+        $per_page = $request->per_page;
+        $numeroFacture = $request->numeroFacture;
+        $boulanger_id = $request->boulanger_id;
+        $monthPaye = $request->monthPaye;
+        $month = $request->month;
+        $etatImpot = $request->etatImpot;
+
+        $recettes = Recette::with('boulanger')
+            ->when($numeroFacture, function($query) use($numeroFacture){
+                $query->where("numeroFacture", $numeroFacture);
+            })
+            ->when($boulanger_id, function($query) use($boulanger_id){
+                $query->where("boulanger_id", $boulanger_id);
+            })
+            ->when($monthPaye, function($query) use($monthPaye){
+                $query->whereMonth("date", $monthPaye);
+            })
+            ->when($month, function($query) use($month){
+                $query->where("month", $month);
+            })
+            ->when($etatImpot, function($query) use($etatImpot){
+                $query->where("type_recette", $etatImpot);
+            })
+            ->latest()
+            ->paginate($per_page ?? 10);
+
+        return inertia('Recette/PrintRecette', compact('recettes'));
     }
 
     /**
@@ -134,8 +176,9 @@ class RecetteController extends Controller
             //code...
             DB::beginTransaction();
             //dd($request->formData);
-
+            $boulanger = Boulanger::find($recette->boulanger_id);
             $recette->delete();
+            $op = DB::table('boulangers')->where('id', $recette->boulanger_id)->update(['arriere' => $boulanger->arriere + 1]);
 
             DB::commit();
 

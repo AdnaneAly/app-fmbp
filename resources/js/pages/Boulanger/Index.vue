@@ -42,25 +42,50 @@
                                     <div class="col-md-3">
                                         <select
                                             @change="search"
-                                            v-model="proprietaireBoulanger"
+                                            v-model="proprietaire_id"
                                             class="form-control ml-3"
                                         >
-                                            <option value="" selected>Proprietaire...</option>
-                                            <option v-for="proprietaire in props.proprietaires" :value="proprietaire.id" :key="proprietaire.id">{{ proprietaire.name }}</option>
-
+                                            <option value="" selected>
+                                                Proprietaire...
+                                            </option>
+                                            <option
+                                                v-for="proprietaire in props.proprietaires"
+                                                :value="proprietaire.id"
+                                                :key="proprietaire.id"
+                                            >
+                                                {{ proprietaire.name }}
+                                            </option>
                                         </select>
                                     </div>
-                                    <div class="col-md-2">
+
+                                    <div class="col-md-1">
                                         <select
                                             @change="search"
                                             v-model="per_page"
                                             class="form-control ml-3"
                                         >
+                                            <option selected value="">
+                                                Page...
+                                            </option>
                                             <option value="5">5</option>
                                             <option value="10">10</option>
                                             <option value="50">50</option>
                                             <option value="100">100</option>
                                         </select>
+                                    </div>
+                                    <div class="col-md-2 ml-2">
+                                        <Link
+                                            :href="
+                                                route('boulanger.print', {
+                                                    per_page,
+                                                    searchBoulanger,
+                                                    proprietaire_id,
+                                                })
+                                            "
+                                            class="btn btn-info"
+                                            ><i class="fa fa-print"></i>
+                                            Imprimer</Link
+                                        >
                                     </div>
                                 </div>
                             </div>
@@ -187,13 +212,13 @@ import {
 } from "../../composables/alert";
 import { router } from "@inertiajs/vue3";
 
-document.title = "Liste des boulangeries"
+document.title = "Liste des boulangeries";
 
 const editingBoulangerId = ref(0);
 const showModal = ref(false);
 const searchBoulanger = ref("");
-const proprietaireBoulanger = ref("");
-const per_page = ref(4);
+const proprietaire_id = ref("");
+const per_page = ref("");
 
 const props = defineProps({
     boulangers: Object,
@@ -234,7 +259,7 @@ const deleteConfimation = (id) => {
 const search = _.throttle(() => {
     const url = route("boulanger.index", {
         search: searchBoulanger.value,
-        proprietaire_id: proprietaireBoulanger.value,
+        proprietaire_id: proprietaire_id.value,
         per_page: per_page.value,
     });
     router.get(

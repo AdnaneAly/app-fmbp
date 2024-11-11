@@ -59,6 +59,42 @@ class BoulangerController extends Controller
         return inertia('Boulanger/ShowBoulanger', compact('boulanger', 'recettes'));
     }
 
+
+    /**
+     * Display the specified resource.
+     */
+    public function print(Request $request)
+    {
+
+        $search = $request->search;
+        $per_page = $request->per_page;
+        $proprietaire_id = $request->proprietaire_id;
+        $boulangers = Boulanger::with('proprietaire')
+            ->when($search, function($query) use($search){
+                $query->where("name", "like", "%${search}%");
+            })
+            ->when($proprietaire_id, function($query) use($proprietaire_id){
+                $query->where("proprietaire_id", $proprietaire_id);
+            })
+            ->latest()
+            ->paginate($per_page ?? 5);
+        return inertia('Boulanger/PrintBoulanger', compact('boulangers'));
+    }
+
+
+    /**
+     * Display the specified resource.
+     */
+    public function printDetail(Request $request)
+    {
+        $boulanger = Boulanger::with('proprietaire')->find($request->id);
+        $recettes = Recette::where('boulanger_id', $request->id)->orderBy('month', 'asc')->get();
+        $etatscountes = Recette::etatRecetteCountes($request->id);
+        $etatsmontants = Recette::etatRecetteMontant($request->id);
+        //dd($etatsmontants);
+        return inertia('Boulanger/PrintShowBoulanger', compact('boulanger', 'recettes', 'etatscountes', 'etatsmontants'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      */

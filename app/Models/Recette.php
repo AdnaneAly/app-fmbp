@@ -45,6 +45,46 @@ class Recette extends Model
         }
     }
 
+
+    static public function etatRecetteCountes($boulanger_id)
+    {
+        try {
+            //code...
+            $query = DB::table('recettes')
+            ->where('deleted_at', NULL)
+            ->where('boulanger_id', $boulanger_id)
+            ->select('type_recette', DB::raw('COUNT(*) as total'))
+            ->groupBy('type_recette')
+            ->get()
+            ->pluck('total', 'type_recette');
+
+        return $query;
+        } catch (Exception $e) {
+            //throw $th;
+            dd($e);
+        }
+    }
+
+
+    static public function etatRecetteMontant($boulanger_id)
+    {
+        try {
+            //code...
+            $query = DB::table('recettes')
+            ->where('deleted_at', NULL)
+            ->where('boulanger_id', $boulanger_id)
+            ->select('type_recette', DB::raw('SUM(montant) as total'))
+            ->groupBy('type_recette')
+            ->get()
+            ->pluck('total', 'type_recette');
+
+        return $query;
+        } catch (Exception $e) {
+            //throw $th;
+            dd($e);
+        }
+    }
+
     static public function counteRecette($debut, $fin)
     {
         $query = self::all()->whereBetween('date', [$debut, $fin])->groupBy('type_recette')->map(function ($group) {

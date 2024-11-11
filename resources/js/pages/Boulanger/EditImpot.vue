@@ -40,7 +40,6 @@
                                             Selectionner...
                                         </option>
                                         <option>PAYE</option>
-                                        <option>NONPAYE</option>
                                         <option>SEMIPAYE</option>
                                         <option>FERMER</option>
                                         <option>EXONERER</option>

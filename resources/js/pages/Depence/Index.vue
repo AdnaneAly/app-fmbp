@@ -292,7 +292,6 @@ const returnTotal = function () {
     return total;
 };
 
-console.log(props.depences.data);
 
 const search = _.throttle(() => {
     const url = route("depence.index", {
