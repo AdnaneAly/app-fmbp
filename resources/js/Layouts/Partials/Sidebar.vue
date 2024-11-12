@@ -123,7 +123,7 @@
                                 }"
                             >
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Recettes quotidienne</p>
+                                <p>Impots </p>
                             </Link>
                         </li>
                     </ul>

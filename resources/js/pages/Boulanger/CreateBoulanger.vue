@@ -5,7 +5,7 @@
         data-toggle="modal"
         data-target="#createBoulanger"
     >
-        <i class="fa fa-plus"></i> Ajouter
+        <i class="fa fa-plus"></i> إضافة
     </button>
 
     <div
@@ -14,10 +14,10 @@
         style="display: none"
         aria-hidden="true"
     >
-        <div class="modal-dialog modal-lg">
+        <div  class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Ajouter une boulangerie</h4>
+
                     <button
                         type="button"
                         @click="closeModel"
@@ -26,6 +26,7 @@
                     >
                         <span aria-hidden="true">×</span>
                     </button>
+                    <h4 class="modal-title">إضافة مخبزة جديدة</h4>
                 </div>
                 <div class="modal-body">
                     <form
@@ -36,12 +37,12 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="InputName">Name</label>
+                                    <label for="InputName">إسم المخبزة:</label>
                                     <input
                                         type="text"
                                         class="form-control"
                                         id="InputName"
-                                        placeholder="Enter name"
+                                        placeholder="ادخل اسم المخبزة"
                                         v-model="form.name"
                                         :class="{
                                             'is-invalid': form.errors.name,
@@ -54,7 +55,7 @@
                                     >
                                 </div>
                                 <div class="form-group">
-                                    <label>Proprietaire</label>
+                                    <label>المالك :</label>
                                     <select
                                         class="form-control"
                                         style="width: 100%"
@@ -64,6 +65,7 @@
                                                 form.errors.proprietaire_id,
                                         }"
                                     >
+                                    <option selected value="">إختر...</option>
                                         <option
                                             v-for="item in props.proprietaires"
                                             :value="item.id"
@@ -84,12 +86,12 @@
                             <!-- /.col -->
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="InputAddress">Adresse</label>
+                                    <label for="InputAddress">مكان المخبزة :</label>
                                     <input
                                         type="text"
                                         class="form-control"
                                         id="InputAddress"
-                                        placeholder="Enter adresse"
+                                        placeholder="ادخل مكان المخبزة"
                                         v-model="form.address"
                                         :class="{
                                             'is-invalid':
@@ -103,7 +105,7 @@
                                     >
                                 </div>
                                 <div class="form-group">
-                                    <label>Etat</label>
+                                    <label>الحالة :</label>
                                     <select
                                         class="form-control"
                                         style="width: 100%"
@@ -114,10 +116,10 @@
                                         }"
                                     >
                                         <option value="" selected="selected">
-                                            Selectionner...
+                                            إختر...
                                         </option>
-                                        <option value="Active" >Active</option>
-                                        <option value="NoActive">NoActive</option>
+                                        <option value="Active" >تعمل حاليا</option>
+                                        <option value="NoActive">لم تعد تعمل</option>
                                     </select>
                                     <span
                                         v-if="form.errors.etat"
@@ -129,11 +131,11 @@
                             <div class="col-md-12">
                                 <!-- textarea -->
                                 <div class="form-group">
-                                    <label>Description</label>
+                                    <label>ملاحظات : </label>
                                     <textarea
                                         class="form-control"
                                         rows="2"
-                                        placeholder="Enter ..."
+                                        placeholder="اكتب الملاحظات هنا ..."
                                         v-model="form.description"
                                     ></textarea>
                                     <input
@@ -148,19 +150,20 @@
                     </form>
                 </div>
                 <div class="modal-footer justify-content-between">
-                    <button
-                        type="button"
-                        class="btn btn-danger"
-                        @click="closeModel"
-                    >
-                        Fermer
-                    </button>
+
                     <button
                         type="submit"
                         form="createFormBoulanger"
                         class="btn btn-success"
                     >
-                        Soumettre
+                        حفظ المخبزة
+                    </button>
+                    <button
+                        type="button"
+                        class="btn btn-danger"
+                        @click="closeModel"
+                    >
+                        إلغاء
                     </button>
                 </div>
             </div>
@@ -178,7 +181,7 @@ import { useSwalSuccess, useSwalError } from "../../composables/alert";
 const form = useForm({
     name: "",
     address: "",
-    proprietaire_id: 0,
+    proprietaire_id: "",
     created_by: 1,
     etat: "",
     description: "",

@@ -1,16 +1,15 @@
 <template>
     <div
+        dir="rtl"
         class="modal fade"
         id="EditEmployeur"
-        style="display: none"
+        style="display: none; text-align: right;"
         aria-hidden="true"
     >
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">
-                        Editer une employeur {{ editEmployeur.nameEmployeur }}
-                    </h4>
+
                     <button
                         type="button"
                         class="close"
@@ -19,6 +18,9 @@
                     >
                         <span aria-hidden="true">×</span>
                     </button>
+                    <h4 class="modal-title">
+                        تعديل معلومات العامل : {{ editEmployeur.nameEmployeur }}
+                    </h4>
                 </div>
                 <div class="modal-body">
                     <form
@@ -29,12 +31,11 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="InputName">Name</label>
+                                    <label for="InputName">إسم العامل :</label>
                                     <input
                                         type="text"
                                         class="form-control"
                                         id="InputName"
-                                        placeholder="Enter name"
                                         v-model="editEmployeur.nameEmployeur"
                                         :class="{
                                             'is-invalid': editEmployeur.messageError.hasOwnProperty('name'),
@@ -47,12 +48,11 @@
                                     >
                                 </div>
                                 <div class="form-group">
-                                    <label for="InputTel">Telephone</label>
+                                    <label for="InputTel">رقم الهاتف :</label>
                                     <input
                                         type="text"
                                         class="form-control"
                                         id="InputTel"
-                                        placeholder="Enter tel"
                                         v-model="editEmployeur.telEmployeur"
                                         :class="{
                                             'is-invalid': editEmployeur.messageError.hasOwnProperty('tel'),
@@ -65,17 +65,17 @@
                                     >
                                 </div>
                                 <div class="form-group">
-                                    <label>Etat</label>
+                                    <label>الحالة :</label>
                                     <select
                                         class="form-control"
                                         style="width: 100%"
                                         v-model="editEmployeur.etatEmployeur"
                                     >
                                         <option selected="selected">
-                                            Selectionner...
+                                            إختر...
                                         </option>
-                                        <option>active</option>
-                                        <option>noActive</option>
+                                        <option value="active">يعمل حاليا</option>
+                                        <option value="noActive">لم يعد يعمل</option>
                                     </select>
                                 </div>
 
@@ -84,7 +84,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Grade</label>
+                                    <label>الرتبة :</label>
                                     <select
                                         class="form-control"
                                         style="width: 100%"
@@ -95,12 +95,11 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="InputNNI">NNI</label>
+                                    <label for="InputNNI">رقم بطاقة التعريف :</label>
                                     <input
                                         type="text"
                                         class="form-control"
                                         id="InputNNI"
-                                        placeholder="Enter nni"
                                         v-model="editEmployeur.nniEmployeur"
                                         :class="{
                                             'is-invalid': editEmployeur.messageError.hasOwnProperty('nni'),
@@ -113,11 +112,10 @@
                                     >
                                 </div>
                                 <div class="form-group">
-                                    <label>Description</label>
+                                    <label>ملاحظات :</label>
                                     <textarea
                                         class="form-control"
                                         rows="1"
-                                        placeholder="Enter ..."
                                         v-model="editEmployeur.descriptionEmployeur"
                                     ></textarea>
                                 </div>
@@ -127,7 +125,7 @@
                             <!-- /.col -->
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="InputDate">Date de recrutement</label>
+                                    <label for="InputDate">تاريخ الاكتتاب :</label>
                                     <input
                                         type="date"
                                         class="form-control"
@@ -145,12 +143,11 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="InputMontantSalaire">montant Salaire</label>
+                                    <label for="InputMontantSalaire">المرتب :</label>
                                     <input
                                         type="number"
                                         class="form-control"
                                         id="InputMontantSalaire"
-                                        placeholder="Enter montant salaire"
                                         v-model="editEmployeur.montantsalaireEmployeur"
                                         :class="{
                                             'is-invalid': editEmployeur.messageError.hasOwnProperty('montantSalaire'),
@@ -169,19 +166,20 @@
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button
-                        type="button"
-                        class="btn btn-danger"
-                        @click="closeModal"
-                    >
-                        Fermer
-                    </button>
-                    <button
                         form="editForm"
                         type="submit"
                         class="btn btn-success"
                     >
-                        Soumettre
+                        حفظ التعديل
                     </button>
+                    <button
+                        type="button"
+                        class="btn btn-danger"
+                        @click="closeModal"
+                    >
+                        إلغاء
+                    </button>
+
                 </div>
             </div>
             <!-- /.modal-content -->

@@ -5,7 +5,7 @@
         data-toggle="modal"
         data-target="#createEmployeur"
     >
-        <i class="fa fa-plus"></i> Ajouter
+        <i class="fa fa-plus"></i> إضافة
     </button>
 
     <div
@@ -17,7 +17,7 @@
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Ajouter un employeur</h4>
+                    <h4 class="modal-title">إضافة عامل جديد</h4>
                     <button
                         type="button"
                         @click="closeModel"
@@ -36,12 +36,12 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="InputName">Name</label>
+                                    <label for="InputName">إسم العامل :</label>
                                     <input
                                         type="text"
                                         class="form-control"
                                         id="InputName"
-                                        placeholder="Enter name"
+                                        placeholder="ادخل اسم العامل هنا..."
                                         v-model="nameEmployeur"
                                         :class="{
                                             'is-invalid': nameError != '',
@@ -54,12 +54,12 @@
                                     >
                                 </div>
                                 <div class="form-group">
-                                    <label for="InputTel">Telephone</label>
+                                    <label for="InputTel">رقم الهاتف :</label>
                                     <input
                                         type="text"
                                         class="form-control"
                                         id="InputTel"
-                                        placeholder="Enter tel"
+                                        placeholder="ادخل رقم الهاتف هنا..."
                                         v-model="telEmployeur"
                                         :class="{
                                             'is-invalid': telError != '',
@@ -72,17 +72,17 @@
                                     >
                                 </div>
                                 <div class="form-group">
-                                    <label>Etat</label>
+                                    <label>الحالة : </label>
                                     <select
                                         class="form-control"
                                         style="width: 100%"
                                         v-model="etatEmployeur"
                                     >
                                         <option selected="selected">
-                                            Selectionner...
+                                            إختر...
                                         </option>
-                                        <option>active</option>
-                                        <option>noActive</option>
+                                        <option value="active">يعمل حاليا</option>
+                                        <option value="noActive">لم يعد يعمل</option>
                                     </select>
                                 </div>
 
@@ -91,23 +91,24 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Grade</label>
+                                    <label>الرتبة :</label>
                                     <select
                                         class="form-control"
                                         style="width: 100%"
                                         v-model="gradeIdEmployeur"
                                     >
+                                    <option selected value="">إختر رتبة العامل</option>
                                         <option v-for="item in props.grades" :value="item.id" :key="item.id" >{{ item.name }}</option>
 
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="InputNNI">NNI</label>
+                                    <label for="InputNNI">رقم بطاقة التعريف :</label>
                                     <input
                                         type="text"
                                         class="form-control"
                                         id="InputNNI"
-                                        placeholder="Enter nni"
+                                        placeholder="ادخل رقم بطاقة التعريف هنا..."
                                         v-model="nniEmployeur"
                                         :class="{
                                             'is-invalid': nniError != '',
@@ -120,11 +121,11 @@
                                     >
                                 </div>
                                 <div class="form-group">
-                                    <label>Description</label>
+                                    <label>ملاحظات :</label>
                                     <textarea
                                         class="form-control"
                                         rows="1"
-                                        placeholder="Enter ..."
+                                        placeholder="اكتب ملاحظات هنا ..."
                                         v-model="descriptionEmployeur"
                                     ></textarea>
                                 </div>
@@ -135,7 +136,7 @@
                             <!-- /.col -->
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="InputDate">Date de recrutement</label>
+                                    <label for="InputDate">تاريخ الاكتتاب :</label>
                                     <input
                                         type="date"
                                         class="form-control"
@@ -152,12 +153,12 @@
                                     >
                                 </div>
                                 <div class="form-group">
-                                    <label for="InputMontantSalaire">montant Salaire</label>
+                                    <label for="InputMontantSalaire">المرتب :</label>
                                     <input
                                         type="number"
                                         class="form-control"
                                         id="InputMontantSalaire"
-                                        placeholder="Enter montant salaire"
+                                        placeholder="ادخل المبلغ هنا..."
                                         v-model="montantsalaireEmployeur"
                                         :class="{
                                             'is-invalid': montantsalaireError != '',
@@ -176,19 +177,20 @@
                     </form>
                 </div>
                 <div class="modal-footer justify-content-between">
-                    <button
-                        type="button"
-                        class="btn btn-danger"
-                        @click="closeModel"
-                    >
-                        Fermer
-                    </button>
+
                     <button
                         type="submit"
                         form="createFormEmployeur"
                         class="btn btn-success"
                     >
-                        Soumettre
+                        حفظ العامل
+                    </button>
+                    <button
+                        type="button"
+                        class="btn btn-danger"
+                        @click="closeModel"
+                    >
+                        إلغاء
                     </button>
                 </div>
             </div>
@@ -203,6 +205,8 @@ import { onMounted, ref } from "vue";
 import { router } from "@inertiajs/vue3";
 import { useSwalSuccess, useSwalError } from "../../composables/alert";
 
+const date = new Date();
+const formattedDate = date.toISOString().slice(0, 10);
 
 const nameError = ref("");
 const dateError = ref("");
@@ -215,7 +219,7 @@ const gradeIdEmployeur = ref("");
 const etatEmployeur = ref("");
 const descriptionEmployeur = ref("");
 const nniEmployeur = ref("");
-const dateEmployeur = ref("");
+const dateEmployeur = ref(formattedDate);
 const montantsalaireEmployeur = ref("");
 const telEmployeur = ref("");
 

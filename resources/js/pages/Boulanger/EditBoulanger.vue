@@ -1,16 +1,14 @@
 <template>
     <div
+        dir="rtl"
         class="modal fade"
         id="EditBoulanger"
-        style="display: none"
+        style="display: none; text-align: right;"
         aria-hidden="true"
     >
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">
-                        Editer une boulangerie {{ editBoulanger.name }}
-                    </h4>
                     <button
                         type="button"
                         class="close"
@@ -19,6 +17,10 @@
                     >
                         <span aria-hidden="true">×</span>
                     </button>
+                    <h4 class="modal-title">
+                        تعديل مخبزة : {{ editBoulanger.name }}
+                    </h4>
+
                 </div>
                 <div class="modal-body">
                     <form
@@ -29,12 +31,11 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="InputName">Name</label>
+                                    <label for="InputName">إسم المخبزة :</label>
                                     <input
                                         type="text"
                                         class="form-control"
                                         id="InputName"
-                                        placeholder="Enter name"
                                         v-model="editBoulanger.name"
                                         :class="{
                                             'is-invalid':
@@ -48,7 +49,7 @@
                                     >
                                 </div>
                                 <div class="form-group">
-                                    <label>Proprietaire</label>
+                                    <label>المالك :</label>
                                     <select
                                         class="form-control"
                                         style="width: 100%"
@@ -71,12 +72,11 @@
                             <!-- /.col -->
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="InputAddress">Adresse</label>
+                                    <label for="InputAddress">مكان المخبزة :</label>
                                     <input
                                         type="text"
                                         class="form-control"
                                         id="InputAddress"
-                                        placeholder="Enter adresse"
                                         v-model="editBoulanger.address"
                                         :class="{
                                             'is-invalid':
@@ -89,7 +89,7 @@
                                         >{{ editBoulanger.messageError.address }}</span>
                                 </div>
                                 <div class="form-group">
-                                    <label>Etat</label>
+                                    <label>حالة المخبزة :</label>
                                     <select
                                         class="form-control"
                                         style="width: 100%"
@@ -100,10 +100,10 @@
                                         }"
                                     >
                                         <option selected="selected">
-                                            Selectionner...
+                                            إختر...
                                         </option>
-                                        <option>active</option>
-                                        <option>noActive</option>
+                                        <option value="active">تعمل حاليا</option>
+                                        <option value="noActive">لم تعد تعمل</option>
                                     </select>
                                     <span
                                         v-if="editBoulanger.messageError.hasOwnProperty('etat')"
@@ -114,11 +114,10 @@
                             <div class="col-md-12">
                                 <!-- textarea -->
                                 <div class="form-group">
-                                    <label>Description</label>
+                                    <label>ملاحظات :</label>
                                     <textarea
                                         class="form-control"
                                         rows="2"
-                                        placeholder="Enter ..."
                                         v-model="editBoulanger.description"
                                     ></textarea>
 
@@ -129,19 +128,20 @@
                     </form>
                 </div>
                 <div class="modal-footer justify-content-between">
-                    <button
-                        type="button"
-                        class="btn btn-danger"
-                        @click="closeModal"
-                    >
-                        Fermer
-                    </button>
+
                     <button
                         form="editForm"
                         type="submit"
                         class="btn btn-success"
                     >
-                        Soumettre
+                        حفظ التعديل
+                    </button>
+                    <button
+                        type="button"
+                        class="btn btn-danger"
+                        @click="closeModal"
+                    >
+                        إلغاء
                     </button>
                 </div>
             </div>

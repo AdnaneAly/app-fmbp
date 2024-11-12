@@ -21,11 +21,12 @@ class AutreRecetteRequest extends FormRequest
      */
     public function rules(): array
     {
+        $id = $this->autrerecette->id ?? "";
         return [
             'type_recette_id' => ['required', 'integer','exists:type_recettes,id'],
             'created_by' => ['required', 'integer','exists:users,id'],
             'montant' => ['required', 'numeric','min:0','max:1000000'],
-            'numeroFacture' => ['nullable', 'numeric','min:0','max:100'],
+            'numeroFacture'     => ['nullable', 'numeric', "unique:autre_recettes,numeroFacture,{$id}","unique:recettes,numeroFacture,{$id}"],
             'date' => ['required', 'date'],
             'description'=> ['nullable', 'string'],
             'annee'=> ['string'],
@@ -39,6 +40,7 @@ class AutreRecetteRequest extends FormRequest
             'montant' => 'La montant est obligatoire',
             'montant.min' => 'La montant est doit etre >= 0',
             'montant.max' => 'La montant est doit etre < 1000000',
+            'numeroFacture.unique' => 'Le numero de facture est doit etre unique',
             'date' => 'La date est obligatoire',
             'annee' => 'L\'annee est obligatoire'
         ];

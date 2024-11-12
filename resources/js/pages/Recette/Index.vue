@@ -1,23 +1,13 @@
 <template>
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0">Liste de Recettes</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item">
-                            <a href="#">Home</a>
-                        </li>
-                        <li class="breadcrumb-item active">Liste</li>
-                    </ol>
-                </div>
+    <section dir="rtl" style="text-align: right;" class="content-header">
+        <div class="card card-cyan card-outline mx-2">
+            <div class="card-header">
+                <h4 class="text-cyan" ><i class="fas fa-bars"></i> قائمة المداخيل</h4>
             </div>
-        </div>
-    </div>
+        </div><!-- /.container-fluid -->
+    </section>
 
-    <div class="content">
+    <div dir="rtl" style="text-align: right;" class="content">
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -25,14 +15,14 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="row">
-                                    <div class="col-md-2 ml-1">
+                                    <div class="col-md-2 ">
                                         <select
                                             @change="search"
                                             v-model="boulanger_id"
                                             class="form-control"
                                         >
                                             <option value="" selected>
-                                                Boulangeries...
+                                                المخابز...
                                             </option>
                                             <option
                                                 v-for="item in props.boulangers"
@@ -43,99 +33,99 @@
                                             </option>
                                         </select>
                                     </div>
-                                    <div class="col-md-1 ml-2">
+                                    <div class="col-md-2 ">
                                         <select
                                             @change="search"
                                             v-model="month"
                                             class="form-control"
                                         >
                                             <option value="" selected>
-                                                Mois d'impot...
+                                                شهر الجباية...
                                             </option>
                                             <option value="JANVIER">
-                                                JANVIER
+                                                يناير
                                             </option>
                                             <option value="FEVRIER">
-                                                FEVRIER
+                                                قبراير
                                             </option>
-                                            <option value="MARS">MARS</option>
-                                            <option value="AVRIL">AVRIL</option>
-                                            <option value="MAI">MAI</option>
-                                            <option value="JUIN">JUIN</option>
+                                            <option value="MARS">مارس</option>
+                                            <option value="AVRIL">ابريل</option>
+                                            <option value="MAI">مايو</option>
+                                            <option value="JUIN">يونيو</option>
                                             <option value="JUILLET">
-                                                JUILLET
+                                                يوليو
                                             </option>
-                                            <option value="AOUT">AOUT</option>
+                                            <option value="AOUT">اغصطس</option>
                                             <option value="SEPTEMBRE">
-                                                SEPTEMBRE
+                                                سبتمبر
                                             </option>
                                             <option value="OCTOBRE">
-                                                OCTOBRE
+                                                اكتوبر
                                             </option>
                                             <option value="NOVEMBRE">
-                                                NOVEMBRE
+                                                نوفمبر
                                             </option>
                                             <option value="DECEMENBRE">
-                                                DECEMENBRE
+                                                دجمبر
                                             </option>
                                         </select>
                                     </div>
-                                    <div class="col-md-1 ml-2">
+                                    <div class="col-md-2 ">
                                         <select
                                             @change="search"
                                             v-model="monthPaye"
                                             class="form-control"
                                         >
                                             <option value="" selected>
-                                                Mois de payement...
+                                                شهر التسديد...
                                             </option>
-                                            <option value="1">JANVIER</option>
-                                            <option value="2">FEVRIER</option>
-                                            <option value="3">MARS</option>
-                                            <option value="4">AVRIL</option>
-                                            <option value="5">MAI</option>
-                                            <option value="6">JUIN</option>
-                                            <option value="7">JUILLET</option>
-                                            <option value="8">AOUT</option>
-                                            <option value="9">SEPTEMBRE</option>
-                                            <option value="10">OCTOBRE</option>
-                                            <option value="11">NOVEMBRE</option>
+                                            <option value="1">يناير</option>
+                                            <option value="2">قبراير</option>
+                                            <option value="3">مارس</option>
+                                            <option value="4">ابريل</option>
+                                            <option value="5">مايو</option>
+                                            <option value="6">يونيو</option>
+                                            <option value="7">يوليو</option>
+                                            <option value="8">اغصطس</option>
+                                            <option value="9">سبتمبر</option>
+                                            <option value="10">اكتوبر</option>
+                                            <option value="11">نوفمبر</option>
                                             <option value="12">
-                                                DECEMENBRE
+                                                دجمبر
                                             </option>
                                         </select>
                                     </div>
-                                    <div class="col-md-2 ml-2">
+                                    <div class="col-md-2 ">
                                         <input
                                             @keyup="search"
                                             v-model="searchFacture"
                                             type="text"
                                             class="form-control"
-                                            placeholder="Search Facture"
+                                            placeholder="ادحل رقم الوصل هنا..."
                                         />
                                     </div>
-                                    <div class="col-md-2 ml-2">
+                                    <div class="col-md-2 ">
                                         <select
                                             @change="search"
                                             v-model="etatImpot"
                                             class="form-control"
                                         >
                                             <option value="" selected>
-                                                Etat d'impot...
+                                                حالة الجباية...
                                             </option>
-                                            <option value="PAYE">PAYE</option>
+                                            <option value="PAYE">دفعت</option>
                                             <option value="SEMIPAYE">
-                                                SEMIPAYE
+                                                تسوية
                                             </option>
                                             <option value="FERMER">
-                                                FERMER
+                                                مغلقة
                                             </option>
                                             <option value="EXONERER">
-                                                EXONERER
+                                                إعفاء
                                             </option>
                                         </select>
                                     </div>
-                                    <div class="col-md-1 ml-2">
+                                    <div class="col-md-1 ">
                                         <select
                                             @change="search"
                                             v-model="per_page"
@@ -147,7 +137,7 @@
                                             <option value="100">100</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-2 ml-2">
+                                    <div class="col-md-1 ">
                                         <Link
                                             :href="
                                                 route('recette.print', {
@@ -161,7 +151,7 @@
                                             "
                                             class="btn btn-info"
                                             ><i class="fa fa-print"></i>
-                                            Imprimer</Link
+                                            سحب</Link
                                         >
                                     </div>
                                 </div>
@@ -171,16 +161,14 @@
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th style="width: 10px">#</th>
-                                            <th>Boulangeries</th>
-                                            <th>Mois d'impot</th>
-                                            <th>Date de payement</th>
-                                            <th>Facture</th>
-                                            <th>Etat</th>
-                                            <th>Montant</th>
-                                            <th style="width: 100px">
-                                                Actions
-                                            </th>
+                                            <th style="width: 50px">#</th>
+                                            <th>المخابز</th>
+                                            <th>شهر الجباية</th>
+                                            <th>تاريخ التسديد</th>
+                                            <th>رقم الوصل</th>
+                                            <th>الحالة </th>
+                                            <th>المبلغ</th>
+                                            <th style="width: 120px">عمليات</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -219,7 +207,7 @@
                                                     }}</span
                                                 >
                                             </td>
-                                            <th>
+                                            <th dir="ltr">
                                                 {{
                                                     recette.montant.toLocaleString()
                                                 }}
@@ -232,7 +220,7 @@
                                                             recette.id
                                                         )
                                                     "
-                                                    style="margin-right: 10px"
+                                                    style="margin-left: 10px"
                                                     class="btn btn-info btn-sm"
                                                     href="#"
                                                 >
@@ -256,9 +244,8 @@
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <th colspan="2">Total:</th>
-                                            <td colspan="4"></td>
-                                            <th>
+                                            <th colspan="6">المجموع :</th>
+                                            <th dir="ltr">
                                                 {{
                                                     returnTotal().toLocaleString()
                                                 }}

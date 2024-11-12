@@ -1,60 +1,74 @@
 <template>
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0">Liste des employeurs</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item">
-                            <a href="#">Home</a>
-                        </li>
-                        <li class="breadcrumb-item active">Liste</li>
-                    </ol>
-                </div>
+    <section dir="rtl" style="text-align: right;" class="content-header">
+        <div class="card card-cyan card-outline mx-2">
+            <div class="card-header">
+                <h4 class="text-cyan" ><i class="fas fa-bars"></i> لائحة العمال</h4>
             </div>
-        </div>
-    </div>
+        </div><!-- /.container-fluid -->
+    </section>
 
-    <div class="content">
+    <div dir="rtl" style="text-align: right;" class="content">
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <div class="card-title d-flex">
-                                    <CreateEmployeur
+                                <div class="row">
+                                    <div class="col-md-1 ml-2">
+                                        <CreateEmployeur
                                         :grades="props.grades"
                                         :boulangers="props.boulangers"
                                     />
-                                    <input
+                                    </div>
+                                    <div class="col-md-2 ml-2">
+                                        <input
                                         @keyup="search"
                                         v-model="searchEmployeur"
                                         type="text"
-                                        class="form-control ml-3"
-                                        placeholder="Search Name"
+                                        class="form-control"
+                                        placeholder="ابحث عن اسم العامل"
                                     />
-                                    <select
+                                    </div>
+                                    <div class="col-md-2 ml-2">
+                                        <select
                                         @change="search"
                                         v-model="grade_id"
-                                        class="form-control ml-3"
+                                        class="form-control"
                                     >
-                                    <option value="" selected>Grade...</option>
+                                    <option value="" selected>الرتب...</option>
                                     <option v-for="item in props.grades" :value="item.id" :key="item.id" >{{ item.name }}</option>
 
                                     </select>
-                                    <select
+                                    </div>
+                                    <div class="col-md-2 ml-2">
+                                        <select
                                         @change="search"
                                         v-model="per_page"
-                                        class="form-control ml-3"
+                                        class="form-control"
                                     >
                                         <option value="5">5</option>
                                         <option value="10">10</option>
                                         <option value="50">50</option>
                                         <option value="100">100</option>
                                     </select>
+                                    </div>
+                                    <div class="col-md-2 ml-2">
+                                        <Link
+                                            :href="
+                                                route('employeur.print', {
+                                                    per_page,
+                                                    grade_id,
+                                                    searchEmployeur,
+                                                })
+                                            "
+                                            class="btn btn-info"
+                                            ><i class="fa fa-print"></i>
+                                            سحب</Link
+                                        >
+                                    </div>
+
+
                                 </div>
                             </div>
 
@@ -62,14 +76,14 @@
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th style="width: 10px">#</th>
-                                            <th>Name</th>
-                                            <th>Grade</th>
-                                            <th>Etat</th>
-                                            <th>Salaire</th>
-                                            <th style="width: 140px">
-                                                Actions
-                                            </th>
+                                            <th style="width: 50px">#</th>
+                                            <th>الإسم الكامل</th>
+                                            <th>رقم الهاتف</th>
+                                            <th>الرتبة</th>
+                                            <th>تاريخ الاكتتاب</th>
+                                            <th>الحالة</th>
+                                            <th>المرتب</th>
+                                            <th style="width: 100px">العمليات</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -79,31 +93,25 @@
                                         >
                                             <td>1.</td>
                                             <td>{{ employeur.name }}</td>
+                                            <td>{{ employeur.tel }}</td>
                                             <td>{{ employeur.grade.name }}</td>
+                                            <td>{{ employeur.date }}</td>
                                             <td>
                                                 <span class="badge" :class="employeur.etat === 'active' ? 'bg-success' : 'bg-danger'">{{
                                                     employeur.etat
                                                 }}</span>
                                             </td>
-                                            <td>
-                                                {{ employeur.montantSalaire }}
-                                            </td>
+                                            <th>
+                                                {{ employeur.montantSalaire.toLocaleString() }}
+                                            </th>
                                             <td class="d-flex gap-2 text-left">
-                                                <a
-                                                    style="margin-right: 10px"
-                                                    class="btn btn-primary btn-sm"
-                                                    href="#"
-                                                >
-                                                    <i class="fas fa-folder">
-                                                    </i>
-                                                </a>
                                                 <button
                                                     @click="
                                                         openEditEmployeur(
                                                             employeur.id
                                                         )
                                                     "
-                                                    style="margin-right: 10px"
+                                                    style="margin-left: 10px"
                                                     class="btn btn-info btn-sm"
                                                     href="#"
                                                 >

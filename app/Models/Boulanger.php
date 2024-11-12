@@ -26,6 +26,12 @@ class Boulanger extends Model
         $query = self::all()->where('etat', 'active')->count();
         return $query;
     }
+
+    static public function counteArriereBoulangers()
+    {
+        $query = self::all()->where('etat', 'active')->sum('arriere');
+        return $query;
+    }
     public function proprietaire()
     {
         return $this->belongsTo(Proprietaire::class);

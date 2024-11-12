@@ -61,6 +61,28 @@ class AutreRecetteController extends Controller
         //
     }
 
+
+    /**
+     * Display the specified resource.
+     */
+    public function print(Request $request)
+    {
+        $per_page = $request->per_page;
+        $boulanger_id = $request->boulanger_id;
+        $type_recette_id = $request->type_recette_id;
+
+        $autrerecettes = AutreRecette::with('typerecette')
+            ->when($type_recette_id, function($query) use($type_recette_id){
+                $query->where("type_recette_id", $type_recette_id);
+            })
+            ->when($boulanger_id, function($query) use($boulanger_id){
+                $query->where("boulanger_id", $boulanger_id);
+            })
+            ->latest()
+            ->paginate($per_page ?? 5);
+        return inertia('Recette/AutreRecette/PrintAutreRecette', compact('autrerecettes'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      */

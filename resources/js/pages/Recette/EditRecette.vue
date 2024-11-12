@@ -1,16 +1,15 @@
 <template>
     <div
+        dir="rtl"
         class="modal fade"
         id="EditImpot"
-        style="display: none"
+        style="display: none; text-align: right;"
         aria-hidden="true"
     >
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">
-                        Editer un impot le mois :  {{ editImpot.month }}
-                    </h4>
+
                     <button
                         type="button"
                         class="close"
@@ -19,6 +18,9 @@
                     >
                         <span aria-hidden="true">×</span>
                     </button>
+                    <h4 class="modal-title">
+                        تعديل جباية شهر :  {{ editImpot.month }}
+                    </h4>
                 </div>
                 <div class="modal-body">
                     <form
@@ -29,7 +31,7 @@
                     <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Etat</label>
+                                    <label>حالة الجباية :</label>
                                     <select
                                         class="form-control"
                                         style="width: 100%"
@@ -37,22 +39,20 @@
                                         @change="etatImpot($event)"
                                     >
                                         <option value="" selected="selected">
-                                            Selectionner...
+                                            إختر...
                                         </option>
-                                        <option>PAYE</option>
-                                        <option>NONPAYE</option>
-                                        <option>SEMIPAYE</option>
-                                        <option>FERMER</option>
-                                        <option>EXONERER</option>
+                                        <option value="PAYE">دفعت</option>
+                                        <option value="SEMIPAYE">تسوية</option>
+                                        <option value="FERMER">مغلقة</option>
+                                        <option value="EXONERER">إعفاء</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="InputAddress">Facture</label>
+                                    <label for="InputAddress">رقم الوصل :</label>
                                     <input
                                         type="text"
                                         class="form-control"
                                         id="InputAddress"
-                                        placeholder="Enter adresse"
                                         :disabled="
                                             editImpot.type_recette === 'FERMER' ||
                                             editImpot.type_recette === 'NONPAYE' ||
@@ -67,18 +67,17 @@
                             <!-- /.col -->
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="InputAddress">Montant</label>
+                                    <label for="InputAddress">مبلغ الجباية :</label>
                                     <input
                                         type="number"
                                         class="form-control"
                                         id="InputAddress"
-                                        placeholder="Enter adresse"
                                         :disabled="editImpot.type_recette !== 'SEMIPAYE'"
                                         v-model="editImpot.montant"
                                     />
                                 </div>
                                 <div class="form-group">
-                                    <label for="InputDate">Date </label>
+                                    <label for="InputDate">تاريخ التسديد : </label>
                                     <input
                                         type="date"
                                         class="form-control"
@@ -90,11 +89,10 @@
                             <div class="col-md-12">
                                 <!-- textarea -->
                                 <div class="form-group">
-                                    <label>Description</label>
+                                    <label>ملاحظات :</label>
                                     <textarea
                                         class="form-control"
                                         rows="2"
-                                        placeholder="Enter ..."
                                         v-model="editImpot.description"
                                     ></textarea>
                                 </div>
@@ -106,19 +104,20 @@
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button
-                        type="button"
-                        class="btn btn-danger"
-                        @click="closeModal"
-                    >
-                        Fermer
-                    </button>
-                    <button
                         form="editForm"
                         type="submit"
                         class="btn btn-success"
                     >
-                        Soumettre
+                        حفظ التعديل
                     </button>
+                    <button
+                        type="button"
+                        class="btn btn-danger"
+                        @click="closeModal"
+                    >
+                        إلغاء
+                    </button>
+
                 </div>
             </div>
             <!-- /.modal-content -->

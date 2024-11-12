@@ -1,23 +1,15 @@
 <template>
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0">Liste de Boulangeries</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item">
-                            <a href="#">Home</a>
-                        </li>
-                        <li class="breadcrumb-item active">Liste</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <div class="content">
+
+    <section dir="rtl" style="text-align: right;" class="content-header">
+        <div class="card card-cyan card-outline mx-2">
+            <div class="card-header">
+                <h4 class="text-cyan" ><i class="fas fa-bars"></i> قائمة المخابز</h4>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <div dir="rtl" style="text-align: right;" class="content">
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -36,7 +28,7 @@
                                             v-model="searchBoulanger"
                                             type="text"
                                             class="form-control ml-3"
-                                            placeholder="Search Name"
+                                            placeholder="أبحث عن إسم المخبزة "
                                         />
                                     </div>
                                     <div class="col-md-3">
@@ -46,7 +38,7 @@
                                             class="form-control ml-3"
                                         >
                                             <option value="" selected>
-                                                Proprietaire...
+                                                المالك...
                                             </option>
                                             <option
                                                 v-for="proprietaire in props.proprietaires"
@@ -58,14 +50,14 @@
                                         </select>
                                     </div>
 
-                                    <div class="col-md-1">
+                                    <div class="col-md-2">
                                         <select
                                             @change="search"
                                             v-model="per_page"
-                                            class="form-control ml-3"
+                                            class="form-control"
                                         >
                                             <option selected value="">
-                                                Page...
+                                                عدد الصفحات...
                                             </option>
                                             <option value="5">5</option>
                                             <option value="10">10</option>
@@ -84,7 +76,7 @@
                                             "
                                             class="btn btn-info"
                                             ><i class="fa fa-print"></i>
-                                            Imprimer</Link
+                                            سحب</Link
                                         >
                                     </div>
                                 </div>
@@ -94,14 +86,14 @@
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th style="width: 10px">#</th>
-                                            <th>Name</th>
-                                            <th>Address</th>
-                                            <th>Proprietaire</th>
-                                            <th>Etat</th>
-                                            <th style="width: 140px">
-                                                Actions
-                                            </th>
+                                        <th style="width: 50px">#</th>
+                                        <th>إسم المخبزة</th>
+                                        <th>المكان</th>
+                                        <th>المالك</th>
+                                        <th>الحالة</th>
+                                        <th>عدد اشهر المتأخرات</th>
+                                        <th>مبلغ المتأخرات</th>
+                                        <th style="width: 140px">العمليات</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -130,9 +122,11 @@
                                                     >{{ boulanger.etat }}</span
                                                 >
                                             </td>
+                                            <th>{{ boulanger.arriere }}</th>
+                                            <th>{{ (boulanger.arriere * 55000).toLocaleString() }}</th>
                                             <td class="d-flex gap-2 text-left">
                                                 <Link
-                                                    style="margin-right: 10px"
+                                                    style="margin-left: 10px"
                                                     class="btn btn-primary btn-sm"
                                                     :href="
                                                         route(
@@ -153,7 +147,7 @@
                                                             boulanger.id
                                                         )
                                                     "
-                                                    style="margin-right: 10px"
+                                                    style="margin-left: 10px"
                                                     class="btn btn-info btn-sm"
                                                     href="#"
                                                 >
@@ -175,6 +169,14 @@
                                             </td>
                                         </tr>
                                     </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="6">Total: </th>
+                                        <th>{{ returnTotal().toLocaleString() }}</th>
+                                        <td></td>
+                                        </tr>
+
+                                    </tfoot>
                                 </table>
                             </div>
 
@@ -254,6 +256,14 @@ const deleteConfimation = (id) => {
     useSwalConfirm(message, () => {
         deleteBoulanger(id);
     });
+};
+
+const returnTotal = function () {
+    var total = 0;
+    props.boulangers.data.forEach((element) => {
+        total += element.arriere;
+    });
+    return total * 55000;
 };
 
 const search = _.throttle(() => {

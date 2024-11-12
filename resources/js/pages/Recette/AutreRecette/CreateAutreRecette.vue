@@ -109,13 +109,15 @@
                                         id="InputFacture"
                                         placeholder="Enter facture"
                                         v-model="form.numeroFacture"
-
+                                        :class="{
+                                            'is-invalid': form.errors.numeroFacture,
+                                        }"
 
                                     />
                                     <span
-                                        v-if="form.errors.date"
+                                        v-if="form.errors.numeroFacture"
                                         class="error invalid-feedback"
-                                        >{{ form.errors.date }}</span
+                                        >{{ form.errors.numeroFacture }}</span
                                     >
                                 </div>
                             </div>
@@ -168,8 +170,11 @@ import { onMounted } from "vue";
 import { useForm } from "@inertiajs/vue3";
 import { useSwalSuccess, useSwalError } from "../../../composables/alert";
 
+const date = new Date();
+const formattedDate = date.toISOString().slice(0, 10);
+
 const form = useForm({
-    date: "",
+    date: formattedDate,
     numeroFacture: "",
     type_recette_id: 0,
     created_by: 1,

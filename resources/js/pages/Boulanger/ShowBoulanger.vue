@@ -1,14 +1,13 @@
 <template>
-    <div class="content-header">
+    <div dir="rtl" style="text-align: right;"  class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1 class="m-0">
-                        Boulangerie : {{ props.boulanger.name }}
+                        إسم المخبزة : {{ props.boulanger.name }}
                     </h1>
                 </div>
-                <div class="col-sm-4 "></div>
-                <div class="col-sm-2 text-right">
+                <div class="col-sm-6 text-left">
                     <Link
                         :href="
                             route('boulanger.printDetail', {
@@ -16,14 +15,14 @@
                             })
                         "
                         class="btn btn-info"
-                        ><i class="fa fa-print"></i> Imprimer</Link
+                        ><i class="fa fa-print"></i> سحب</Link
                     >
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="content">
+    <div dir="rtl" style="text-align: right;" class="content">
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -32,17 +31,18 @@
                             <div class="card-body">
                                 <table class="table table-sm table-bordered">
                                     <thead>
+
                                         <tr>
-                                            <th style="width: 10px">#</th>
-                                            <th>Mois d'impot</th>
-                                            <th>Date de payement</th>
-                                            <th>Numero de facture</th>
-                                            <th>Etat</th>
-                                            <th>Montant</th>
-                                            <th style="width: 140px">
-                                                Actions
+                                                <th style="width: 5%">الرقم</th>
+                                                <th style="width: 25%">تاريخ الجباية</th>
+                                                <th style="width: 25%">تاريخ التسديد</th>
+                                                <th style="width: 15%">رقم الوصل</th>
+                                                <th style="width: 10%">الحالة</th>
+                                                <th style="width: 20%">المبلغ المدفوع</th>
+                                                <th style="width: 140px">
+                                                العمليات
                                             </th>
-                                        </tr>
+                                            </tr>
                                     </thead>
                                     <tbody>
                                         <tr
@@ -104,7 +104,7 @@
                                                     }}</span
                                                 >
                                             </td>
-                                            <th>
+                                            <th dir="ltr">
                                                 {{
                                                     recetteImpot(month)
                                                         .length != 1
@@ -117,7 +117,7 @@
                                             </th>
                                             <td class="d-flex gap-2 text-left">
                                                 <button
-                                                    style="margin-right: 10px"
+                                                    style="margin-left: 10px"
                                                     class="btn btn-primary btn-sm"
                                                     @click="
                                                         addImpotBoulanger(month)
@@ -136,7 +136,7 @@
                                                                 .id
                                                         )
                                                     "
-                                                    style="margin-right: 10px"
+                                                    style="margin-left: 10px"
                                                     class="btn btn-info btn-sm"
                                                     :disabled="
                                                         recetteImpot(month)
@@ -170,7 +170,7 @@
                                         <tr>
                                             <th colspan="2">Total:</th>
                                             <td colspan="3"></td>
-                                            <th>
+                                            <th dir="ltr">
                                                 {{
                                                     returnTotal().toLocaleString()
                                                 }}

@@ -1,16 +1,15 @@
 <template>
     <div
+        dir="rtl"
         class="modal fade"
         id="addImpotBolanger"
-        style="display: none"
+        style="display: none; text-align: right;"
         aria-hidden="true"
     >
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">
-                        Ajouter impot le mois {{ props.mois }}
-                    </h4>
+
                     <button
                         type="button"
                         @click="closeModal"
@@ -19,6 +18,9 @@
                     >
                         <span aria-hidden="true">×</span>
                     </button>
+                    <h4 class="modal-title">
+                        إضافة جباية شهر : {{ props.mois }}
+                    </h4>
                 </div>
                 <div class="modal-body">
                     <form
@@ -29,7 +31,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Etat</label>
+                                    <label>حالة الجباية :</label>
                                     <select
                                         class="form-control"
                                         style="width: 100%"
@@ -41,12 +43,12 @@
                                         }"
                                     >
                                         <option value="" selected="selected">
-                                            Selectionner...
+                                            إختر...
                                         </option>
-                                        <option>PAYE</option>
-                                        <option>SEMIPAYE</option>
-                                        <option>FERMER</option>
-                                        <option>EXONERER</option>
+                                        <option value="PAYE">دفعت</option>
+                                        <option value="SEMIPAYE">تسوية</option>
+                                        <option value="FERMER">مغلقة</option>
+                                        <option value="EXONERER">إعفاء</option>
                                     </select>
                                     <span
                                         v-if="form.errors.type_recette"
@@ -55,20 +57,29 @@
                                     >
                                 </div>
                                 <div class="form-group">
-                                    <label for="InputFacture">Facture</label>
+                                    <label for="InputFacture">رقم الوصل :</label>
                                     <input
                                         type="text"
                                         class="form-control"
                                         id="InputFacture"
-                                        placeholder="Enter facture"
+                                        placeholder="ادخل رقم الوصل هنا..."
                                         v-model="form.numeroFacture"
                                         :disabled="
                                             form.type_recette === 'FERMER' ||
                                             form.type_recette === 'NONPAYE' ||
                                             form.type_recette === 'EXONERER'
                                         "
+                                        :class="{
+                                            'is-invalid':
+                                                form.errors.numeroFacture,
+                                        }"
 
                                     />
+                                    <span
+                                        v-if="form.errors.numeroFacture"
+                                        class="error invalid-feedback"
+                                        >{{ form.errors.numeroFacture }}</span
+                                    >
                                 </div>
 
                                 <!-- /.form-group -->
@@ -76,12 +87,12 @@
                             <!-- /.col -->
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="InputAddress">Montant</label>
+                                    <label for="InputAddress">مبلغ الجباية :</label>
                                     <input
                                         type="number"
                                         class="form-control"
                                         id="InputAddress"
-                                        placeholder="Enter adresse"
+                                        placeholder="ادخل المبلغ هنا ..."
                                         :disabled="
                                             form.type_recette !== 'SEMIPAYE'
                                         "
@@ -98,7 +109,7 @@
                                     >
                                 </div>
                                 <div class="form-group">
-                                    <label for="InputDate">Date </label>
+                                    <label for="InputDate">تاريخ العملية : </label>
                                     <input
                                         type="date"
                                         class="form-control"
@@ -119,11 +130,11 @@
                             <div class="col-md-12">
                                 <!-- textarea -->
                                 <div class="form-group">
-                                    <label>Description</label>
+                                    <label>ملاحظات :</label>
                                     <textarea
                                         class="form-control"
                                         rows="2"
-                                        placeholder="Enter ..."
+                                        placeholder="اكتب الملاحظات هنا ..."
                                         v-model="form.description"
                                     ></textarea>
                                     <input type="hidden" v-model="monthImpot" />
@@ -134,19 +145,20 @@
                     </form>
                 </div>
                 <div class="modal-footer justify-content-between">
-                    <button
-                        type="button"
-                        class="btn btn-danger"
-                        @click="closeModal"
-                    >
-                        Fermer
-                    </button>
+
                     <button
                         type="submit"
                         form="addFormImpotBoulanger"
                         class="btn btn-success"
                     >
-                        Soumettre
+                        حفظ الجباية
+                    </button>
+                    <button
+                        type="button"
+                        class="btn btn-danger"
+                        @click="closeModal"
+                    >
+                        إلغاء
                     </button>
                 </div>
             </div>
@@ -187,7 +199,7 @@ const form = useForm({
     created_by: 1,
     montant: "",
     numeroFacture: "",
-    date: "",
+    date: formattedDate,
     month: "",
     annee: "2024",
     description: "",

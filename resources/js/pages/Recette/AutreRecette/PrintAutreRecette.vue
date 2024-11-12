@@ -20,8 +20,8 @@
                         <table class="table no-border">
                             <tbody>
                                 <tr>
-                                <td style="text-align: center; font-size: x-large;" colspan="2"><strong> قائمة المخابز
-                                            </strong></td>
+                                <td style="text-align: center; font-size: x-large;" colspan="2"><strong> قائمة المداخيل الاخرى
+                                         الشهر  : 10 </strong></td>
                                 <td style="text-align: right; font-size: x-large;" colspan="2"></td>
                             </tr>
                             </tbody>
@@ -42,49 +42,44 @@
                             <thead>
                                 <tr>
                                     <th>الرقم</th>
-                                    <th>الإسم </th>
-                                    <th>المكان </th>
-                                    <th>المالك </th>
-                                    <th>الحالة </th>
-                                    <th>عدد أشهر المتأخرات </th>
-                                    <th>المبلغ </th>
+                                    <th>الحالة</th>
+                                    <th>ملاحظة</th>
+                                    <th>رقم الوصل</th>
+                                    <th>تاريخ العمليات</th>
+                                    <th>المبلغ المدفوع</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                                    <tbody>
                                         <tr
-                                            v-for="(boulanger, index) in props
-                                                .boulangers.data"
-                                            :key="boulanger.id"
+                                            v-for="(autrerecette, index) in props
+                                                .autrerecettes.data"
+                                            :key="autrerecette.id"
                                         >
                                             <td>{{ index + 1 }}.</td>
-                                            <td>{{ boulanger.name }}</td>
-                                            <td>{{ boulanger.address }}</td>
                                             <td>
+                                                {{ autrerecette.typerecette.name }}
+                                            </td>
+                                            <td>{{ autrerecette.description }}</td>
+                                            <td>{{ autrerecette.numeroFacture }}</td>
+                                            <td>{{ autrerecette.date }}</td>
+                                            <th dir="ltr">
                                                 {{
-                                                    boulanger.proprietaire.name
+                                                    autrerecette.montant.toLocaleString()
                                                 }}
-                                            </td>
-                                            <td>
-                                                <span
-                                                    class="badge"
-                                                    :class="
-                                                        boulanger.etat ===
-                                                        'active'
-                                                            ? 'bg-success'
-                                                            : 'bg-danger'
-                                                    "
-                                                    >{{ boulanger.etat }}</span
-                                                >
-                                            </td>
-                                            <th>{{ boulanger.arriere }}</th>
-                                            <th>{{ (boulanger.arriere * 55000).toLocaleString() }}</th>
+                                                UM
+                                            </th>
 
                                         </tr>
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <th colspan="6">المجموع : </th>
-                                            <th>{{ returnTotal().toLocaleString() }}</th>
+                                            <th colspan="5">Total:</th>
+                                            <th dir="ltr">
+                                                {{
+                                                    returnTotal().toLocaleString()
+                                                }}
+                                                UM
+                                            </th>
                                         </tr>
                                     </tfoot>
                         </table>
@@ -98,7 +93,7 @@
                 <div style="margin-top: 1em;" class="col-sm-12">
                     <table class="table no-border">
                         <tbody>
-                        <tr>
+                            <tr>
                             <td style="text-align: left;" colspan="2">المحاسب</td>
                             <td style="text-align: right;" colspan="2"><strong> الرئيس </strong></td>
                         </tr>
@@ -106,7 +101,8 @@
                             <td style="text-align: left;" colspan="2"></td>
                             <td style="text-align: right;" colspan="2"><strong>{{ datePrint }}</strong></td>
                         </tr>
-                    </tbody>
+                        </tbody>
+
                     </table>
                 </div>
             </div>
@@ -120,7 +116,7 @@
 </template>
 <script>
 import { ref } from "vue";
-import AuthLayout from "../../Layouts/PrintLayout.vue";
+import AuthLayout from "../../../Layouts/PrintLayout.vue";
 
 export default {
     layout: AuthLayout,
@@ -134,17 +130,16 @@ const formattedDate = date.toISOString().slice(0, 10);
 const datePrint = ref(formattedDate);
 
 const props = defineProps({
-    boulangers: Object,
+    autrerecettes: Object,
 });
 
 const returnTotal = function () {
     var total = 0;
-    props.boulangers.data.forEach((element) => {
-        total += element.arriere;
+    props.autrerecettes.data.forEach((element) => {
+        total += element.montant;
     });
-    return total * 55000;
+    return total;
 };
-
 
 
 </script>

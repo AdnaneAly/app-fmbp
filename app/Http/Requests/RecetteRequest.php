@@ -27,7 +27,7 @@ class RecetteRequest extends FormRequest
             'type_recette'      => ['required'],
             'created_by'        => ['required', 'integer', 'exists:users,id'],
             'montant'           => ['required', 'numeric', 'min:0', 'max:55000'],
-            'numeroFacture'     => ['nullable'],
+            'numeroFacture'     => ['nullable', 'numeric', "unique:recettes,numeroFacture,{$id}","unique:autre_recettes,numeroFacture,{$id}"],
             'date'              => ['required', 'date'],
             'month'             => ['required'],
             'description'       => ['nullable', 'string'],
@@ -39,6 +39,7 @@ class RecetteRequest extends FormRequest
     public function messages(){
         return [
             'boulanger_id' => 'La boulangerie est obligatoire',
+            'numeroFacture.unique' => 'Le numero de facture est doit etre unique',
             'date' => 'La date est obligatoire',
             'annee' => 'L\'annee est obligatoire'
         ];

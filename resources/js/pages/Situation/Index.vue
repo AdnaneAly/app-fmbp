@@ -62,29 +62,25 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
 import {
-    useSwalConfirm,
     useSwalError,
-    useSwalSuccess,
 } from "../../composables/alert";
 
-
+const date = new Date();
+const formattedDate = date.toISOString().slice(0, 10);
 
 const form = useForm({
-    debutSearch: null,
-    finSearch: null,
-    rapportSearch: ""
+    debutSearch: formattedDate,
+    finSearch: formattedDate,
+    rapportSearch: "All"
 });
-
 
 const soumettre = () => {
     form.post(route("situation.etat"), {
         onSuccess: (page) => {
             // afficher un message de succes
-            useSwalSuccess("Le salaire ajouté avec succés");
             form.reset();
         },
         onError: (errors) => {
-            console.log(errors);
             useSwalError(errors[0]);
         },
     });

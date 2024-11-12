@@ -24,17 +24,17 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <div class="card-title d-flex">
-                                    <div class="col-md-3">
+                                <div class="row">
+                                    <div class="col-md-1 ml-2">
                                         <CreateAutreRecette
                                             :typerecettes="props.typerecettes"
                                         />
                                         </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-2 ml-2">
                                             <select
                                                 @change="search"
                                                 v-model="typerecette_id"
-                                                class="form-control ml-3"
+                                                class="form-control"
                                             >
                                                 <option value="" selected>
                                                     Type recettes...
@@ -48,27 +48,41 @@
                                                 </option>
                                             </select>
                                         </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-2 ml-2">
                                         <input
                                             @keyup="search"
                                             v-model="searchFacture"
                                             type="text"
-                                            class="form-control ml-3"
+                                            class="form-control"
                                             placeholder="Search Facture"
                                         />
                                     </div>
 
-                                    <div class="col-md-3">
+                                    <div class="col-md-1 ml-2">
                                         <select
                                             @change="search"
                                             v-model="per_page"
-                                            class="form-control ml-3"
+                                            class="form-control"
                                         >
                                             <option value="5">5</option>
                                             <option value="10">10</option>
                                             <option value="50">50</option>
                                             <option value="100">100</option>
                                         </select>
+                                    </div>
+                                    <div class="col-md-2 ml-2">
+                                        <Link
+                                            :href="
+                                                route('autrerecette.print', {
+                                                    per_page,
+                                                    typerecette_id,
+                                                    searchFacture,
+                                                })
+                                            "
+                                            class="btn btn-info"
+                                            ><i class="fa fa-print"></i>
+                                            Imprimer</Link
+                                        >
                                     </div>
                                 </div>
                             </div>

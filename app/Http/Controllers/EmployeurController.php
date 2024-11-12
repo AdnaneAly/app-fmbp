@@ -58,6 +58,28 @@ class EmployeurController extends Controller
         return response()->json(["employeur" => $employeur]);
     }
 
+
+    /**
+     * Display the specified resource.
+     */
+    public function print(Request $request)
+    {
+        $search = $request->search;
+        $per_page = $request->per_page;
+        $grade_id = $request->grade_id;
+
+        $employeurs = Employeur::with('grade')
+            ->when($search, function($query) use($search){
+                $query->where("name", "like", "%${search}%");
+            })
+            ->when($grade_id, function($query) use($grade_id){
+                $query->where("grade_id", $grade_id);
+            })
+            ->latest()
+            ->paginate($per_page ?? 5);
+        return inertia('Employeur/PrintEmployeur', compact('employeurs'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      */

@@ -107,8 +107,7 @@
                                                             : 'bg-danger'
                                                     "
                                                     >{{
-                                                        recetteImpot(month) !==
-                                                        []
+                                                        recetteImpot(month)
                                                             ? recetteImpot(
                                                                   month
                                                               ).type_recette
@@ -210,7 +209,7 @@
                                     </tr>
                                     <tr>
                                         <th colspan="2">المجموع الكامل :</th>
-                                        <th dir="ltr">{{ props.etatsmontants.PAYE + props.etatsmontants.SEMIPAYE }} UM</th>
+                                        <th dir="ltr">{{ (props.etatsmontants.PAYE || 0) + (props.etatsmontants.SEMIPAYE || 0) }} UM</th>
                                     </tr>
                                 </tbody>
                             </table>
@@ -242,7 +241,7 @@
     </div>
 </template>
 <script>
-import { onMounted, ref } from "vue";
+import { ref } from "vue";
 import AuthLayout from "../../Layouts/PrintLayout.vue";
 
 export default {
