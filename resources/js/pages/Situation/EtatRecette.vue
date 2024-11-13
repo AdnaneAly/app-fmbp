@@ -159,7 +159,7 @@
                                                             dir="ltr"
                                                             style="width: 65%"
                                                         >
-                                                            {{ etat }}
+                                                            {{ etatImpot[etat] }}
                                                         </th>
                                                         <th
                                                             dir="ltr"
@@ -192,7 +192,7 @@
                                                         style="padding: 0"
                                                     >
                                                         <th style="width: 5%">
-                                                            {{ j++ }}
+                                                            {{ 1 }}
                                                         </th>
                                                         <th style="width: 65%">
                                                             {{ name }}
@@ -307,7 +307,12 @@
 
 <script setup>
 import { ref } from "vue";
-
+const etatImpot = {
+    'PAYE': 'دفعت',
+    'SEMIPAYE': 'تسوية',
+    'FERMER': 'مغلقة',
+    'EXONERER': 'إعفاء',
+}
 const props = defineProps({
     data: Object,
 });
