@@ -50,7 +50,7 @@
                                 <tr v-for="(depence, index) in props.depences.data" :key="index">
                                             <td>{{ index + 1 }}.</td>
                                             <td>{{ depence.type_depence.name ?? '' }}</td>
-                                            <td>{{ depence.employeur.name ?? '' }}</td>
+                                            <td>{{ depence.employeur ? depence.employeur.name : '' }}</td>
                                             <td>{{ depence.date }}</td>
                                             <td dir="ltr">{{ depence.montant.toLocaleString() }} UM</td>
                                         </tr>

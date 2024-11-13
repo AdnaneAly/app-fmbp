@@ -221,7 +221,8 @@
 
                 <div style="margin-top: 1em;" class="col-sm-12">
                         <table class="table no-border">
-                            <tr>
+                            <tbody>
+                                <tr>
                                 <td style="text-align: left;" colspan="2">المحاسب</td>
                                 <td style="text-align: right;" colspan="2"><strong> الرئيس  </strong></td>
                             </tr>
@@ -229,6 +230,8 @@
                                 <td style="text-align: left;" colspan="2"></td>
                                 <td style="text-align: right;" colspan="2"><strong>{{ datePrint }}</strong></td>
                             </tr>
+                            </tbody>
+
                         </table>
                     </div>
             </div>

@@ -5,7 +5,7 @@
         data-toggle="modal"
         data-target="#createAutreRecette"
     >
-        <i class="fa fa-plus"></i> Ajouter
+        <i class="fa fa-plus"></i> إضافة
     </button>
 
     <div
@@ -17,7 +17,6 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Ajouter une autre recette</h4>
                     <button
                         type="button"
                         @click="closeModel"
@@ -26,6 +25,8 @@
                     >
                         <span aria-hidden="true">×</span>
                     </button>
+                    <h4 class="modal-title">إضافة دخل آخر جديد</h4>
+
                 </div>
                 <div class="modal-body">
                     <form
@@ -36,7 +37,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Type de recette</label>
+                                    <label>نوع الدخل :</label>
                                     <select
                                         class="form-control"
                                         style="width: 100%"
@@ -46,6 +47,7 @@
                                                 form.errors.type_recette_id,
                                         }"
                                     >
+                                        <option selected value="">إختر...</option>
                                         <option
                                             v-for="item in props.typerecettes"
                                             :value="item.id"
@@ -61,12 +63,12 @@
                                     >
                                 </div>
                                 <div class="form-group">
-                                    <label for="InputMontant">Montant</label>
+                                    <label for="InputMontant">المبلغ :</label>
                                     <input
                                         type="number"
                                         class="form-control"
                                         id="InputMontant"
-                                        placeholder="Enter montant"
+                                        placeholder="ادخل المبلغ هنا..."
                                         v-model="form.montant"
                                         :class="{
                                             'is-invalid': form.errors.montant,
@@ -85,7 +87,7 @@
                             <!-- /.col -->
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="InputDate">Date</label>
+                                    <label for="InputDate">التاريخ :</label>
                                     <input
                                         type="date"
                                         class="form-control"
@@ -102,12 +104,12 @@
                                     >
                                 </div>
                                 <div class="form-group">
-                                    <label for="InputFacture">Facture</label>
+                                    <label for="InputFacture">رقم الوصل :</label>
                                     <input
                                         type="text"
                                         class="form-control"
                                         id="InputFacture"
-                                        placeholder="Enter facture"
+                                        placeholder="ادخل رقم الوصل هنا..."
                                         v-model="form.numeroFacture"
                                         :class="{
                                             'is-invalid': form.errors.numeroFacture,
@@ -124,11 +126,11 @@
                             <div class="col-md-12">
                                 <!-- textarea -->
                                 <div class="form-group">
-                                    <label>Description</label>
+                                    <label>ملاحظات :</label>
                                     <textarea
                                         class="form-control"
                                         rows="2"
-                                        placeholder="Enter ..."
+                                        placeholder="اكتب ملاحظة هنا ..."
                                         v-model="form.description"
                                     ></textarea>
                                     <input
@@ -144,19 +146,20 @@
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button
-                        type="button"
-                        class="btn btn-danger"
-                        @click="closeModel"
-                    >
-                        Fermer
-                    </button>
-                    <button
                         type="submit"
                         form="createFormAutreRecette"
                         class="btn btn-success"
                     >
-                        Soumettre
+                        حفظ الدخل
                     </button>
+                    <button
+                        type="button"
+                        class="btn btn-danger"
+                        @click="closeModel"
+                    >
+                        إلغاء
+                    </button>
+
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -176,7 +179,7 @@ const formattedDate = date.toISOString().slice(0, 10);
 const form = useForm({
     date: formattedDate,
     numeroFacture: "",
-    type_recette_id: 0,
+    type_recette_id: "",
     created_by: 1,
     montant: "",
     description: "",

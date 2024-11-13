@@ -32,7 +32,7 @@ class DepenceController extends Controller
                 $query->whereMonth("date", $month);
             })
             ->latest()
-            ->paginate($per_page ?? 5);
+            ->paginate($per_page ?? 10);
         $typedepences = TypeDepence::all();
         $employeurs = Employeur::all();
         return inertia('Depence/Index', compact('depences',  'typedepences', 'employeurs'));
@@ -120,7 +120,7 @@ class DepenceController extends Controller
                 $query->whereMonth("date", $month);
             })
             ->latest()
-            ->paginate($per_page ?? 5);
+            ->paginate($per_page ?? 10);
         return inertia('Depence/PrintDepence', compact('depences'));
     }
 

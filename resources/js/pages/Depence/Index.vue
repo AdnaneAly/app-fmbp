@@ -1,23 +1,13 @@
 <template>
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0">Liste des depences</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item">
-                            <a href="#">Home</a>
-                        </li>
-                        <li class="breadcrumb-item active">Liste</li>
-                    </ol>
-                </div>
+    <section dir="rtl" style="text-align: right;" class="content-header">
+        <div class="card card-cyan card-outline mx-2">
+            <div class="card-header">
+                <h4 class="text-cyan" ><i class="fas fa-bars"></i> قائمة المصاريف</h4>
             </div>
-        </div>
-    </div>
+        </div><!-- /.container-fluid -->
+    </section>
 
-    <div class="content">
+    <div dir="rtl" style="text-align: right;" class="content">
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -25,14 +15,22 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="row">
-                                    <div class="col-md-2 ml-1">
+                                    <div class="col-md-1">
+                                        <Link
+                                            :href="route('depence.create')"
+                                            class="btn btn-success"
+                                            ><i class="fa fa-plus"></i
+                                            > إضافة</Link
+                                        >
+                                    </div>
+                                    <div class="col-md-2 ">
                                         <select
                                             @change="search"
                                             v-model="type_depence_id"
                                             class="form-control "
                                         >
                                             <option value="" selected>
-                                                Type depence...
+                                                نوع المصروف...
                                             </option>
                                             <option
                                                 v-for="item in props.typedepences"
@@ -43,14 +41,14 @@
                                             </option>
                                         </select>
                                     </div>
-                                    <div class="col-md-2 ml-2">
+                                    <div class="col-md-2 ">
                                         <select
                                             @change="search"
                                             v-model="employeur_id"
                                             class="form-control "
                                         >
                                             <option value="" selected>
-                                                Employeur...
+                                                العمال...
                                             </option>
                                             <option
                                                 v-for="item in props.employeurs"
@@ -61,32 +59,32 @@
                                             </option>
                                         </select>
                                     </div>
-                                    <div class="col-md-2 ml-2">
+                                    <div class="col-md-2 ">
                                         <select
                                             @change="search"
                                             v-model="month"
                                             class="form-control "
                                         >
                                             <option value="" selected>
-                                                Mois de depence...
+                                                شهر المصاريف...
                                             </option>
-                                            <option value="1">JANVIER</option>
-                                            <option value="2">FEVRIER</option>
-                                            <option value="3">MARS</option>
-                                            <option value="4">AVRIL</option>
-                                            <option value="5">MAI</option>
-                                            <option value="6">JUIN</option>
-                                            <option value="7">JUILLET</option>
-                                            <option value="8">AOUT</option>
-                                            <option value="9">SEPTEMBRE</option>
-                                            <option value="10">OCTOBRE</option>
-                                            <option value="11">NOVEMBRE</option>
+                                            <option value="1">يناير</option>
+                                            <option value="2">قبراير</option>
+                                            <option value="3">مارس</option>
+                                            <option value="4">ابريل</option>
+                                            <option value="5">مايو</option>
+                                            <option value="6">يونيو</option>
+                                            <option value="7">يوليو</option>
+                                            <option value="8">اغسطس</option>
+                                            <option value="9">سبتمبر</option>
+                                            <option value="10">اكتوبر</option>
+                                            <option value="11">نوفمبر</option>
                                             <option value="12">
-                                                DECEMENBRE
+                                                دجمبر
                                             </option>
                                         </select>
                                     </div>
-                                    <div class="col-md-1 ml-2">
+                                    <div class="col-md-1 ">
                                         <select
                                             @change="search"
                                             v-model="per_page"
@@ -98,15 +96,8 @@
                                             <option value="100">100</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-1 ml-2">
-                                        <Link
-                                            :href="route('depence.create')"
-                                            class="btn btn-success"
-                                            ><i class="fa fa-plus"></i
-                                            > Ajouter</Link
-                                        >
-                                    </div>
-                                    <div class="col-md-2 ml-2">
+
+                                    <div class="col-md-2 ">
                                         <Link
                                             :href="
                                                 route('depence.print', {
@@ -118,7 +109,7 @@
                                             "
                                             class="btn btn-info"
                                             ><i class="fa fa-print"></i>
-                                            Imprimer</Link
+                                            سحب</Link
                                         >
                                     </div>
                                 </div>
@@ -128,14 +119,12 @@
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th style="width: 10px">#</th>
-                                            <th>Type depences</th>
-                                            <th>Employeur</th>
-                                            <th>Date</th>
-                                            <th>Montant</th>
-                                            <th style="width: 100px">
-                                                Actions
-                                            </th>
+                                            <th style="width: 50px">#</th>
+                                            <th>نوع المصروف</th>
+                                            <th>المستفيد</th>
+                                            <th>التاريخ</th>
+                                            <th>المبلغ</th>
+                                            <th style="width: 100px">العمليات</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -156,15 +145,15 @@
                                                 }}
                                             </td>
                                             <td>{{ depence.date }}</td>
-                                            <td>
+                                            <th dir="ltr">
                                                 {{
                                                     depence.montant.toLocaleString()
                                                 }}
                                                 MU
-                                            </td>
+                                            </th>
                                             <td class="d-flex gap-2 text-left">
                                                 <button
-                                                    style="margin-right: 10px"
+                                                    style="margin-left: 10px"
                                                     class="btn btn-info btn-sm"
                                                     @click="
                                                         openEditDepence(
@@ -192,9 +181,8 @@
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <th colspan="2">Total:</th>
-                                            <td colspan="2"></td>
-                                            <th>
+                                            <th colspan="4">المجموع :</th>
+                                            <th dir="ltr">
                                                 {{
                                                     returnTotal().toLocaleString()
                                                 }}
@@ -242,7 +230,7 @@ import EditDepence from "./EditDepence.vue";
 
 const employeur_id = ref("");
 const type_depence_id = ref("");
-const per_page = ref(5);
+const per_page = ref(10);
 const month = ref("");
 const editingDepenceId = ref(0);
 const showModal = ref(false);

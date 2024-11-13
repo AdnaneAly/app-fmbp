@@ -1,22 +1,10 @@
 <template>
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0">Ajouter un depences</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item">
-                            <a href="#">Home</a>
-                        </li>
-                        <li class="breadcrumb-item active">Ajouter</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="content">
+    <section dir="rtl" style="text-align: right;" class="content-header">
+        <div>
+
+        </div><!-- /.container-fluid -->
+    </section>
+    <div dir="rtl" style="text-align: right;" class="content">
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -24,7 +12,7 @@
                         <div class="card">
                             <div class="card card-info">
                                 <div class="card-header">
-                                    <h3 class="card-title">title</h3>
+                                    <h5 class=" text-right"><i class="fas fa-bars"></i> إضافة مصروف جديد</h5>
                                 </div>
                             </div>
 
@@ -38,7 +26,7 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="InputDate"
-                                                    >Date </label
+                                                    >التاريخ : </label
                                                 >
                                                 <input
                                                     type="date"
@@ -52,13 +40,13 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <table class="table no-border" id="invoice_details">
+                                        <table class="table table-bordered" id="invoice_details">
                                             <tr>
-                                                    <th>Supp</th>
-                                                    <th>Type de depence</th>
-                                                    <th>Employeur beneficiaire</th>
-                                                    <th>Observations</th>
-                                                    <th> Montant</th>
+                                                    <th>مسح</th>
+                                                    <th>نوع المصروف</th>
+                                                    <th>المستفيد</th>
+                                                    <th>ملاحظات</th>
+                                                    <th>المبلغ</th>
                                                 </tr>
                                         <tbody id="depence_fields">
 
@@ -79,7 +67,7 @@
                                                         value=""
                                                         selected="selected"
                                                     >
-                                                        Selectionner...
+                                                        إختر...
                                                     </option>
                                                     <option
                                                         v-for="itm in props.typedepences"
@@ -104,7 +92,7 @@
                                                         value=""
                                                         selected="selected"
                                                     >
-                                                        Selectionner...
+                                                        إختر...
                                                     </option>
                                                     <option
                                                         v-for="ite in props.employeurs"
@@ -118,14 +106,14 @@
                                                 <td style="width: 25%"><textarea
                                                     class="form-control"
                                                     rows="1"
-                                                    placeholder="Enter ..."
+                                                    placeholder="اكتب ملاحظة هنا ..."
                                                     v-model="item.description"
                                                 ></textarea></td>
                                                 <td style="width: 25%"><input
                                                     type="number"
                                                     class="form-control"
                                                     id="InputMontant"
-                                                    placeholder="Enter montant"
+                                                    placeholder="ادخل المبلغ هنا..."
                                                     v-model="item.montant"
 
                                                 /></td>
@@ -138,12 +126,12 @@
                                                     <td colspan="5">
                                                         <button type="button"  @click="addRow"
                                                             class="btn btn-primary btn_add"> <i
-                                                                class="fa fa-plus-circle"></i> Ajouter une autre depence </button>
+                                                                class="fa fa-plus-circle"></i> إضافة مصروف جديد </button>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td colspan="3"></td>
-                                                    <th style="text-align: right"> Montant Total : </th>
+                                                    <th style="text-align: left">  المجموع الكامل : </th>
                                                     <td>
                                                         <input type="number" step="0.01" name="sub_total"
                                                             :value="returnTotal()"
@@ -166,7 +154,7 @@
                                         form="createFormDepence"
                                         class="btn btn-success"
                                     >
-                                        Soumettre
+                                        حفظ المصاريف
                                     </button>
                                 </div>
                             </form>

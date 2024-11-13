@@ -1,16 +1,15 @@
 <template>
     <div
+        dir="rtl"
         class="modal fade"
         id="EditAutreRecette"
-        style="display: none"
+        style="display: none; text-align: right;"
         aria-hidden="true"
     >
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">
-                        Editer une autre recette
-                    </h4>
+
                     <button
                         type="button"
                         class="close"
@@ -19,6 +18,9 @@
                     >
                         <span aria-hidden="true">×</span>
                     </button>
+                    <h4 class="modal-title">
+                        تعديل دخل آخر
+                    </h4>
                 </div>
                 <div class="modal-body">
                     <form
@@ -30,7 +32,7 @@
                             <div class="col-md-6">
 
                                 <div class="form-group">
-                                    <label>Type de recette</label>
+                                    <label>نوع الدخل :</label>
                                     <select
                                         class="form-control"
                                         style="width: 100%"
@@ -48,12 +50,11 @@
                                         >{{ editAutreRecette.messageError.type_recette_id }}</span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="InputMontant">Montant</label>
+                                    <label for="InputMontant">المبلغ :</label>
                                     <input
                                         type="number"
                                         class="form-control"
                                         id="InputMontant"
-                                        placeholder="Enter montant"
                                         v-model="editAutreRecette.montant"
                                         :class="{
                                             'is-invalid':
@@ -72,7 +73,7 @@
                             <!-- /.col -->
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="InputDate">Date</label>
+                                    <label for="InputDate">التاريخ :</label>
                                     <input
                                         type="date"
                                         class="form-control"
@@ -98,12 +99,11 @@
                                     >
                                 </div>
                                 <div class="form-group">
-                                    <label for="InputFacture">Facture</label>
+                                    <label for="InputFacture">رقم الوصل :</label>
                                     <input
                                         type="number"
                                         class="form-control"
                                         id="InputFacture"
-                                        placeholder="Enter numero Facture"
                                         v-model="editAutreRecette.numeroFacture"
                                         :class="{
                                             'is-invalid':
@@ -120,11 +120,10 @@
                             <div class="col-md-12">
                                 <!-- textarea -->
                                 <div class="form-group">
-                                    <label>Description</label>
+                                    <label>ملاحظات :</label>
                                     <textarea
                                         class="form-control"
                                         rows="2"
-                                        placeholder="Enter ..."
                                         v-model="editAutreRecette.description"
                                     ></textarea>
 
@@ -136,19 +135,20 @@
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button
-                        type="button"
-                        class="btn btn-danger"
-                        @click="closeModal"
-                    >
-                        Fermer
-                    </button>
-                    <button
                         form="editForm"
                         type="submit"
                         class="btn btn-success"
                     >
-                        Soumettre
+                        حفظ التعديل
                     </button>
+                    <button
+                        type="button"
+                        class="btn btn-danger"
+                        @click="closeModal"
+                    >
+                        إلغاء
+                    </button>
+
                 </div>
             </div>
             <!-- /.modal-content -->

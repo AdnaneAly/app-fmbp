@@ -1,23 +1,13 @@
 <template>
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0">Liste des avance salaires</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item">
-                            <a href="#">Home</a>
-                        </li>
-                        <li class="breadcrumb-item active">Liste</li>
-                    </ol>
-                </div>
+    <section dir="rtl" style="text-align: right;" class="content-header">
+        <div class="card card-cyan card-outline mx-2">
+            <div class="card-header">
+                <h4 class="text-cyan" ><i class="fas fa-bars"></i> قائمة مصاريف المقدمات</h4>
             </div>
-        </div>
-    </div>
+        </div><!-- /.container-fluid -->
+    </section>
 
-    <div class="content">
+    <div dir="rtl" style="text-align: right;" class="content">
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -35,10 +25,10 @@
                                         <select
                                             @change="search"
                                             v-model="employeur_id"
-                                            class="form-control ml-3"
+                                            class="form-control "
                                         >
                                             <option value="" selected>
-                                                Employeur...
+                                                المستفيد...
                                             </option>
                                             <option
                                                 v-for="item in props.employeurs"
@@ -55,9 +45,9 @@
                                             v-model="etatDepence"
                                             class="form-control ml-3"
                                         >
-                                            <option value="">Etat...</option>
-                                            <option value="paye">Paye</option>
-                                            <option value="noPaye">NonPaye</option>
+                                            <option value="">الحالة...</option>
+                                            <option value="paye">تم الدفع</option>
+                                            <option value="noPaye">لم تدفع بعد</option>
                                         </select>
                                     </div>
                                     <div class="col-md-2">
@@ -67,42 +57,22 @@
                                                 class="form-control ml-3"
                                             >
                                             <option value="" selected>
-                                                    Mois d'avance salaire...
+                                                    شهر المقدمات...
                                                 </option>
-                                                <option value="1">
-                                                    JANVIER
-                                                </option>
-                                                <option value="2">
-                                                    FEVRIER
-                                                </option>
-                                                <option value="3">
-                                                    MARS
-                                                </option>
-                                                <option value="4">
-                                                    AVRIL
-                                                </option>
-                                                <option value="5">MAI</option>
-                                                <option value="6">
-                                                    JUIN
-                                                </option>
-                                                <option value="7">
-                                                    JUILLET
-                                                </option>
-                                                <option value="8">
-                                                    AOUT
-                                                </option>
-                                                <option value="9">
-                                                    SEPTEMBRE
-                                                </option>
-                                                <option value="10">
-                                                    OCTOBRE
-                                                </option>
-                                                <option value="11">
-                                                    NOVEMBRE
-                                                </option>
-                                                <option value="12">
-                                                    DECEMENBRE
-                                                </option>
+                                                <option value="1">يناير</option>
+                                            <option value="2">قبراير</option>
+                                            <option value="3">مارس</option>
+                                            <option value="4">ابريل</option>
+                                            <option value="5">مايو</option>
+                                            <option value="6">يونيو</option>
+                                            <option value="7">يوليو</option>
+                                            <option value="8">اغسطس</option>
+                                            <option value="9">سبتمبر</option>
+                                            <option value="10">اكتوبر</option>
+                                            <option value="11">نوفمبر</option>
+                                            <option value="12">
+                                                دجمبر
+                                            </option>
                                             </select>
                                     </div>
                                     <div class="col-md-1">
@@ -122,7 +92,7 @@
                                         :href="route('avancesalaire.print', {per_page, employeur_id, etatDepence, month })"
                                         class="btn btn-info"
                                         ><i class="fa fa-print"></i
-                                        > Imprimer</Link
+                                        > سحب</Link
                                     >
                                 </div>
 
@@ -133,15 +103,13 @@
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th style="width: 10px">#</th>
-                                            <th>Employeur</th>
-                                            <th>Telephone</th>
-                                            <th>Date</th>
-                                            <th>Montant Avance</th>
-                                            <th>Etat</th>
-                                            <th style="width: 140px">
-                                                Actions
-                                            </th>
+                                            <th style="width: 50px">#</th>
+                                            <th>العمال</th>
+                                            <th>الهاتف</th>
+                                            <th>التاريخ</th>
+                                            <th>المبلغ المقدم</th>
+                                            <th>الحالة</th>
+                                            <th style="width: 100px">العمليات</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -163,27 +131,19 @@
                                                 }}
                                             </td>
                                             <td>{{ avancesalaire.date }}</td>
-                                            <td>
+                                            <th dir="ltr">
                                                 {{
                                                     avancesalaire.montantAvanceSalaire.toLocaleString()
                                                 }} UM
-                                            </td>
+                                            </th>
                                             <td>
                                                 <span class="badge " :class="avancesalaire.etat === 'paye' ? 'bg-success' : 'bg-danger'" >{{
                                                     avancesalaire.etat
                                                 }}</span>
                                             </td>
                                             <td class="d-flex gap-2 text-left">
-                                                <a
-                                                    style="margin-right: 10px"
-                                                    class="btn btn-primary btn-sm"
-                                                    href="#"
-                                                >
-                                                    <i class="fas fa-folder">
-                                                    </i>
-                                                </a>
                                                 <button
-                                                    style="margin-right: 10px"
+                                                    style="margin-left: 10px"
                                                     class="btn btn-info btn-sm"
                                                     @click="
                                                         openEditAvanceSalaire(
@@ -210,9 +170,8 @@
                                         </tr>
                                     </tbody>
                                     <tfoot>
-                                        <tr>
-                                            <th colspan="2">Total:</th>
-                                            <td colspan="2"></td>
+                                        <tr dir="ltr">
+                                            <th colspan="4">المجموع الكامل:</th>
                                             <th>{{ returnTotal().toLocaleString() }} UM</th>
                                             <td></td>
                                             <td></td>

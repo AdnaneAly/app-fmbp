@@ -5,7 +5,7 @@
         data-toggle="modal"
         data-target="#createAvanceSalaire"
     >
-        <i class="fa fa-plus"></i> Ajouter
+        <i class="fa fa-plus"></i> إضافة
     </button>
 
     <div
@@ -17,7 +17,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Ajouter une avance salaire</h4>
+
                     <button
                         type="button"
                         @click="closeModel"
@@ -26,6 +26,7 @@
                     >
                         <span aria-hidden="true">×</span>
                     </button>
+                    <h4 class="modal-title">إضافة مقدم راتب</h4>
                 </div>
                 <div class="modal-body">
                     <form
@@ -36,7 +37,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="InputDate">Date</label>
+                                    <label for="InputDate">التاريخ :</label>
                                     <input
                                         type="date"
                                         class="form-control"
@@ -54,13 +55,13 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="InputMontantAvanceSalaire"
-                                        >Montant Avance Salaire</label
+                                        >المبلغ المقدم :</label
                                     >
                                     <input
                                         type="number"
                                         class="form-control"
                                         id="InputMontantAvanceSalaire"
-                                        placeholder="Enter montantAvanceSalaire"
+                                        placeholder="ادخل المبلغ المقدم هنا..."
                                         v-model="form.montantAvanceSalaire"
                                         :class="{
                                             'is-invalid':
@@ -83,7 +84,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="InputEmployeur"
-                                        >Employeur</label
+                                        >العامل المستفيد :</label
                                     >
                                     <select
                                         id="InputEmployeur"
@@ -97,7 +98,7 @@
                                         @change="getSalaire($event)"
                                     >
                                         <option value="" selected="selected">
-                                            Selectionner...
+                                            إختر...
                                         </option>
                                         <option
                                             v-for="item in props.employeurs"
@@ -115,7 +116,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="InputMontantSalaire"
-                                        >Montant Salaire</label
+                                        >الراتب</label
                                     >
                                     <input
                                         type="number"
@@ -138,11 +139,11 @@
                             <div class="col-md-6">
                                 <!-- textarea -->
                                 <div class="form-group">
-                                    <label>Description</label>
+                                    <label>ملاحظات :</label>
                                     <textarea
                                         class="form-control"
                                         rows="1"
-                                        placeholder="Enter ..."
+                                        placeholder="اكتب الملاحظات هنا..."
                                         v-model="form.description"
                                     ></textarea>
                                     <input
@@ -155,7 +156,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="InputMontantTotalAvancer"
-                                        >Montant Total Avancer</label
+                                        >مجموع ما تم تقديمه : </label
                                     >
                                     <input
                                         type="number"
@@ -182,19 +183,20 @@
                     </form>
                 </div>
                 <div class="modal-footer justify-content-between">
-                    <button
-                        type="button"
-                        class="btn btn-danger"
-                        @click="closeModel"
-                    >
-                        Fermer
-                    </button>
+
                     <button
                         type="submit"
                         form="createFormAvanceSalaire"
                         class="btn btn-success"
                     >
-                        Soumettre
+                        حفظ العملية
+                    </button>
+                    <button
+                        type="button"
+                        class="btn btn-danger"
+                        @click="closeModel"
+                    >
+                        إلغاء
                     </button>
                 </div>
             </div>
@@ -208,13 +210,14 @@
 import { onMounted } from "vue";
 import { useForm } from "@inertiajs/vue3";
 import { useSwalSuccess, useSwalError } from "../../../composables/alert";
-
+const date = new Date();
+const formattedDate = date.toISOString().slice(0, 10);
 const form = useForm({
     employeur_id: "",
     montantAvanceSalaire: "",
     montantTotalAvancer: "",
     montantSalaire: "",
-    date: null,
+    date: formattedDate,
     created_by: 1,
     etat: "noPaye",
     annee: "2024",

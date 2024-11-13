@@ -16,15 +16,19 @@ class AutreRecetteController extends Controller
     public function index(Request $request)
     {
         $per_page = $request->per_page;
-        $boulanger_id = $request->boulanger_id;
+        $numeroFacture = $request->numeroFacture;
         $type_recette_id = $request->type_recette_id;
+        $month = $request->month;
 
         $autrerecettes = AutreRecette::with('typerecette')
             ->when($type_recette_id, function($query) use($type_recette_id){
                 $query->where("type_recette_id", $type_recette_id);
             })
-            ->when($boulanger_id, function($query) use($boulanger_id){
-                $query->where("boulanger_id", $boulanger_id);
+            ->when($numeroFacture, function($query) use($numeroFacture){
+                $query->where("numeroFacture", $numeroFacture);
+            })
+            ->when($month, function($query) use($month){
+                $query->whereMonth("date", $month);
             })
             ->latest()
             ->paginate($per_page ?? 5);
@@ -68,15 +72,19 @@ class AutreRecetteController extends Controller
     public function print(Request $request)
     {
         $per_page = $request->per_page;
-        $boulanger_id = $request->boulanger_id;
+        $numeroFacture = $request->numeroFacture;
         $type_recette_id = $request->type_recette_id;
+        $month = $request->month;
 
         $autrerecettes = AutreRecette::with('typerecette')
             ->when($type_recette_id, function($query) use($type_recette_id){
                 $query->where("type_recette_id", $type_recette_id);
             })
-            ->when($boulanger_id, function($query) use($boulanger_id){
-                $query->where("boulanger_id", $boulanger_id);
+            ->when($numeroFacture, function($query) use($numeroFacture){
+                $query->where("numeroFacture", $numeroFacture);
+            })
+            ->when($month, function($query) use($month){
+                $query->whereMonth("date", $month);
             })
             ->latest()
             ->paginate($per_page ?? 5);

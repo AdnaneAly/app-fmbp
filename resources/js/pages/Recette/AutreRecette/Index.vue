@@ -1,23 +1,13 @@
 <template>
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0">Liste des Autre Recettes</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item">
-                            <a href="#">Home</a>
-                        </li>
-                        <li class="breadcrumb-item active">Liste</li>
-                    </ol>
-                </div>
+    <section dir="rtl" style="text-align: right;" class="content-header">
+        <div class="card card-cyan card-outline mx-2">
+            <div class="card-header">
+                <h4 class="text-cyan" ><i class="fas fa-bars"></i> قائمة المداخيل الاخرى</h4>
             </div>
-        </div>
-    </div>
+        </div><!-- /.container-fluid -->
+    </section>
 
-    <div class="content">
+    <div dir="rtl" style="text-align: right;" class="content">
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -25,19 +15,19 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="row">
-                                    <div class="col-md-1 ml-2">
+                                    <div class="col-md-1 ">
                                         <CreateAutreRecette
                                             :typerecettes="props.typerecettes"
                                         />
                                         </div>
-                                    <div class="col-md-2 ml-2">
+                                    <div class="col-md-2 ">
                                             <select
                                                 @change="search"
-                                                v-model="typerecette_id"
+                                                v-model="type_recette_id"
                                                 class="form-control"
                                             >
                                                 <option value="" selected>
-                                                    Type recettes...
+                                                    انواع المداخيل...
                                                 </option>
                                                 <option
                                                     v-for="item in props.typerecettes"
@@ -47,18 +37,43 @@
                                                     {{ item.name }}
                                                 </option>
                                             </select>
-                                        </div>
-                                    <div class="col-md-2 ml-2">
+                                    </div>
+                                    <div class="col-md-2 ">
+                                        <select
+                                            @change="search"
+                                            v-model="month"
+                                            class="form-control"
+                                        >
+                                            <option value="" selected>
+                                                شهر الدخل...
+                                            </option>
+                                            <option value="1">يناير</option>
+                                            <option value="2">قبراير</option>
+                                            <option value="3">مارس</option>
+                                            <option value="4">ابريل</option>
+                                            <option value="5">مايو</option>
+                                            <option value="6">يونيو</option>
+                                            <option value="7">يوليو</option>
+                                            <option value="8">اغصطس</option>
+                                            <option value="9">سبتمبر</option>
+                                            <option value="10">اكتوبر</option>
+                                            <option value="11">نوفمبر</option>
+                                            <option value="12">
+                                                دجمبر
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 ">
                                         <input
                                             @keyup="search"
-                                            v-model="searchFacture"
-                                            type="text"
+                                            v-model="numeroFacture"
+                                            type="number"
                                             class="form-control"
-                                            placeholder="Search Facture"
+                                            placeholder="ادخل رقم الوصل هنا..."
                                         />
                                     </div>
 
-                                    <div class="col-md-1 ml-2">
+                                    <div class="col-md-1 ">
                                         <select
                                             @change="search"
                                             v-model="per_page"
@@ -70,18 +85,19 @@
                                             <option value="100">100</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-2 ml-2">
+                                    <div class="col-md-2 ">
                                         <Link
                                             :href="
                                                 route('autrerecette.print', {
                                                     per_page,
-                                                    typerecette_id,
-                                                    searchFacture,
+                                                    type_recette_id,
+                                                    numeroFacture,
+                                                    month
                                                 })
                                             "
                                             class="btn btn-info"
                                             ><i class="fa fa-print"></i>
-                                            Imprimer</Link
+                                            سحب</Link
                                         >
                                     </div>
                                 </div>
@@ -91,15 +107,13 @@
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th style="width: 10px">#</th>
-                                            <th>Type de autrerecette</th>
-                                            <th>Decriptions</th>
-                                            <th>Facture</th>
-                                            <th>Date</th>
-                                            <th>Montant</th>
-                                            <th style="width: 100px">
-                                                Actions
-                                            </th>
+                                            <th style="width: 50px">#</th>
+                                            <th>نوع الدخل </th>
+                                            <th>ملاحظة </th>
+                                            <th>رقم الوصل</th>
+                                            <th>التاريخ</th>
+                                            <th>المبلغ</th>
+                                            <th style="width: 100px">العمليات</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -115,7 +129,7 @@
                                             <td>{{ autrerecette.description }}</td>
                                             <td>{{ autrerecette.numeroFacture }}</td>
                                             <td>{{ autrerecette.date }}</td>
-                                            <th>
+                                            <th dir="ltr">
                                                 {{
                                                     autrerecette.montant.toLocaleString()
                                                 }}
@@ -128,7 +142,7 @@
                                                             autrerecette.id
                                                         )
                                                     "
-                                                    style="margin-right: 10px"
+                                                    style="margin-left: 10px"
                                                     class="btn btn-info btn-sm"
                                                     href="#"
                                                 >
@@ -152,9 +166,8 @@
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <th colspan="2">Total:</th>
-                                            <td colspan="3"></td>
-                                            <th>
+                                            <th colspan="5">المجموع :</th>
+                                            <th dir="ltr">
                                                 {{
                                                     returnTotal().toLocaleString()
                                                 }}
@@ -202,11 +215,10 @@ import CreateAutreRecette from "./CreateAutreRecette.vue";
 
 const editingAutreRecetteId = ref(0);
 const showModal = ref(false);
-const searchFacture = ref("");
-const typerecette_id = ref("");
+const numeroFacture = ref("");
+const type_recette_id = ref("");
 const month = ref("");
 const per_page = ref(5);
-const etatImpot = ref("");
 
 const props = defineProps({
     autrerecettes: Object,
@@ -254,11 +266,10 @@ const returnTotal = function () {
 
 const search = _.throttle(() => {
     const url = route("autrerecette.index", {
-        numeroFacture: searchFacture.value,
+        numeroFacture: numeroFacture.value,
         per_page: per_page.value,
-        typerecette_id: typerecette_id.value,
+        type_recette_id: type_recette_id.value,
         month: month.value,
-        etatImpot: etatImpot.value,
     });
     router.get(
         url,

@@ -1,16 +1,15 @@
 <template>
     <div
+        dir="rtl"
         class="modal fade"
         id="EditAvanceSalaire"
-        style="display: none"
+        style="display: none; text-align: right;"
         aria-hidden="true"
     >
-        <div class="modal-dialog modal-lg">
+        <div  class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">
-                        Editer une avance salaire
-                    </h4>
+
                     <button
                         type="button"
                         class="close"
@@ -19,6 +18,9 @@
                     >
                         <span aria-hidden="true">×</span>
                     </button>
+                    <h4 class="modal-title">
+                        تعديل مقدم راتب
+                    </h4>
                 </div>
                 <div class="modal-body">
                     <form
@@ -29,7 +31,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="InputDate">Date</label>
+                                    <label for="InputDate">التاريخ :</label>
                                     <input
                                         type="date"
                                         class="form-control"
@@ -47,7 +49,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="InputMontantAvanceSalaire"
-                                        >Montant Avance Salaire</label
+                                        >المبلغ المقدم :</label
                                     >
                                     <input
                                         type="number"
@@ -77,7 +79,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="InputEmployeur"
-                                        >Employeur</label
+                                        >العامل المستفيد :</label
                                     >
                                     <select
                                         id="InputEmployeur"
@@ -91,7 +93,7 @@
                                         @change="getSalaires($event)"
                                     >
                                         <option value="" selected="selected">
-                                            Selectionner...
+                                            إختر...
                                         </option>
                                         <option
                                             v-for="item in props.employeurs"
@@ -109,7 +111,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="InputMontantSalaire"
-                                        >Montant Salaire</label
+                                        >الراتب :</label
                                     >
                                     <input
                                         type="number"
@@ -133,7 +135,7 @@
                             <div class="col-md-6">
                                 <!-- textarea -->
                                 <div class="form-group">
-                                    <label>Description</label>
+                                    <label>ملاحظات</label>
                                     <textarea
                                         class="form-control"
                                         rows="1"
@@ -150,7 +152,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="InputMontantTotalAvancer"
-                                        >Montant Total Avancer</label
+                                        >مجموع ما تم تقديمه :</label
                                     >
                                     <input
                                         type="number"
@@ -180,14 +182,14 @@
                         class="btn btn-danger"
                         @click="closeModal"
                     >
-                        Fermer
+                        إلغاء
                     </button>
                     <button
                         form="editForm"
                         type="submit"
                         class="btn btn-success"
                     >
-                        Soumettre
+                        حفظ التعديل
                     </button>
                 </div>
             </div>

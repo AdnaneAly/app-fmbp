@@ -1,16 +1,15 @@
 <template>
     <div
+        dir="rtl"
         class="modal fade"
         id="EditDepence"
-        style="display: none"
+        style="display: none; text-align: right;"
         aria-hidden="true"
     >
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">
-                        Editer une depence {{ editDepence.nameDepence }}
-                    </h4>
+
                     <button
                         type="button"
                         class="close"
@@ -19,13 +18,16 @@
                     >
                         <span aria-hidden="true">×</span>
                     </button>
+                    <h4 class="modal-title">
+                        تعديل مصروف
+                    </h4>
                 </div>
                 <div class="modal-body">
                     <form action="" @submit.prevent="soumettre" id="editForm">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="InputDate">Date</label>
+                                    <label for="InputDate">التاريخ :</label>
                                     <input
                                         type="date"
                                         class="form-control"
@@ -51,14 +53,14 @@
                                     >
                                 </div>
                                 <div class="form-group">
-                                    <label>Employeur</label>
+                                    <label>إسم المستفيد :</label>
                                     <select
                                         class="form-control"
                                         style="width: 100%"
                                         v-model="editDepence.employeurIdDepence"
                                     >
                                         <option value="" selected="selected">
-                                            Selectionner...
+                                            إختر...
                                         </option>
                                         <option
                                             v-for="item in props.employeurs"
@@ -74,7 +76,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Type de depence</label>
+                                    <label>نوع المصروف :</label>
                                     <select
                                         class="form-control"
                                         style="width: 100%"
@@ -83,7 +85,7 @@
                                         "
                                     >
                                         <option value="" selected="selected">
-                                            Selectionner...
+                                            إختر...
                                         </option>
                                         <option
                                             v-for="item in props.typedepences"
@@ -95,12 +97,11 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="InputMontant">Montant</label>
+                                    <label for="InputMontant">المبلغ : </label>
                                     <input
                                         type="number"
                                         class="form-control"
                                         id="InputMontant"
-                                        placeholder="Enter montant"
                                         v-model="editDepence.montantDepence"
                                         :class="{
                                             'is-invalid':
@@ -127,11 +128,10 @@
                             <!-- /.col -->
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label>Description</label>
+                                    <label>ملاحظات :</label>
                                     <textarea
                                         class="form-control"
                                         rows="2"
-                                        placeholder="Enter ..."
                                         v-model="editDepence.descriptionDepence"
                                     ></textarea>
                                 </div>
@@ -141,19 +141,20 @@
                     </form>
                 </div>
                 <div class="modal-footer justify-content-between">
-                    <button
-                        type="button"
-                        class="btn btn-danger"
-                        @click="closeModal"
-                    >
-                        Fermer
-                    </button>
+
                     <button
                         form="editForm"
                         type="submit"
                         class="btn btn-success"
                     >
-                        Soumettre
+                        حفظ التعديل
+                    </button>
+                    <button
+                        type="button"
+                        class="btn btn-danger"
+                        @click="closeModal"
+                    >
+                        إلغاء
                     </button>
                 </div>
             </div>
