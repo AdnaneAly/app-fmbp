@@ -18,7 +18,7 @@
     </div>
 
     <div class="content">
-        <div class="container-fluid">Mon contenu test 2</div>
+        <div class="container-fluid">Vous pouvez nous contacter directement </div>
     </div>
 </template>
 
