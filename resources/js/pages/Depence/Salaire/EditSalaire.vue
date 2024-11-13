@@ -285,7 +285,7 @@ const soumettre = () => {
     form.put(route("salaire.update", {salaire: props.salaire.id}), {
         onSuccess: (page) => {
             // afficher un message de succes
-            useSwalSuccess("Le salaire mise a jour avec succés");
+            useSwalSuccess("لقد تم تعديل راتب بنجاح !");
         },
         onError: (errors) => {
             useSwalError("Une erreur s'est produite");

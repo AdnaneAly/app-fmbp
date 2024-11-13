@@ -142,7 +142,7 @@ const deleteProprietaire = (id) => {
     router.delete(url, {
         onSuccess: (page) => {
             // afficher un message de succes
-            useSwalSuccess("Le proprietaire supprime avec succés");
+            useSwalSuccess("لقد تم مسح صاحب المخبزة بنجاح !");
         },
         onError: (errors) => {
             // afficher un message d'error
@@ -152,7 +152,7 @@ const deleteProprietaire = (id) => {
 };
 
 const deleteConfimation = (id) => {
-    const message = "Etes vous sur de supprimer ce proprietaire";
+    const message = "هل انت متأكد من مسح صاحب المخبزة ؟";
     useSwalConfirm(message, () => {
         deleteProprietaire(id);
     });

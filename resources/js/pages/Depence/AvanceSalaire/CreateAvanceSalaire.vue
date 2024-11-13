@@ -244,7 +244,7 @@ const soumettre = () => {
         onSuccess: (page) => {
             // afficher un message de succes
             closeModel();
-            useSwalSuccess("L'avance salaireie ajouté avec succés");
+            useSwalSuccess("لقد تم إضافة مقدم راتب بنجاح !");
             form.reset();
         },
         onError: (errors) => {

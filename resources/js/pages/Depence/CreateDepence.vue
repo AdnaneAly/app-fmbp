@@ -218,7 +218,7 @@ const soumettre = () => {
         {
             onSuccess: (page) => {
                 // afficher un message de succes
-                useSwalSuccess("Le depence ajouté avec succés");
+                useSwalSuccess("لقد تم إضافة المصروف بنجاح !");
             },
             onError: (errors) => {
                 // afficher un message d'error

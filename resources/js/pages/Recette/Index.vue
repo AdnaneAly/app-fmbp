@@ -181,7 +181,7 @@
                                             <td>
                                                 {{ recette.boulanger.name }}
                                             </td>
-                                            <td>{{ recette.month }}</td>
+                                            <td>{{ monthImpot[recette.month] }}</td>
                                             <td>{{ recette.date }}</td>
                                             <td>{{ recette.numeroFacture }}</td>
                                             <td>
@@ -203,7 +203,7 @@
                                                             : 'bg-danger'
                                                     "
                                                     >{{
-                                                        recette.type_recette
+                                                        etatImpotAR[recette.type_recette]
                                                     }}</span
                                                 >
                                             </td>
@@ -289,6 +289,26 @@ import {
 } from "../../composables/alert";
 import { router } from "@inertiajs/vue3";
 
+const etatImpotAR = {
+    'PAYE': 'دفعت',
+    'SEMIPAYE': 'تسوية',
+    'FERMER': 'مغلقة',
+    'EXONERER': 'إعفاء',
+}
+const monthImpot = {
+    'JANVIER': 'يناير',
+    'FEVRIER': 'قبراير',
+    'MARS': 'مارس',
+    'AVRIL': 'ابريل',
+    'MAI': 'مايو',
+    'JUIN': 'يونيو',
+    'JUILLET': 'يوليو',
+    'AOUT': 'اغصطس',
+    'SEPTEMBRE': 'سبتمبر',
+    'OCTOBRE': 'اكتوبر',
+    'NOVEMBRE': 'نوفمبر',
+    'DECEMENBRE': 'دجمبر'
+}
 const editingRecetteId = ref(0);
 const showModal = ref(false);
 const searchFacture = ref("");

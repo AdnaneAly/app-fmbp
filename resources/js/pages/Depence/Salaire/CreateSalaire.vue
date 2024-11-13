@@ -282,7 +282,7 @@ const soumettre = () => {
     form.post(route("salaire.store"), {
         onSuccess: (page) => {
             // afficher un message de succes
-            useSwalSuccess("Le salaire ajouté avec succés");
+            useSwalSuccess("لقد تم إضافة راتب بنجاح !");
             form.reset();
         },
         onError: (errors) => {

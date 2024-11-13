@@ -128,7 +128,7 @@ const deleteGrade = (id) => {
     router.delete(url, {
         onSuccess: (page) => {
             // afficher un message de succes
-            useSwalSuccess("Le grade supprime avec succés");
+            useSwalSuccess("لقد تم مسح الرتبة بنجاح !");
         },
         onError: (errors) => {
             // afficher un message d'error
@@ -138,7 +138,7 @@ const deleteGrade = (id) => {
 };
 
 const deleteConfimation = (id) => {
-    const message = "Etes vous sur de supprimer ce grade";
+    const message = "هل انت متأكد من مسح الرتبة ؟";
     useSwalConfirm(message, () => {
         deleteGrade(id);
     });

@@ -1,5 +1,5 @@
 <template>
-   <div class="wrapper">
+    <div class="wrapper">
         <!-- Main content -->
         <section class="invoice">
             <!-- Main content -->
@@ -8,20 +8,38 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="position-relative">
-                            <img src="~admin-lte/dist/img/cover-01.png" alt="Photo 1" class="img-fluid">
+                            <img
+                                src="~admin-lte/dist/img/cover-01.png"
+                                alt="Photo 1"
+                                class="img-fluid"
+                            />
                         </div>
                     </div>
                     <!-- /.col -->
                 </div>
-                <div style="margin-top: 2em;" dir="rtl" class="row">
-
-
+                <div style="margin-top: 2em" dir="rtl" class="row">
                     <div class="col-sm-12">
                         <table class="table no-border">
                             <tr>
-                                <td style="text-align: center; font-size: x-large;" colspan="2"><strong> قائمة المصاريف
-                                         الشهر  : 10 </strong></td>
-                                <td style="text-align: right; font-size: x-large;" colspan="2"></td>
+                                <td
+                                    style="
+                                        text-align: center;
+                                        font-size: x-large;
+                                    "
+                                    colspan="2"
+                                >
+                                <strong>
+                                            قائمة المصاريف  {{ monthDepence > 0 ? 'الشهر' : '' }} :
+                                            {{ monthDepence }}
+                                        </strong>
+                                </td>
+                                <td
+                                    style="
+                                        text-align: right;
+                                        font-size: x-large;
+                                    "
+                                    colspan="2"
+                                ></td>
                             </tr>
                         </table>
                     </div>
@@ -34,8 +52,17 @@
 
                 <!-- Table row -->
                 <div class="row">
-                    <div class="col-12 ">
-                        <table border="1" dir="rtl" style="text-align: right; margin-top: 10px; width: 100%" class="table-sm table-striped">
+                    <div class="col-12">
+                        <table
+                            border="1"
+                            dir="rtl"
+                            style="
+                                text-align: right;
+                                margin-top: 10px;
+                                width: 100%;
+                            "
+                            class="table-sm table-striped"
+                        >
                             <thead>
                                 <tr>
                                     <th style="width: 50px">#</th>
@@ -46,23 +73,42 @@
                                 </tr>
                             </thead>
                             <tbody>
-
-                                <tr v-for="(depence, index) in props.depences.data" :key="index">
-                                            <td>{{ index + 1 }}.</td>
-                                            <td>{{ depence.type_depence.name ?? '' }}</td>
-                                            <td>{{ depence.employeur ? depence.employeur.name : '' }}</td>
-                                            <td>{{ depence.date }}</td>
-                                            <td dir="ltr">{{ depence.montant.toLocaleString() }} UM</td>
-                                        </tr>
-
-
+                                <tr
+                                    v-for="(depence, index) in props.depences
+                                        .data"
+                                    :key="index"
+                                >
+                                    <td>{{ index + 1 }}.</td>
+                                    <td>
+                                        {{ depence.type_depence.name ?? "" }}
+                                    </td>
+                                    <td>
+                                        {{
+                                            depence.employeur
+                                                ? depence.employeur.name
+                                                : ""
+                                        }}
+                                    </td>
+                                    <td>{{ depence.date }}</td>
+                                    <td dir="ltr">
+                                        {{
+                                            depence.montant.toLocaleString()
+                                        }}
+                                        UM
+                                    </td>
+                                </tr>
                             </tbody>
                             <tfoot>
-                                        <tr>
-                                            <th colspan="4">المجموع الكامل </th>
-                                            <th dir="ltr">{{ returnTotalMJT().toLocaleString() }} UM</th>
-                                        </tr>
-                                    </tfoot>
+                                <tr>
+                                    <th colspan="4">المجموع الكامل</th>
+                                    <th dir="ltr">
+                                        {{
+                                            returnTotalMJT().toLocaleString()
+                                        }}
+                                        UM
+                                    </th>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
                     <!-- /.col -->
@@ -70,22 +116,26 @@
                 <!-- /.row -->
                 <hr />
 
-
-                <div style="margin-top: 1em;" class="col-sm-12">
+                <div style="margin-top: 1em" class="col-sm-12">
                     <table class="table no-border">
                         <tr>
-                            <td style="text-align: left;" colspan="2">المحاسب</td>
-                            <td style="text-align: right;" colspan="2"><strong> الرئيس </strong></td>
+                            <td style="text-align: left" colspan="2">
+                                المحاسب
+                            </td>
+                            <td style="text-align: right" colspan="2">
+                                <strong> الرئيس </strong>
+                            </td>
                         </tr>
                         <tr>
-                            <td style="text-align: left;" colspan="2"></td>
-                            <td style="text-align: right;" colspan="2"><strong>{{ datePrint }}</strong></td>
+                            <td style="text-align: left" colspan="2"></td>
+                            <td style="text-align: right" colspan="2">
+                                <strong>{{ datePrint }}</strong>
+                            </td>
                         </tr>
                     </table>
                 </div>
             </div>
             <!-- /.invoice -->
-
 
             <!-- /.content -->
         </section>
@@ -93,7 +143,7 @@
     </div>
 </template>
 <script>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import AuthLayout from "../../Layouts/PrintLayout.vue";
 
 export default {
@@ -103,6 +153,8 @@ export default {
 
 <script setup>
 
+const urlParams = new URLSearchParams(location.search);
+const monthDepence = ref(urlParams.get("month"));
 const date = new Date();
 const formattedDate = date.toISOString().slice(0, 10);
 const datePrint = ref(formattedDate);
@@ -119,5 +171,9 @@ const returnTotalMJT = function () {
     return total;
 };
 
+
+onMounted(() => {
+    window.addEventListener("load", window.print());
+})
 
 </script>

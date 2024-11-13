@@ -143,8 +143,7 @@
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <th colspan="2">Total:</th>
-                                            <td colspan="3"></td>
+                                            <th colspan="5">المجموع الكامل :</th>
                                             <th dir="ltr">{{ returnTotalMJT().toLocaleString() }} UM</th>
                                             <th dir="ltr">{{ returnTotalMAS().toLocaleString() }} UM</th>
                                             <th dir="ltr">{{ returnTotalMNet().toLocaleString() }} UM</th>

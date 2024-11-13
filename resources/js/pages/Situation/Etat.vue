@@ -137,7 +137,6 @@
                                             >
                                                 <thead class="thead-light">
                                                     <tr>
-                                                        <th>الرقم</th>
                                                         <th>وضعية المخابز</th>
                                                         <th>عدد الاشهر</th>
                                                         <th>المبلغ المدفوع</th>
@@ -146,18 +145,16 @@
                                                 <tbody>
                                                     <tr
                                                         v-for="(
-                                                            montant, etat, i
+                                                            montant, etat
                                                         ) in props.data
                                                             .dupMontantRecette"
                                                         :key="etat"
                                                         style="padding: 0"
                                                     >
-                                                        <th style="width: 5%">
-                                                            {{ i + 1 }}
-                                                        </th>
+
                                                         <th
                                                             dir="ltr"
-                                                            style="width: 65%"
+                                                            style="width: 70%"
                                                         >
                                                             {{ etatImpot[etat] }}
                                                         </th>
@@ -191,10 +188,8 @@
                                                         :key="j"
                                                         style="padding: 0"
                                                     >
-                                                        <th style="width: 5%">
-                                                            1
-                                                        </th>
-                                                        <th style="width: 65%">
+
+                                                        <th style="width: 70%">
                                                             {{ name }}
                                                         </th>
                                                         <td
@@ -222,7 +217,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <th colspan="3">
+                                                        <th colspan="2">
                                                             المجموع الكامل :
                                                         </th>
                                                         <td
@@ -261,7 +256,6 @@
                                             >
                                                 <thead class="thead-light">
                                                     <tr>
-                                                        <th>الرقم</th>
                                                         <th>نوع المصروف</th>
                                                         <th>العدد</th>
                                                         <th>المبلغ المصروف</th>
@@ -275,10 +269,8 @@
                                                             .typeDepences"
                                                         :key="i"
                                                     >
-                                                        <th style="width: 5%">
-                                                            {{ i }}
-                                                        </th>
-                                                        <th style="width: 65%">
+
+                                                        <th style="width: 70%">
                                                             {{ name }}
                                                         </th>
                                                         <th
@@ -307,10 +299,8 @@
                                                     </tr>
 
                                                     <tr>
-                                                        <th
-                                                            style="width: 5%"
-                                                        ></th>
-                                                        <th style="width: 65%">
+
+                                                        <th style="width: 70%">
                                                             مجموع مصاريف الرواتب
                                                         </th>
                                                         <th
@@ -334,10 +324,8 @@
                                                     </tr>
 
                                                     <tr>
-                                                        <th
-                                                            style="width: 5%"
-                                                        ></th>
-                                                        <th style="width: 65%">
+
+                                                        <th style="width: 70%">
                                                             مجموع مصاريف
                                                             المقدمات
                                                         </th>
@@ -361,7 +349,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <th colspan="3">
+                                                        <th colspan="2">
                                                             المجموع الكامل :
                                                         </th>
                                                         <td

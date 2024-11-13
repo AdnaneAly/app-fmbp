@@ -208,7 +208,7 @@ const soumettre = () => {
         onSuccess: (page) => {
             // afficher un message de succes
             closeModel();
-            useSwalSuccess("Le boulangerie ajouté avec succés");
+            useSwalSuccess("لقد تمت إضافة المخبزة بنجاح !");
             form.reset();
         },
         onError: (errors) => {

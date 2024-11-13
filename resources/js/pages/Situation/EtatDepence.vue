@@ -137,7 +137,6 @@
                                             >
                                                 <thead class="thead-light">
                                                     <tr>
-                                                        <th>الرقم</th>
                                                         <th>نوع المصروف</th>
                                                         <th>العدد</th>
                                                         <th>المبلغ المصروف</th>
@@ -151,10 +150,8 @@
                                                             .typeDepences"
                                                         :key="i"
                                                     >
-                                                        <th style="width: 5%">
-                                                            {{ i }}
-                                                        </th>
-                                                        <th style="width: 65%">
+
+                                                        <th style="width: 70%">
                                                             {{ name }}
                                                         </th>
                                                         <th
@@ -177,16 +174,14 @@
                                                                 props.data
                                                                     .dupMontantDepence[
                                                                     i
-                                                                ]
+                                                                ].toLocaleString()
                                                             }}
                                                         </td>
                                                     </tr>
 
                                                     <tr>
-                                                        <th
-                                                            style="width: 5%"
-                                                        ></th>
-                                                        <th style="width: 65%">
+
+                                                        <th style="width: 70%">
                                                             مجموع مصاريف الرواتب
                                                         </th>
                                                         <th
@@ -210,10 +205,8 @@
                                                     </tr>
 
                                                     <tr>
-                                                        <th
-                                                            style="width: 5%"
-                                                        ></th>
-                                                        <th style="width: 65%">
+
+                                                        <th style="width: 70%">
                                                             مجموع مصاريف
                                                             المقدمات
                                                         </th>
@@ -237,7 +230,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <th colspan="3">
+                                                        <th colspan="2">
                                                             المجموع الكامل :
                                                         </th>
                                                         <td

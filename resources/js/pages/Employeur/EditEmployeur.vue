@@ -249,7 +249,7 @@ const soumettre = () => {
             onSuccess: (page) => {
                 closeModal();
                 // afficher un message de succes
-                useSwalSuccess("Le employeur edtité avec succés");
+                useSwalSuccess("لقد تم تعديل العامل بنجاح !");
             },
             onError: (errors) => {
                 // afficher un message d'error

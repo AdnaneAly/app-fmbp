@@ -126,7 +126,7 @@ const soumettre = () => {
             onSuccess: (page) => {
                 closeModal();
                 // afficher un message de succes
-                useSwalSuccess("Le grade edtité avec succés");
+                useSwalSuccess("لقد تم تعديل الرتبة بنجاح !");
             },
             onError: (errors) => {
                 // afficher un message d'error

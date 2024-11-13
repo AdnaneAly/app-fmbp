@@ -179,7 +179,7 @@ const soumettre = () => {
             onSuccess: (page) => {
                 closeModal();
                 // afficher un message de succes
-                useSwalSuccess("Le proprietaire edtité avec succés");
+                useSwalSuccess("لقد تم تعديل صاحب المخبزة بنجاح !");
             },
             onError: (errors) => {
                 // afficher un message d'error

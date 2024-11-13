@@ -28,9 +28,10 @@
                                     "
                                     colspan="2"
                                 >
-                                    <strong>
-                                        قائمة مصاريف مقدمات الرواتب الشهر : 10
-                                    </strong>
+                                <strong>
+                                            قائمة مصاريف  مقدمات الرواتب {{ monthAvanceSalaire > 0 ? 'الشهر' : '' }} :
+                                            {{ monthAvanceSalaire }}
+                                        </strong>
                                 </td>
                                 <td
                                     style="
@@ -65,11 +66,11 @@
                             <thead>
                                 <tr>
                                     <th style="width: 5%">#</th>
-                                    <th style="width: 20%">العمال</th>
-                                    <th style="width: 10%">الهاتف</th>
+                                    <th style="width: 25%">العمال</th>
+                                    <th style="width: 15%">الهاتف</th>
                                     <th style="width: 15%">الرتبة</th>
                                     <th style="width: 15%">التاريخ</th>
-                                    <th style="width: 25%">المبلغ المقدم</th>
+                                    <th style="width: 15%">المبلغ المقدم</th>
                                     <th style="width: 10%">الحالة</th>
                                 </tr>
                             </thead>
@@ -148,7 +149,7 @@
     </div>
 </template>
 <script>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import AuthLayout from "../../../Layouts/PrintLayout.vue";
 
 export default {
@@ -157,6 +158,9 @@ export default {
 </script>
 
 <script setup>
+
+const urlParams = new URLSearchParams(location.search);
+const monthAvanceSalaire = ref(urlParams.get("month"));
 const date = new Date();
 const formattedDate = date.toISOString().slice(0, 10);
 const datePrint = ref(formattedDate);
@@ -172,4 +176,9 @@ const returnTotalMJT = function () {
     });
     return total;
 };
+
+onMounted(() => {
+    window.addEventListener("load", window.print());
+})
+
 </script>

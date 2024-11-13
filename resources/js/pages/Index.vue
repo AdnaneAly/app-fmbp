@@ -1,27 +1,22 @@
 <template>
     <div class="content-header">
         <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0">Page de test</h1>
+            <section dir="rtl" style="text-align: center" class="content">
+                <div class="container-fluid">
+                    <img
+                        style="
+                            padding-top: 3em;
+                            padding-bottom: 30px;
+                            justify-content: center;
+                        "
+                        class="img-fluid pad"
+                        src="~admin-lte/dist/img/fmbp.png"
+                        alt=""
+                    />
                 </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item">
-                            <a href="#">Home</a>
-                        </li>
-                        <li class="breadcrumb-item active">Page de test</li>
-                    </ol>
-                </div>
-            </div>
+            </section>
         </div>
-    </div>
-
-    <div class="content">
-        <div class="container-fluid">Mon contenu</div>
     </div>
 </template>
 
-<script setup>
-
-</script>
+<script setup></script>

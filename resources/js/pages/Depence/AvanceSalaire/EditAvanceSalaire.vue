@@ -247,7 +247,7 @@ const soumettre = () => {
     form.put(route("avancesalaire.update", {avancesalaire: props.avancesalaire_id}), {
         onSuccess: (page) => {
             // afficher un message de succes
-            useSwalSuccess("Le store mise a jour avec succés");
+            useSwalSuccess("لقد تم تعديل مقدم راتب بنجاح !");
             closeModal()
         },
         onError: (errors) => {

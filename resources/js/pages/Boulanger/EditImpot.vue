@@ -188,7 +188,7 @@ const soumettre = () => {
             onSuccess: (page) => {
                 closeModal();
                 // afficher un message de succes
-                useSwalSuccess("Le boulangerie edtité avec succés");
+                useSwalSuccess("لقد تم تعديل الجباية بنجاح !");
             },
             onError: (errors) => {
                 // afficher un message d'error

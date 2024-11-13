@@ -101,7 +101,7 @@ const soumettre = () => {
                     onSuccess: (page) => {
                         closeModel();
                         // afficher un message de succes
-                        useSwalSuccess("Le Grade ajouté avec succés")
+                        useSwalSuccess("لقد تمت إضافة الرتبة بنجاح !");
                     },
                     onError: (errors) => {
                         // afficher un message d'error

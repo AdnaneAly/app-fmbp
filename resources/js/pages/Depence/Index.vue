@@ -256,7 +256,7 @@ const deleteDepence = (id) => {
     router.delete(url, {
         onSuccess: (page) => {
             // afficher un message de succes
-            useSwalSuccess("Le depence supprime avec succés");
+            useSwalSuccess("لقد تم مسح المصروف بنجاح !");
         },
         onError: (errors) => {
             // afficher un message d'error
@@ -266,7 +266,7 @@ const deleteDepence = (id) => {
 };
 
 const deleteConfimation = (id) => {
-    const message = "Etes vous sur de supprimer cet depence";
+    const message = "هل انت متأكد من مسح المصروف";
     useSwalConfirm(message, () => {
         deleteDepence(id);
     });

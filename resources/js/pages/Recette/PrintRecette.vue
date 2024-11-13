@@ -117,7 +117,7 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th colspan="6">Total:</th>
+                                    <th colspan="6">المجموع الكامل :</th>
                                     <th dir="ltr">
                                         {{ returnTotal().toLocaleString() }} UM
                                     </th>
@@ -157,7 +157,7 @@
     </div>
 </template>
 <script>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import AuthLayout from "../../Layouts/PrintLayout.vue";
 
 export default {
@@ -191,4 +191,10 @@ const returnTotal = function () {
     });
     return total;
 };
+
+onMounted(() => {
+    window.addEventListener("load", window.print());
+});
+
+
 </script>

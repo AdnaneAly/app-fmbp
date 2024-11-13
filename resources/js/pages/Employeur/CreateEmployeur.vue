@@ -263,7 +263,7 @@ const soumettre = () => {
             onSuccess: (page) => {
                 closeModel();
                 // afficher un message de succes
-                useSwalSuccess("L\'mployeur ajouté avec succés");
+                useSwalSuccess("لقد تم إضافة العامل بنجاح !");
             },
             onError: (errors) => {
                 // afficher un message d'error

@@ -172,7 +172,7 @@
     </div>
 </template>
 <script>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import AuthLayout from "../../../Layouts/PrintLayout.vue";
 
 export default {
@@ -214,4 +214,9 @@ const returnTotalMAS = function () {
     });
     return total;
 };
+
+onMounted(() => {
+    window.addEventListener("load", window.print());
+})
+
 </script>

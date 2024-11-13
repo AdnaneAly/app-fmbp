@@ -58,11 +58,11 @@
                             </thead>
                             <tbody>
                                         <tr
-                                            v-for="(month, index) in months"
+                                            v-for="(monthAR, month, index) in monthImpot"
                                             :key="index"
                                         >
                                             <td>{{ index + 1 }}.</td>
-                                            <td>{{ month }}</td>
+                                            <td>{{ monthAR }}</td>
                                             <td>
                                                 {{
                                                     recetteImpot(month)
@@ -131,8 +131,7 @@
                                     </tbody>
                                     <tfoot>
                                         <tr dir="ltr">
-                                            <th colspan="2">Total:</th>
-                                            <td colspan="3"></td>
+                                            <th colspan="5"> : المجموع الكامل </th>
                                             <th>
                                                 {{
                                                     returnTotal().toLocaleString()
@@ -244,7 +243,7 @@
     </div>
 </template>
 <script>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import AuthLayout from "../../Layouts/PrintLayout.vue";
 
 export default {
@@ -265,20 +264,21 @@ const date = new Date();
 const formattedDate = date.toISOString().slice(0, 10);
 const datePrint = ref(formattedDate);
 
-const months = [
-    "JANVIER",
-    "FEVRIER",
-    "MARS",
-    "AVRIL",
-    "MAI",
-    "JUIN",
-    "JUILLET",
-    "AOUT",
-    "SEPTEMBRE",
-    "OCTOBRE",
-    "NOVEMBRE",
-    "DECEMENBRE",
-];
+
+const monthImpot = {
+    'JANVIER': 'يناير',
+    'FEVRIER': 'قبراير',
+    'MARS': 'مارس',
+    'AVRIL': 'ابريل',
+    'MAI': 'مايو',
+    'JUIN': 'يونيو',
+    'JUILLET': 'يوليو',
+    'AOUT': 'اغسطس',
+    'SEPTEMBRE': 'سبتمبر',
+    'OCTOBRE': 'اكتوبر',
+    'NOVEMBRE': 'نوفمبر',
+    'DECEMENBRE': 'دجمبر'
+}
 
 
 const props = defineProps({
@@ -308,6 +308,8 @@ const returnTotal = function () {
     return total;
 };
 
-
+onMounted(() => {
+    window.addEventListener("load", window.print());
+})
 
 </script>

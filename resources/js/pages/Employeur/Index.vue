@@ -133,6 +133,17 @@
                                             </td>
                                         </tr>
                                     </tbody>
+                                    <tfoot>
+                                <tr>
+                                    <th colspan="6">المجموع الكامل</th>
+                                    <th dir="ltr">
+                                        {{
+                                            returnTotal().toLocaleString()
+                                        }}
+                                        UM
+                                    </th>
+                                </tr>
+                            </tfoot>
                                 </table>
                             </div>
 
@@ -196,7 +207,7 @@ const deleteEmployeur = (id) => {
     router.delete(url, {
         onSuccess: (page) => {
             // afficher un message de succes
-            useSwalSuccess("Le employeur supprime avec succés");
+            useSwalSuccess("لقد تم مسح العامل بنجاح !");
         },
         onError: (errors) => {
             // afficher un message d'error
@@ -206,10 +217,18 @@ const deleteEmployeur = (id) => {
 };
 
 const deleteConfimation = (id) => {
-    const message = "Etes vous sur de supprimer cet employeur";
+    const message = "هل انت متأكد من مسح العامل!";
     useSwalConfirm(message, () => {
         deleteEmployeur(id);
     });
+};
+
+const returnTotal = function () {
+    var total = 0;
+    props.employeurs.data.forEach((element) => {
+        total += element.montantSalaire;
+    });
+    return total;
 };
 
 const search = _.throttle(() => {

@@ -171,7 +171,7 @@
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <th colspan="6">Total: </th>
+                                            <th colspan="6">المجموع : </th>
                                         <th>{{ returnTotal().toLocaleString() }}</th>
                                         <td></td>
                                         </tr>

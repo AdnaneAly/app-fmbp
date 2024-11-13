@@ -96,7 +96,7 @@
                                     <th colspan="5">المجموع الكامل</th>
                                     <th dir="ltr">
                                         {{
-                                            returnTotalMJT().toLocaleString()
+                                            returnTotal().toLocaleString()
                                         }}
                                         UM
                                     </th>
@@ -138,7 +138,7 @@
     </div>
 </template>
 <script>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import AuthLayout from "../../Layouts/PrintLayout.vue";
 
 export default {
@@ -155,11 +155,16 @@ const props = defineProps({
     employeurs: Object,
 });
 
-const returnTotalMJT = function () {
+const returnTotal = function () {
     var total = 0;
     props.employeurs.data.forEach((element) => {
         total += element.montantSalaire;
     });
     return total;
 };
+
+onMounted(() => {
+    window.addEventListener("load", window.print());
+})
+
 </script>

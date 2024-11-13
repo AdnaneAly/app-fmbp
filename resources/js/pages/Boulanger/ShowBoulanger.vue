@@ -53,11 +53,11 @@
                                     </thead>
                                     <tbody>
                                         <tr
-                                            v-for="(month, index) in months"
+                                            v-for="(monthAR, month, index) in months"
                                             :key="index"
                                         >
                                             <td>{{ index + 1 }}.</td>
-                                            <td>{{ month }}</td>
+                                            <th>{{ monthAR }}</th>
                                             <td>
                                                 {{
                                                     recetteImpot(month)
@@ -177,8 +177,7 @@
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <th colspan="2">Total:</th>
-                                            <td colspan="3"></td>
+                                            <th colspan="5">المجموع الكامل :</th>
                                             <th dir="ltr">
                                                 {{
                                                     returnTotal().toLocaleString()
@@ -234,20 +233,21 @@ const editingBoulangerId = ref(0);
 const addingImpotMois = ref("");
 const showModal = ref(false);
 const showModal2 = ref(false);
-const months = [
-    "JANVIER",
-    "FEVRIER",
-    "MARS",
-    "AVRIL",
-    "MAI",
-    "JUIN",
-    "JUILLET",
-    "AOUT",
-    "SEPTEMBRE",
-    "OCTOBRE",
-    "NOVEMBRE",
-    "DECEMENBRE",
-];
+
+const months = {
+    'JANVIER': 'يناير',
+    'FEVRIER': 'قبراير',
+    'MARS': 'مارس',
+    'AVRIL': 'ابريل',
+    'MAI': 'مايو',
+    'JUIN': 'يونيو',
+    'JUILLET': 'يوليو',
+    'AOUT': 'اغسطس',
+    'SEPTEMBRE': 'سبتمبر',
+    'OCTOBRE': 'اكتوبر',
+    'NOVEMBRE': 'نوفمبر',
+    'DECEMENBRE': 'دجمبر'
+}
 
 const props = defineProps({
     boulanger: Object,

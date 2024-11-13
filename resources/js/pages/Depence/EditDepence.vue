@@ -224,7 +224,7 @@ const soumettre = () => {
             onSuccess: (page) => {
                 closeModal();
                 // afficher un message de succes
-                useSwalSuccess("Le depence edtité avec succés");
+                useSwalSuccess("لقد تم تعديل المصروف بنجاح !");
             },
             onError: (errors) => {
                 // afficher un message d'error

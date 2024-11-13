@@ -146,7 +146,7 @@ const soumettre = () => {
                     onSuccess: (page) => {
                         closeModel();
                         // afficher un message de succes
-                        useSwalSuccess("Le Proprietaire ajouté avec succés")
+                        useSwalSuccess("لقد تم إضافة صاحب المخبزة بنجاح !");
                     },
                     onError: (errors) => {
                         // afficher un message d'error

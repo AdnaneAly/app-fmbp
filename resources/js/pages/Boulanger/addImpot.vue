@@ -219,7 +219,7 @@ const soumettre = () => {
     form.post(route("recette.store"), {
         onSuccess: (page) => {
             // afficher un message de succes
-            useSwalSuccess("Le impot ajouté avec succés");
+            useSwalSuccess("لقد تمت إضافة الجباية بنجاح !");
             form.reset();
             closeModal();
         },
