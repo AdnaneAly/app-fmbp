@@ -10,7 +10,7 @@
                         <li class="breadcrumb-item">
                             <a href="#">Home</a>
                         </li>
-                        <li class="breadcrumb-item active">Page de test2</li>
+                        <li class="breadcrumb-item active">Page de contact</li>
                     </ol>
                 </div>
             </div>
