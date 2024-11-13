@@ -1,5 +1,5 @@
 <template>
-    <div dir="rtl" style="text-align: right;"  class="content-header">
+    <div dir="rtl" style="text-align: right" class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
@@ -11,7 +11,7 @@
                     <Link
                         :href="
                             route('boulanger.printDetail', {
-                                id:props.boulanger.id
+                                id: props.boulanger.id,
                             })
                         "
                         class="btn btn-info"
@@ -22,7 +22,7 @@
         </div>
     </div>
 
-    <div dir="rtl" style="text-align: right;" class="content">
+    <div dir="rtl" style="text-align: right" class="content">
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -31,18 +31,25 @@
                             <div class="card-body">
                                 <table class="table table-sm table-bordered">
                                     <thead>
-
                                         <tr>
-                                                <th style="width: 5%">الرقم</th>
-                                                <th style="width: 25%">تاريخ الجباية</th>
-                                                <th style="width: 25%">تاريخ التسديد</th>
-                                                <th style="width: 15%">رقم الوصل</th>
-                                                <th style="width: 10%">الحالة</th>
-                                                <th style="width: 20%">المبلغ المدفوع</th>
-                                                <th style="width: 140px">
+                                            <th style="width: 5%">الرقم</th>
+                                            <th style="width: 25%">
+                                                تاريخ الجباية
+                                            </th>
+                                            <th style="width: 25%">
+                                                تاريخ التسديد
+                                            </th>
+                                            <th style="width: 15%">
+                                                رقم الوصل
+                                            </th>
+                                            <th style="width: 10%">الحالة</th>
+                                            <th style="width: 20%">
+                                                المبلغ المدفوع
+                                            </th>
+                                            <th style="width: 140px">
                                                 العمليات
                                             </th>
-                                            </tr>
+                                        </tr>
                                     </thead>
                                     <tbody>
                                         <tr
@@ -97,9 +104,11 @@
                                                     >{{
                                                         recetteImpot(month) !==
                                                         []
-                                                            ? recetteImpot(
-                                                                  month
-                                                              ).type_recette
+                                                            ? etatImpot[
+                                                                  recetteImpot(
+                                                                      month
+                                                                  ).type_recette
+                                                              ]
                                                             : ""
                                                     }}</span
                                                 >
@@ -213,6 +222,12 @@ import { router } from "@inertiajs/vue3";
 import addImpot from "./addImpot.vue";
 import EditImpot from "./EditImpot.vue";
 
+const etatImpot = {
+    PAYE: "دفعت",
+    SEMIPAYE: "تسوية",
+    FERMER: "مغلقة",
+    EXONERER: "إعفاء",
+};
 document.title = "Liste des impots 2024";
 
 const editingBoulangerId = ref(0);

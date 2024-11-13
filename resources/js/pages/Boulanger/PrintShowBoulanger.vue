@@ -108,9 +108,9 @@
                                                     "
                                                     >{{
                                                         recetteImpot(month)
-                                                            ? recetteImpot(
+                                                            ? etatImpot[recetteImpot(
                                                                   month
-                                                              ).type_recette
+                                                            ).type_recette]
                                                             : ""
                                                     }}</span
                                                 >
@@ -173,7 +173,7 @@
                                         <td dir="ltr"></td>
                                     </tr>
                                     <tr>
-                                        <th>لم يدفع</th>
+                                        <th>لم تدفع</th>
                                         <td>{{ boulanger.arriere }}</td>
                                         <th dir="ltr">{{ (boulanger.arriere * 55000).toLocaleString() }} UM</th>
                                     </tr>
@@ -198,7 +198,7 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <th style="width:50%"> دفع </th>
+                                        <th style="width:50%"> دفعت </th>
                                         <td>{{ props.etatscountes.PAYE ?? 0 }}</td>
                                         <th dir="ltr">{{ props.etatsmontants.PAYE }} UM</th>
                                     </tr>
@@ -253,6 +253,13 @@ export default {
 </script>
 
 <script setup>
+
+const etatImpot = {
+    'PAYE': 'دفعت',
+    'SEMIPAYE': 'تسوية',
+    'FERMER': 'مغلقة',
+    'EXONERER': 'إعفاء',
+}
 
 const date = new Date();
 const formattedDate = date.toISOString().slice(0, 10);
