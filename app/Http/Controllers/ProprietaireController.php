@@ -13,7 +13,7 @@ class ProprietaireController extends Controller
      */
     public function index()
     {
-        $proprietaires = Proprietaire::latest()->paginate(4);
+        $proprietaires = Proprietaire::with('boulangers')->latest()->paginate(4);
         return inertia('Operation/Proprietaire/Index', compact('proprietaires'));
     }
 

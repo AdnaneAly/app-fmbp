@@ -5,7 +5,7 @@
         data-toggle="modal"
         data-target="#createGrade"
     >
-        <i class="fa fa-plus"></i> Ajouter
+        <i class="fa fa-plus"></i> إضافة
     </button>
 
     <div
@@ -17,7 +17,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Ajouter un grade</h4>
+
                     <button
                         type="button"
                         @click="closeModel"
@@ -26,18 +26,19 @@
                     >
                         <span aria-hidden="true">×</span>
                     </button>
+                    <h4 class="modal-title">إضافة رتبة جديدة :</h4>
                 </div>
                 <div class="modal-body">
                     <form action="" @submit.prevent="soumettre" id="createFormGrade">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="InputName">Nom</label>
+                                    <label for="InputName">إسم الرتبة :</label>
                                     <input
                                         type="text"
                                         class="form-control"
                                         id="InputName"
-                                        placeholder="Enter name"
+                                        placeholder="ادخل اسم الرتبة هنا..."
                                         v-model="nameGrade"
                                         :class="{'is-invalid': nameError != ''}"
                                     />
@@ -51,15 +52,16 @@
                     </form>
                 </div>
                 <div class="modal-footer justify-content-between">
+
+                    <button type="submit" form="createFormGrade" class="btn btn-success">
+                        حفظ الرتبة
+                    </button>
                     <button
                         type="button"
                         class="btn btn-danger"
                         @click="closeModel"
                     >
-                        Fermer
-                    </button>
-                    <button type="submit" form="createFormGrade" class="btn btn-success">
-                        Soumettre
+                        إلغاء
                     </button>
                 </div>
             </div>

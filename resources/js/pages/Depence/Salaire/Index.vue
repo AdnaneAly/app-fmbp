@@ -1,23 +1,13 @@
 <template>
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0">Liste des salaires</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item">
-                            <a href="#">Home</a>
-                        </li>
-                        <li class="breadcrumb-item active">Liste</li>
-                    </ol>
-                </div>
+    <section dir="rtl" style="text-align: right;" class="content-header">
+        <div class="card card-cyan card-outline mx-2">
+            <div class="card-header">
+                <h4 class="text-cyan" ><i class="fas fa-bars"></i> قائمة مصاريف الرواتب</h4>
             </div>
-        </div>
-    </div>
+        </div><!-- /.container-fluid -->
+    </section>
 
-    <div class="content">
+    <div dir="rtl" style="text-align: right;" class="content">
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -30,7 +20,7 @@
                                             :href="route('salaire.create')"
                                             class="btn btn-success"
                                             ><i class="fa fa-plus"></i
-                                            > Ajouter</Link
+                                            > إضافة</Link
                                         >
                                     </div>
 
@@ -41,7 +31,7 @@
                                             class="form-control ml-3"
                                         >
                                             <option value="" selected>
-                                                Employeur...
+                                                العمال...
                                             </option>
                                             <option
                                                 v-for="item in props.employeurs"
@@ -59,42 +49,22 @@
                                                 class="form-control ml-3"
                                             >
                                             <option value="" selected>
-                                                    Mois de salaire...
+                                                    شهر الرواتب...
                                                 </option>
-                                                <option value="1">
-                                                    JANVIER
-                                                </option>
-                                                <option value="2">
-                                                    FEVRIER
-                                                </option>
-                                                <option value="3">
-                                                    MARS
-                                                </option>
-                                                <option value="4">
-                                                    AVRIL
-                                                </option>
-                                                <option value="5">MAI</option>
-                                                <option value="6">
-                                                    JUIN
-                                                </option>
-                                                <option value="7">
-                                                    JUILLET
-                                                </option>
-                                                <option value="8">
-                                                    AOUT
-                                                </option>
-                                                <option value="9">
-                                                    SEPTEMBRE
-                                                </option>
-                                                <option value="10">
-                                                    OCTOBRE
-                                                </option>
-                                                <option value="11">
-                                                    NOVEMBRE
-                                                </option>
-                                                <option value="12">
-                                                    DECEMENBRE
-                                                </option>
+                                                <option value="1">يناير</option>
+                                            <option value="2">قبراير</option>
+                                            <option value="3">مارس</option>
+                                            <option value="4">ابريل</option>
+                                            <option value="5">مايو</option>
+                                            <option value="6">يونيو</option>
+                                            <option value="7">يوليو</option>
+                                            <option value="8">اغسطس</option>
+                                            <option value="9">سبتمبر</option>
+                                            <option value="10">اكتوبر</option>
+                                            <option value="11">نوفمبر</option>
+                                            <option value="12">
+                                                دجمبر
+                                            </option>
                                             </select>
                                     </div>
                                     <div class="col-md-2">
@@ -114,7 +84,7 @@
                                             :href="route('salaire.print', {per_page, employeur_id, month })"
                                             class="btn btn-info"
                                             ><i class="fa fa-print"></i
-                                            > Imprimer</Link
+                                            > سحب</Link
                                         >
                                     </div>
                                 </div>
@@ -124,41 +94,32 @@
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th style="width: 10px">#</th>
-                                            <th>Employeur</th>
-                                            <th>Telephone</th>
-                                            <th>Date</th>
-                                            <th>Nombre Jours Travail</th>
-                                            <th>Montant Jours Travail</th>
-                                            <th>Montant Avance</th>
-                                            <th>Montant Net Paye</th>
-                                            <th style="width: 140px">
-                                                Actions
-                                            </th>
+                                            <th style="width: 50px">#</th>
+                                            <th>العمال</th>
+                                            <th>الهاتف</th>
+                                            <th>التاريخ</th>
+                                            <th> أيام العمل</th>
+                                            <th>المبلغ المقابل</th>
+                                            <th>المبلغ المقتطع</th>
+                                            <th>المبلغ بعد الاقتطاع</th>
+                                            <th style="width: 100px">العمليات</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr v-for="(salaire, index) in props.salaires.data" :key="index">
                                             <td>{{ index + 1 }}.</td>
                                             <td>{{ salaire.employeur.name }}</td>
-                                            <td>{{ salaire.employeur.tel }}</td>
+                                            <td dir="ltr">{{ salaire.employeur.tel }}</td>
                                             <td>{{ salaire.date }}</td>
                                             <td>{{ salaire.nombreJoursTravail }}</td>
-                                            <td>{{ salaire.montantJoursTravail.toLocaleString() }} UM</td>
-                                            <td>{{ salaire.montantAS.toLocaleString() }} UM</td>
-                                            <td>{{ salaire.montantNet.toLocaleString() }} UM</td>
+                                            <th dir="ltr">{{ salaire.montantJoursTravail.toLocaleString() }} UM</th>
+                                            <th dir="ltr">{{ salaire.montantAS.toLocaleString() }} UM</th>
+                                            <th dir="ltr">{{ salaire.montantNet.toLocaleString() }} UM</th>
                                             <td class="d-flex gap-2 text-left">
-                                                <a
-                                                    style="margin-right: 10px"
-                                                    class="btn btn-primary btn-sm"
-                                                    href="#"
-                                                >
-                                                    <i class="fas fa-folder">
-                                                    </i>
-                                                </a>
+
                                                 <Link
 
-                                                    style="margin-right: 10px"
+                                                    style="margin-left: 10px"
                                                     class="btn btn-info btn-sm"
                                                     :href="route('salaire.edit', {salaire: salaire.id})"
                                                 >
@@ -184,9 +145,9 @@
                                         <tr>
                                             <th colspan="2">Total:</th>
                                             <td colspan="3"></td>
-                                            <th>{{ returnTotalMJT().toLocaleString() }} UM</th>
-                                            <th>{{ returnTotalMAS().toLocaleString() }} UM</th>
-                                            <th>{{ returnTotalMNet().toLocaleString() }} UM</th>
+                                            <th dir="ltr">{{ returnTotalMJT().toLocaleString() }} UM</th>
+                                            <th dir="ltr">{{ returnTotalMAS().toLocaleString() }} UM</th>
+                                            <th dir="ltr">{{ returnTotalMNet().toLocaleString() }} UM</th>
                                             <td></td>
                                         </tr>
                                     </tfoot>

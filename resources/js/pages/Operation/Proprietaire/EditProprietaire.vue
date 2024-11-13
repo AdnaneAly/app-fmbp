@@ -1,16 +1,15 @@
 <template>
     <div
+        dir="rtl"
         class="modal fade"
         id="EditProprietaire"
-        style="display: none"
+        style="display: none; text-align: right;"
         aria-hidden="true"
     >
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">
-                        Editer une proprietaire {{ editProprietaire.name }}
-                    </h4>
+
                     <button
                         type="button"
                         class="close"
@@ -19,6 +18,9 @@
                     >
                         <span aria-hidden="true">×</span>
                     </button>
+                    <h4 class="modal-title">
+                        تعديل معلومات صاحب مخبزة : {{ editProprietaire.name }}
+                    </h4>
                 </div>
                 <div class="modal-body">
                     <form
@@ -29,12 +31,11 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="InputName">Nom</label>
+                                    <label for="InputName">الإسم :</label>
                                     <input
                                         type="text"
                                         class="form-control"
                                         id="InputName"
-                                        placeholder="Enter nom"
                                         v-model="editProprietaire.name"
                                         :class="{
                                             'is-invalid':
@@ -48,12 +49,11 @@
                                     >
                                 </div>
                                 <div class="form-group">
-                                    <label for="InputTel">Telephone</label>
+                                    <label for="InputTel">رقم الهاتف :</label>
                                     <input
                                         type="text"
                                         class="form-control"
                                         id="InputTel"
-                                        placeholder="Enter telephone"
                                         v-model="editProprietaire.tel"
                                         :class="{
                                             'is-invalid':
@@ -70,12 +70,11 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="InputAddress">Adresse</label>
+                                    <label for="InputAddress">العنوان :</label>
                                     <input
                                         type="text"
                                         class="form-control"
                                         id="InputAddress"
-                                        placeholder="Enter adresse"
                                         v-model="editProprietaire.address"
                                         :class="{
                                             'is-invalid':
@@ -90,11 +89,11 @@
                                 </div>
                                 <!-- textarea -->
                                 <div class="form-group">
-                                    <label>Description</label>
+                                    <label>ملاحظات :</label>
                                     <textarea
                                         class="form-control"
                                         rows="2"
-                                        placeholder="Enter ..."
+                                        placeholder="اكتب ملاحظة هنا ..."
                                         v-model="editProprietaire.description"
                                     ></textarea>
 
@@ -106,19 +105,20 @@
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button
-                        type="button"
-                        class="btn btn-danger"
-                        @click="closeModal"
-                    >
-                        Fermer
-                    </button>
-                    <button
                         form="editForm"
                         type="submit"
                         class="btn btn-success"
                     >
-                        Soumettre
+                        حفظ التعديل
                     </button>
+                    <button
+                        type="button"
+                        class="btn btn-danger"
+                        @click="closeModal"
+                    >
+                        إلغاء
+                    </button>
+
                 </div>
             </div>
             <!-- /.modal-content -->

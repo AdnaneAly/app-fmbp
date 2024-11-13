@@ -5,7 +5,7 @@
         data-toggle="modal"
         data-target="#createTypeDepence"
     >
-        <i class="fa fa-plus"></i> Ajouter
+        <i class="fa fa-plus"></i> إضافة
     </button>
 
     <div
@@ -16,8 +16,8 @@
     >
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Ajouter un type depence</h4>
+                <div class="modal-header ">
+
                     <button
                         type="button"
                         @click="closeModel"
@@ -26,18 +26,19 @@
                     >
                         <span aria-hidden="true">×</span>
                     </button>
+                    <h4 class="modal-title">إضافة نوع مصروف جديد :</h4>
                 </div>
                 <div class="modal-body">
                     <form action="" @submit.prevent="soumettre" id="createFormTypeDepence">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="InputName">Nom</label>
+                                    <label for="InputName">إسم المصروف :</label>
                                     <input
                                         type="text"
                                         class="form-control"
                                         id="InputName"
-                                        placeholder="Enter name"
+                                        placeholder="ادخل اسم المصروف هنا ..."
                                         v-model="nameTypeDepence"
                                         :class="{'is-invalid': nameError != ''}"
                                     />
@@ -51,16 +52,17 @@
                     </form>
                 </div>
                 <div class="modal-footer justify-content-between">
+                    <button type="submit" form="createFormTypeDepence" class="btn btn-success">
+                        حفظ العملية
+                    </button>
                     <button
                         type="button"
                         class="btn btn-danger"
                         @click="closeModel"
                     >
-                        Fermer
+                        إلغاء
                     </button>
-                    <button type="submit" form="createFormTypeDepence" class="btn btn-success">
-                        Soumettre
-                    </button>
+
                 </div>
             </div>
             <!-- /.modal-content -->

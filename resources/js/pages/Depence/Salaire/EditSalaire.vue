@@ -1,22 +1,10 @@
 <template>
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0">Editer un stock</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item">
-                            <a href="#">Home</a>
-                        </li>
-                        <li class="breadcrumb-item active">Editer</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="content">
+    <section dir="rtl" style="text-align: right;" class="content-header">
+        <div>
+
+        </div><!-- /.container-fluid -->
+    </section>
+    <div dir="rtl" style="text-align: right;" class="content">
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -24,7 +12,7 @@
                         <div class="card">
                             <div class="card card-info">
                                 <div class="card-header">
-                                    <h3 class="card-title">title</h3>
+                                    <h3 class="text-right">تعديل معلومات الراتب :</h3>
                                 </div>
                             </div>
 
@@ -38,7 +26,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="InputDate"
-                                                    >Date</label
+                                                    >التاريخ :</label
                                                 >
                                                 <input
                                                     type="date"
@@ -64,14 +52,13 @@
 
                                             <div class="form-group">
                                                 <label for="InputnombreJoursTravail"
-                                                    >Nombre Jours Travail</label
+                                                    >عدد ايام العمل :</label
                                                 >
                                                 <input
                                                     type="number"
                                                     class="form-control"
                                                     id="InputnombreJoursTravail"
                                                     @input="montantJoursTravailCalcul($event)"
-                                                    placeholder="Enter nombreJoursTravail"
                                                     v-model="form.nombreJoursTravail"
                                                     :class="{
                                                         'is-invalid':
@@ -89,7 +76,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="InputMontantAvance"
-                                                    >Montant Avance</label
+                                                    >المبلغ المقدم :</label
                                                 >
                                                 <input
                                                     type="number"
@@ -115,7 +102,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="InputEmployeur"
-                                                    >Employeur</label
+                                                    >العامل المستفيد :</label
                                                 >
                                                 <select
                                                     id="InputEmployeur"
@@ -133,7 +120,7 @@
                                                         value=""
                                                         selected="selected"
                                                     >
-                                                        Selectionner...
+                                                        إختر...
                                                     </option>
                                                     <option
                                                         v-for="item in props.employeurs"
@@ -155,7 +142,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="InputMontantJoursTravail"
-                                                    >Montant Jours Travail</label
+                                                    >المبلغ مقابل عدد ايام العمل :</label
                                                 >
                                                 <input
                                                     type="number"
@@ -181,7 +168,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="InputMontantNet"
-                                                    >Montant Net A Paye</label
+                                                    >المبلغ بعد الاقتطاع :</label
                                                 >
                                                 <input
                                                     type="number"
@@ -210,7 +197,7 @@
 
                                             <div class="form-group">
                                                 <label for="InputSalaireNet"
-                                                    > Salaire Net</label
+                                                    > الراتب الصافي :</label
                                                 >
                                                 <input
                                                     type="number"
@@ -233,11 +220,11 @@
                                                 >
                                             </div>
                                             <div class="form-group">
-                                                <label>Description</label>
+                                                <label>ملاحظات : </label>
                                                 <textarea
                                                     class="form-control"
                                                     rows="1"
-                                                    placeholder="Enter ..."
+                                                    placeholder="اكتب ملاحظة هنا ..."
                                                     v-model="form.description"
                                                 ></textarea>
                                             </div>
@@ -253,7 +240,7 @@
                                         form="editFormSalaire"
                                         class="btn btn-success"
                                     >
-                                        Soumettre
+                                        حفظ التعديل
                                     </button>
                                 </div>
                             </form>

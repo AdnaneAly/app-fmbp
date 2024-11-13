@@ -5,7 +5,7 @@
         data-toggle="modal"
         data-target="#createProprietaire"
     >
-        <i class="fa fa-plus"></i> Ajouter
+        <i class="fa fa-plus"></i> إضافة
     </button>
 
     <div
@@ -17,7 +17,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Ajouter un proprietaire</h4>
+
                     <button
                         type="button"
                         @click="closeModel"
@@ -26,30 +26,31 @@
                     >
                         <span aria-hidden="true">×</span>
                     </button>
+                    <h4 class="modal-title">إضافة صاحب مخبزة جديد</h4>
                 </div>
                 <div class="modal-body">
                     <form action="" @submit.prevent="soumettre" id="createFormProprietaire">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="InputName">Nom</label>
+                                    <label for="InputName">الإسم :</label>
                                     <input
                                         type="text"
                                         class="form-control"
                                         id="InputName"
-                                        placeholder="Enter name"
+                                        placeholder="ادخل إسم صاحب المخبزة هنا..."
                                         v-model="nameProprietaire"
                                         :class="{'is-invalid': nameError != ''}"
                                     />
                                     <span v-if="nameError != ''" class="error invalid-feedback">{{ nameError }}</span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="InputTel">Telephone</label>
+                                    <label for="InputTel">رقم الهاتف :</label>
                                     <input
                                         type="text"
                                         class="form-control"
                                         id="InputTel"
-                                        placeholder="Enter tel"
+                                        placeholder="ادخل رقم الهاتف هنا..."
                                         v-model="telProprietaire"
                                         :class="{'is-invalid': telError != ''}"
                                     />
@@ -60,23 +61,23 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="InputAddress">Adresse</label>
+                                    <label for="InputAddress">المكان :</label>
                                     <input
                                         type="text"
                                         class="form-control"
                                         id="InputAddress"
-                                        placeholder="Enter address"
+                                        placeholder="ادخل المكان هنا..."
                                         v-model="addressProprietaire"
                                         :class="{'is-invalid': addressError != ''}"
                                     />
                                     <span v-if="addressError != ''" class="error invalid-feedback">{{ addressError }}</span>
                                 </div>
                                 <div class="form-group">
-                                    <label>Description</label>
+                                    <label>ملاحظات :</label>
                                     <textarea
                                         class="form-control"
                                         rows="1"
-                                        placeholder="Enter ..."
+                                        placeholder="اكتب ملاحظة هنا ..."
                                         v-model="descriptionProprietaire"
                                     ></textarea>
                                 </div>
@@ -88,16 +89,17 @@
                     </form>
                 </div>
                 <div class="modal-footer justify-content-between">
+                    <button type="submit" form="createFormProprietaire" class="btn btn-success">
+                        حفظ العملية
+                    </button>
                     <button
                         type="button"
                         class="btn btn-danger"
                         @click="closeModel"
                     >
-                        Fermer
+                        إلغاء
                     </button>
-                    <button type="submit" form="createFormProprietaire" class="btn btn-success">
-                        Soumettre
-                    </button>
+
                 </div>
             </div>
             <!-- /.modal-content -->

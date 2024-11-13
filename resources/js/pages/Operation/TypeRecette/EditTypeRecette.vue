@@ -1,16 +1,15 @@
 <template>
     <div
+        dir="rtl"
         class="modal fade"
         id="EditTypeRecette"
-        style="display: none"
+        style="display: none; text-align: right;"
         aria-hidden="true"
     >
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">
-                        Editer une type recette {{ editTypeRecette.name }}
-                    </h4>
+
                     <button
                         type="button"
                         class="close"
@@ -19,6 +18,9 @@
                     >
                         <span aria-hidden="true">×</span>
                     </button>
+                    <h4 class="modal-title">
+                        تعديل نوع الدخل : {{ editTypeRecette.name }}
+                    </h4>
                 </div>
                 <div class="modal-body">
                     <form
@@ -29,12 +31,12 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="InputName">Nom</label>
+                                    <label for="InputName">أسم نوع الدخل :</label>
                                     <input
                                         type="text"
                                         class="form-control"
                                         id="InputName"
-                                        placeholder="Enter nom"
+                                        placeholder="ادخل الاسم هنا..."
                                         v-model="editTypeRecette.name"
                                         :class="{
                                             'is-invalid':
@@ -57,19 +59,20 @@
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button
-                        type="button"
-                        class="btn btn-danger"
-                        @click="closeModal"
-                    >
-                        Fermer
-                    </button>
-                    <button
                         form="editForm"
                         type="submit"
                         class="btn btn-success"
                     >
-                        Soumettre
+                        حفظ التعديل
                     </button>
+                    <button
+                        type="button"
+                        class="btn btn-danger"
+                        @click="closeModal"
+                    >
+                        إلغاء
+                    </button>
+
                 </div>
             </div>
             <!-- /.modal-content -->

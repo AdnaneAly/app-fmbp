@@ -1,32 +1,25 @@
 <template>
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0">Liste de Type Depences</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item">
-                            <a href="#">Home</a>
-                        </li>
-                        <li class="breadcrumb-item active">Liste</li>
-                    </ol>
-                </div>
+    <section dir="rtl" style="text-align: right;" class="content-header">
+        <div class="card card-cyan card-outline mx-2">
+            <div class="card-header">
+                <h4 class="text-cyan" ><i class="fas fa-bars"></i> قائمة انواع المصروفات</h4>
             </div>
-        </div>
-    </div>
+        </div><!-- /.container-fluid -->
+    </section>
 
-    <div class="content">
+    <div dir="rtl" style="text-align: right;" class="content">
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <div class="card-title">
-                                    <CreateTypeDepence />
+                                <div class="col-md-1">
+                                    <div class="text-right">
+                                        <CreateTypeDepence />
+                                    </div>
                                 </div>
+
                             </div>
 
                             <div class="card-body">
@@ -34,9 +27,9 @@
                                     <thead>
                                         <tr>
                                             <th style="width: 10px">#</th>
-                                            <th>Nom</th>
+                                            <th>إسم المصروف</th>
                                             <th style="width: 100px">
-                                                Actions
+                                                العمليات
                                             </th>
                                         </tr>
                                     </thead>
@@ -44,6 +37,7 @@
                                         <tr
                                             v-for="typedepence in props
                                                 .typedepences.data"
+                                                :key="typedepence.id"
                                         >
                                             <td>1.</td>
                                             <td>{{ typedepence.name }}</td>
@@ -56,7 +50,7 @@
                                                             typedepence.id
                                                         )
                                                     "
-                                                    style="margin-right: 10px"
+                                                    style="margin-left: 10px"
                                                     class="btn btn-info btn-sm"
                                                     href="#"
                                                 >
