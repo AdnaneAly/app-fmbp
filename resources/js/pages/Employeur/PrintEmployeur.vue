@@ -164,7 +164,11 @@ const returnTotal = function () {
 };
 
 onMounted(() => {
+    print();
+});
+
+const print = _.throttle(() => {
     window.addEventListener("load", window.print());
-})
+}, 5000);
 
 </script>

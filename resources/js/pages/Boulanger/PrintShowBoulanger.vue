@@ -298,7 +298,6 @@ const recetteImpot = (monthId) => {
     return impots;
 };
 
-console.log(props.etats);
 
 const returnTotal = function () {
     var total = 0;
@@ -309,7 +308,11 @@ const returnTotal = function () {
 };
 
 onMounted(() => {
+    print();
+});
+
+const print = _.throttle(() => {
     window.addEventListener("load", window.print());
-})
+}, 5000);
 
 </script>

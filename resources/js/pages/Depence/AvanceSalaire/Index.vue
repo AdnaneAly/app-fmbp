@@ -105,6 +105,7 @@
                                         <tr>
                                             <th style="width: 50px">#</th>
                                             <th>العمال</th>
+                                            <th>الرتبة</th>
                                             <th>الهاتف</th>
                                             <th>التاريخ</th>
                                             <th>المبلغ المقدم</th>
@@ -126,10 +127,14 @@
                                                 }}
                                             </td>
                                             <td>
+                                                {{ grades[avancesalaire.employeur.grade_id] }}
+                                            </td>
+                                            <td>
                                                 {{
                                                     avancesalaire.employeur.tel
                                                 }}
                                             </td>
+
                                             <td>{{ avancesalaire.date }}</td>
                                             <th dir="ltr">
                                                 {{
@@ -171,7 +176,7 @@
                                     </tbody>
                                     <tfoot>
                                         <tr dir="ltr">
-                                            <th colspan="4">المجموع الكامل:</th>
+                                            <th colspan="5">المجموع الكامل:</th>
                                             <th>{{ returnTotal().toLocaleString() }} UM</th>
                                             <td></td>
                                             <td></td>
@@ -225,8 +230,8 @@ const month = ref("");
 const props = defineProps({
     avancesalaires: Object,
     employeurs: Object,
+    grades: Object,
 });
-
 const modalClosed = () => {
     editingAvanceSalaireId.value = 0;
     showModal.value = false;

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SalaireRequest;
 use App\Models\Employeur;
+use App\Models\Grade;
 use App\Models\Salaire;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -29,7 +30,8 @@ class SalaireController extends Controller
             ->latest()
             ->paginate($per_page ?? 5);
         $employeurs = Employeur::all();
-        return inertia('Depence/Salaire/Index', compact('salaires',  'employeurs'));
+        $grades = Grade::pluck('name', 'id');
+        return inertia('Depence/Salaire/Index', compact('salaires',  'employeurs', 'grades'));
     }
 
     /**
@@ -103,7 +105,8 @@ class SalaireController extends Controller
             })
             ->latest()
             ->paginate($per_page ?? 5);
-        return inertia('Depence/Salaire/PrintSalaire', compact('salaires'));
+            $grades = Grade::pluck('name', 'id');
+        return inertia('Depence/Salaire/PrintSalaire', compact('salaires', 'grades'));
     }
 
     /**

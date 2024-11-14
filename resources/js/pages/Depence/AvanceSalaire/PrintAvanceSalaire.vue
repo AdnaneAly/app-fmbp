@@ -67,8 +67,8 @@
                                 <tr>
                                     <th style="width: 5%">#</th>
                                     <th style="width: 25%">العمال</th>
-                                    <th style="width: 15%">الهاتف</th>
                                     <th style="width: 15%">الرتبة</th>
+                                    <th style="width: 15%">الهاتف</th>
                                     <th style="width: 15%">التاريخ</th>
                                     <th style="width: 15%">المبلغ المقدم</th>
                                     <th style="width: 10%">الحالة</th>
@@ -82,7 +82,7 @@
                                 >
                                     <td>{{ index + 1 }}.</td>
                                     <td>{{ avancesalaire.employeur.name }}</td>
-                                    <td>{{ avancesalaire.employeur.tel }}</td>
+                                    <td>{{ grades[avancesalaire.employeur.grade_id] }}</td>
                                     <td>{{ avancesalaire.employeur.tel }}</td>
                                     <td>{{ avancesalaire.date }}</td>
                                     <td>
@@ -167,6 +167,7 @@ const datePrint = ref(formattedDate);
 
 const props = defineProps({
     avancesalaires: Object,
+    grades: Object,
 });
 
 const returnTotalMJT = function () {
@@ -178,7 +179,11 @@ const returnTotalMJT = function () {
 };
 
 onMounted(() => {
+    print();
+});
+
+const print = _.throttle(() => {
     window.addEventListener("load", window.print());
-})
+}, 5000);
 
 </script>

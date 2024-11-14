@@ -96,6 +96,7 @@
                                         <tr>
                                             <th style="width: 50px">#</th>
                                             <th>العمال</th>
+                                            <th>الرتبة</th>
                                             <th>الهاتف</th>
                                             <th>التاريخ</th>
                                             <th> أيام العمل</th>
@@ -109,6 +110,7 @@
                                         <tr v-for="(salaire, index) in props.salaires.data" :key="index">
                                             <td>{{ index + 1 }}.</td>
                                             <td>{{ salaire.employeur.name }}</td>
+                                            <td>{{ grades[salaire.employeur.grade_id] }}</td>
                                             <td dir="ltr">{{ salaire.employeur.tel }}</td>
                                             <td>{{ salaire.date }}</td>
                                             <td>{{ salaire.nombreJoursTravail }}</td>
@@ -143,7 +145,7 @@
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <th colspan="5">المجموع الكامل :</th>
+                                            <th colspan="6">المجموع الكامل :</th>
                                             <th dir="ltr">{{ returnTotalMJT().toLocaleString() }} UM</th>
                                             <th dir="ltr">{{ returnTotalMAS().toLocaleString() }} UM</th>
                                             <th dir="ltr">{{ returnTotalMNet().toLocaleString() }} UM</th>
@@ -189,6 +191,7 @@ const showModal = ref(false);
 const props = defineProps({
     salaires: Object,
     employeurs: Object,
+    grades: Object,
 });
 
 const modalClosed = () => {

@@ -69,6 +69,7 @@
                                 <tr>
                                     <th style="width: 50px">#</th>
                                     <th>العمال</th>
+                                    <th>الرتبة</th>
                                     <th>الهاتف</th>
                                     <th>التاريخ</th>
                                     <th>أيام العمل</th>
@@ -86,6 +87,7 @@
                                 >
                                     <td>{{ index + 1 }}.</td>
                                     <td>{{ salaire.employeur.name }}</td>
+                                    <td>{{ grades[salaire.employeur.grade_id] }}</td>
                                     <td dir="ltr">
                                         {{ salaire.employeur.tel }}
                                     </td>
@@ -114,7 +116,7 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th colspan="5">المجموع الكامل</th>
+                                    <th colspan="6">المجموع الكامل</th>
                                     <th dir="ltr">
                                         {{
                                             returnTotalMJT().toLocaleString()
@@ -189,6 +191,7 @@ const datePrint = ref(formattedDate);
 
 const props = defineProps({
     salaires: Object,
+    grades: Object
 });
 
 const returnTotalMJT = function () {
@@ -216,7 +219,11 @@ const returnTotalMAS = function () {
 };
 
 onMounted(() => {
+    print();
+});
+
+const print = _.throttle(() => {
     window.addEventListener("load", window.print());
-})
+}, 5000);
 
 </script>

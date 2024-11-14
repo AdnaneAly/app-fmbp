@@ -6,6 +6,7 @@ use App\Http\Requests\AvanceSalaireRequest;
 use App\Models\AvanceSalaire;
 use App\Models\Boulanger;
 use App\Models\Employeur;
+use App\Models\Grade;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -34,7 +35,8 @@ class AvanceSalaireController extends Controller
             ->latest()
             ->paginate($per_page ?? 5);
         $employeurs = Employeur::all();
-        return inertia('Depence/AvanceSalaire/Index', compact('avancesalaires', 'employeurs'));
+        $grades = Grade::pluck('name', 'id');
+        return inertia('Depence/AvanceSalaire/Index', compact('avancesalaires', 'employeurs', 'grades'));
     }
 
     /**
@@ -100,8 +102,9 @@ class AvanceSalaireController extends Controller
                 $query->whereMonth("date", $month);
             })
             ->latest()
-            ->paginate($per_page ?? 5);
-        return inertia('Depence/AvanceSalaire/PrintAvanceSalaire', compact('avancesalaires'));
+            ->paginate($per_page ?? 100);
+            $grades = Grade::pluck('name', 'id');
+        return inertia('Depence/AvanceSalaire/PrintAvanceSalaire', compact('avancesalaires', 'grades'));
     }
 
 

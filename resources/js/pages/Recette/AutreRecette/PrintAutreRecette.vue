@@ -170,6 +170,10 @@ const returnTotal = function () {
 };
 
 onMounted(() => {
-    window.addEventListener("load", window.print());
+    print();
 });
+
+const print = _.throttle(() => {
+    window.addEventListener("load", window.print());
+}, 5000);
 </script>
