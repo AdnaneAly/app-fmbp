@@ -39,7 +39,8 @@
                                     <div class="col-sm-2"></div>
                                     <div class="col-sm-8">
                                         <table class="table table-sm no-border">
-                                            <tr>
+                                            <tbody>
+                                                <tr>
                                                 <td
                                                     style="
                                                         text-align: center;
@@ -113,6 +114,8 @@
                                                     </strong>
                                                 </td>
                                             </tr>
+                                            </tbody>
+
                                         </table>
                                     </div>
                                     <!-- /.col -->
@@ -244,7 +247,8 @@
                                 <!-- Table row -->
                                 <div style="margin-top: 1em" class="col-sm-12">
                                     <table class="table no-border">
-                                        <tr>
+                                        <tbody>
+                                            <tr>
                                             <td
                                                 style="text-align: left"
                                                 colspan="2"
@@ -270,6 +274,8 @@
                                                 <strong>{{ datePrint }}</strong>
                                             </td>
                                         </tr>
+                                        </tbody>
+
                                     </table>
                                 </div>
 

@@ -84,7 +84,7 @@
                                     <td>
                                         {{ recette.boulanger.name }}
                                     </td>
-                                    <td>{{ recette.month }}</td>
+                                    <td>{{ monthImpot[recette.month] }}</td>
                                     <td>{{ recette.date }}</td>
                                     <td>{{ recette.numeroFacture }}</td>
                                     <td>
@@ -172,6 +172,21 @@ const etatImpot = {
     'SEMIPAYE': 'تسوية',
     'FERMER': 'مغلقة',
     'EXONERER': 'إعفاء',
+}
+
+const monthImpot = {
+    'JANVIER': 'يناير',
+    'FEVRIER': 'قبراير',
+    'MARS': 'مارس',
+    'AVRIL': 'ابريل',
+    'MAI': 'مايو',
+    'JUIN': 'يونيو',
+    'JUILLET': 'يوليو',
+    'AOUT': 'اغصطس',
+    'SEPTEMBRE': 'سبتمبر',
+    'OCTOBRE': 'اكتوبر',
+    'NOVEMBRE': 'نوفمبر',
+    'DECEMENBRE': 'دجمبر'
 }
 
 const urlParams = new URLSearchParams(location.search);
