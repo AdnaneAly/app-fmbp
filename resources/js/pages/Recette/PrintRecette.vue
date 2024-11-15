@@ -20,7 +20,8 @@
                 <div style="margin-top: 2em" dir="rtl" class="row">
                     <div class="col-sm-12">
                         <table class="table no-border">
-                            <tr>
+                            <tbody>
+                                <tr>
                                 <td
                                     style="
                                         text-align: center;
@@ -41,6 +42,8 @@
                                     colspan="2"
                                 ></td>
                             </tr>
+                            </tbody>
+
                         </table>
                     </div>
 
@@ -132,7 +135,8 @@
 
                 <div style="margin-top: 1em" class="col-sm-12">
                     <table class="table no-border">
-                        <tr>
+                        <tbody>
+                            <tr>
                             <td style="text-align: left" colspan="2">
                                 المحاسب
                             </td>
@@ -146,6 +150,8 @@
                                 <strong>{{ datePrint }}</strong>
                             </td>
                         </tr>
+                        </tbody>
+
                     </table>
                 </div>
             </div>

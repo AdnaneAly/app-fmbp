@@ -96,8 +96,6 @@ class AutreRecetteController extends Controller
      */
     public function edit(AutreRecette $autrerecette)
     {
-        $boulangers = Boulanger::all();
-        $typerecettes = TypeRecette::all();
         return response()->json(["autreRecette" => $autrerecette]);
     }
 

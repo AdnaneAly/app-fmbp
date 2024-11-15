@@ -214,6 +214,43 @@
                 <li
                     class="nav-item"
                     :class="{
+                        'menu-open': $page.component.startsWith('Observation/'),
+                    }"
+                >
+                    <a
+                        href="#"
+                        class="nav-link"
+                        :class="{
+                            active: $page.component.startsWith('Observation/'),
+                        }"
+                    >
+                        <i class="nav-icon fas fa-user"></i>
+                        <p>
+                            Observations
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <Link
+                                :href="route('observation.index')"
+                                class="nav-link"
+                                :class="{
+                                    active:
+                                        $page.component == 'Observation/Index',
+                                }"
+                            >
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Liste</p>
+                            </Link>
+                        </li>
+                    </ul>
+                </li>
+
+
+                <li
+                    class="nav-item"
+                    :class="{
                         'menu-open': $page.component.startsWith('Operation/'),
                     }"
                 >

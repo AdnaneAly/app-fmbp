@@ -8,6 +8,7 @@ use App\Http\Controllers\DepenceController;
 use App\Http\Controllers\EmployeurController;
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ObservationController;
 use App\Http\Controllers\ProprietaireController;
 use App\Http\Controllers\RecetteController;
 use App\Http\Controllers\SalaireController;
@@ -33,6 +34,7 @@ Route::get('boulanger/print', [BoulangerController::class, 'print'])->middleware
 Route::get('boulanger/printDetail', [BoulangerController::class, 'printDetail'])->middleware('auth')->name('boulanger.printDetail');
 Route::get('employeur/print', [EmployeurController::class, 'print'])->middleware('auth')->name('employeur.print');
 Route::get('autrerecette/print', [AutreRecetteController::class, 'print'])->middleware('auth')->name('autrerecette.print');
+Route::get('observation/print', [ObservationController::class, 'print'])->middleware('auth')->name('observation.print');
 Route::fallback(fn() => Redirect::to('/'));
 
 
@@ -52,6 +54,7 @@ Route::group(["middleware" => "auth"], function(){
     Route::resource('recette', RecetteController::class);
     Route::resource('autrerecette', AutreRecetteController::class);
     Route::resource('depence', DepenceController::class);
+    Route::resource('observation', ObservationController::class);
 });
 
 
