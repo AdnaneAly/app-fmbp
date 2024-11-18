@@ -24,8 +24,8 @@
                 <tr>
                   <td style="text-align: center; font-size: x-large" colspan="2">
                     <strong>
-                      قائمة مصاريف الرواتب {{ monthSalaire > 0 ? "الشهر" : "" }} :
-                      {{ monthSalaire }}
+                      قائمة الملاحظات على مخبزة :
+                      {{ props.observations.boulanger.name }}
                     </strong>
                   </td>
                   <td style="text-align: right; font-size: x-large" colspan="2"></td>
@@ -51,61 +51,29 @@
             >
               <thead>
                 <tr>
-                  <th style="width: 50px">#</th>
-                  <th>العمال</th>
-                  <th>الرتبة</th>
-                  <th>الهاتف</th>
-                  <th>التاريخ</th>
-                  <th>أيام العمل</th>
-                  <th>المبلغ المقابل</th>
-                  <th>المبلغ المقتطع</th>
-                  <th>المبلغ بعد الاقتطاع</th>
-                  <th>التوقيع</th>
+                  <th style="width: 5%; text-align: center">#</th>
+                  <th style="width: 15%">العامل</th>
+                  <th style="width: 10%">التاريخ</th>
+                  <th style="width: 60%">الملاحظة</th>
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(salaire, index) in props.salaires.data" :key="index">
+                <tr>
+                  <td>{{ 1 }}.</td>
+                  <td>{{ observations.employeur.name }}</td>
+                  <td>{{ observations.date }}</td>
+                  <td>{{ observations.message }}</td>
+                </tr>
+                <tr
+                  v-for="(observation, index) in props.observations.comments"
+                  :key="index"
+                >
                   <td>{{ index + 1 }}.</td>
-                  <td>{{ salaire.employeur.name }}</td>
-                  <td>{{ grades[salaire.employeur.grade_id] }}</td>
-                  <td dir="ltr">
-                    {{ salaire.employeur.tel }}
-                  </td>
-                  <td>{{ salaire.date }}</td>
-                  <td>{{ salaire.nombreJoursTravail }}</td>
-                  <td dir="ltr">
-                    {{ salaire.montantJoursTravail.toLocaleString() }}
-                    UM
-                  </td>
-                  <td dir="ltr">
-                    {{ salaire.montantAS.toLocaleString() }}
-                    UM
-                  </td>
-                  <td dir="ltr">
-                    {{ salaire.montantNet.toLocaleString() }}
-                    UM
-                  </td>
-                  <td></td>
+                  <td>{{ employeur[observation.employeur_id] }}</td>
+                  <td>{{ observation.date }}</td>
+                  <td>{{ observation.message }}</td>
                 </tr>
               </tbody>
-              <tfoot>
-                <tr>
-                  <th colspan="6">المجموع الكامل</th>
-                  <th dir="ltr">
-                    {{ returnTotalMJT().toLocaleString() }}
-                    UM
-                  </th>
-                  <th dir="ltr">
-                    {{ returnTotalMAS().toLocaleString() }}
-                    UM
-                  </th>
-                  <th dir="ltr">
-                    {{ returnTotalMNet().toLocaleString() }}
-                    UM
-                  </th>
-                  <td></td>
-                </tr>
-              </tfoot>
             </table>
           </div>
           <!-- /.col -->
@@ -141,7 +109,7 @@
 </template>
 <script>
 import { onMounted, ref } from "vue";
-import AuthLayout from "../../../Layouts/PrintLayout.vue";
+import AuthLayout from "../../Layouts/PrintLayout.vue";
 
 export default {
   layout: AuthLayout,
@@ -149,40 +117,14 @@ export default {
 </script>
 
 <script setup>
-const urlParams = new URLSearchParams(location.search);
-const monthSalaire = ref(urlParams.get("month"));
 const date = new Date();
 const formattedDate = date.toISOString().slice(0, 10);
 const datePrint = ref(formattedDate);
 
 const props = defineProps({
-  salaires: Object,
-  grades: Object,
+  observations: Object,
+  employeur: Object,
 });
-
-const returnTotalMJT = function () {
-  var total = 0;
-  props.salaires.data.forEach((element) => {
-    total += element.montantJoursTravail;
-  });
-  return total;
-};
-
-const returnTotalMNet = function () {
-  var total = 0;
-  props.salaires.data.forEach((element) => {
-    total += element.montantNet;
-  });
-  return total;
-};
-
-const returnTotalMAS = function () {
-  var total = 0;
-  props.salaires.data.forEach((element) => {
-    total += element.montantAS;
-  });
-  return total;
-};
 
 onMounted(() => {
   $(document).ready(function () {

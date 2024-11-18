@@ -41,13 +41,16 @@
                                     </div>
                                     <div class="row">
                                         <table class="table table-bordered" id="invoice_details">
-                                            <tr>
+                                            <thead>
+                                                <tr>
                                                     <th>مسح</th>
                                                     <th>نوع المصروف</th>
                                                     <th>المستفيد</th>
                                                     <th>ملاحظات</th>
                                                     <th>المبلغ</th>
                                                 </tr>
+                                            </thead>
+
                                         <tbody id="depence_fields">
 
                                             <tr class="cloning_row " v-for="(item, index) in forms" :key="item" id="0">

@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AutreRecetteController;
 use App\Http\Controllers\AvanceSalaireController;
 use App\Http\Controllers\BoulangerController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DepenceController;
 use App\Http\Controllers\EmployeurController;
 use App\Http\Controllers\GradeController;
@@ -35,6 +36,8 @@ Route::get('boulanger/printDetail', [BoulangerController::class, 'printDetail'])
 Route::get('employeur/print', [EmployeurController::class, 'print'])->middleware('auth')->name('employeur.print');
 Route::get('autrerecette/print', [AutreRecetteController::class, 'print'])->middleware('auth')->name('autrerecette.print');
 Route::get('observation/print', [ObservationController::class, 'print'])->middleware('auth')->name('observation.print');
+Route::get('observation/prints', [ObservationController::class, 'prints'])->middleware('auth')->name('observation.prints');
+Route::post('comment/{comment}', [CommentController::class, 'updateComment'])->middleware('auth')->name('comment.updateComment');
 Route::fallback(fn() => Redirect::to('/'));
 
 
@@ -55,6 +58,7 @@ Route::group(["middleware" => "auth"], function(){
     Route::resource('autrerecette', AutreRecetteController::class);
     Route::resource('depence', DepenceController::class);
     Route::resource('observation', ObservationController::class);
+    Route::resource('comment', CommentController::class);
 });
 
 

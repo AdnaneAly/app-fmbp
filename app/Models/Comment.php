@@ -25,11 +25,6 @@ class Comment extends Model
     ];
 
 
-    public function imageUrl(): string
-    {
-        return Storage::disk('public')->url($this->image);
-    }
-
 
     public function observations()
     {

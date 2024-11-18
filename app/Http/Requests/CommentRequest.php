@@ -11,7 +11,7 @@ class CommentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,12 @@ class CommentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'observation_id'    => ['required', 'integer', 'exists:observations,id'],
+            'employeur_id'      => ['required', 'integer', 'exists:employeurs,id'],
+            'date'              => ['required', 'date'],
+            'message'           => ['required', 'string'],
+            'image'             => ['nullable', 'image', 'max:2000'],
+            'annee'             => ['required', 'string'],
         ];
     }
 }

@@ -60,7 +60,11 @@ class ObservationController extends Controller
      */
     public function show(Observation $observation)
     {
-        return inertia('Observation/ShowObservation');
+        $observations = Observation::with('boulanger', 'employeur', 'comments')->where('boulanger_id', $observation->boulanger_id)->first();
+        //dd($observations);
+        $employeur = Employeur::pluck('name', 'id');
+        $employeurs = Employeur::all();
+        return inertia('Observation/ShowObservation', compact('observations', 'employeur', 'employeurs'));
     }
 
 
@@ -69,7 +73,37 @@ class ObservationController extends Controller
      */
     public function print(Request $request)
     {
-        //
+
+        $search = $request->search;
+        $per_page = $request->per_page;
+        $boulanger_id = $request->boulanger_id;
+        $employeur_id = $request->employeur_id;
+
+        $observations = Observation::with('boulanger', 'employeur')
+            ->when($search, function($query) use($search){
+                $query->where("name", "like", "%${search}%");
+            })
+            ->when($boulanger_id, function($query) use($boulanger_id){
+                $query->where("boulanger_id", $boulanger_id);
+            })
+            ->when($employeur_id, function($query) use($employeur_id){
+                $query->where("employeur_id", $employeur_id);
+            })
+            ->latest()
+            ->paginate($per_page ?? 5);
+        return inertia('Observation/PrintObservation', compact('observations'));
+    }
+
+    /**
+     * Display the specified resource.
+     */
+
+    public function prints(Request $request)
+    {
+        $observations = Observation::with('boulanger', 'employeur', 'comments')
+            ->find($request->id);
+        $employeur = Employeur::pluck('name', 'id');
+        return inertia('Observation/PrintComment', compact('observations','employeur'));
     }
 
     /**
