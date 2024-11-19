@@ -13,6 +13,7 @@ class Recette extends Model
     use HasFactory;
     use SoftDeletes;
     protected $table = "recettes";
+    //public $annee = session()->get('annee');
     protected $fillable = [
         'boulanger_id',
         'type_recette',
@@ -48,11 +49,13 @@ class Recette extends Model
 
     static public function etatRecetteCountes($boulanger_id)
     {
+        $annee = session()->get('annee');
         try {
             //code...
             $query = DB::table('recettes')
             ->where('deleted_at', NULL)
             ->where('boulanger_id', $boulanger_id)
+            ->where('annee', $annee)
             ->select('type_recette', DB::raw('COUNT(*) as total'))
             ->groupBy('type_recette')
             ->get()
@@ -68,11 +71,13 @@ class Recette extends Model
 
     static public function etatRecetteMontant($boulanger_id)
     {
+        $annee = session()->get('annee');
         try {
             //code...
             $query = DB::table('recettes')
             ->where('deleted_at', NULL)
             ->where('boulanger_id', $boulanger_id)
+            ->where('annee', $annee)
             ->select('type_recette', DB::raw('SUM(montant) as total'))
             ->groupBy('type_recette')
             ->get()
@@ -90,6 +95,34 @@ class Recette extends Model
         $query = self::all()->whereBetween('date', [$debut, $fin])->groupBy('type_recette')->map(function ($group) {
             return $group->count();
         });
+        return $query;
+    }
+
+
+    static public function counteRecetteType()
+    {
+        $annee = session()->get('annee');
+        $query = self::all()->where('annee', $annee)->where('type_recette', 'NONPAYE')->groupBy('boulanger_id')->map(function ($group) {
+            return $group->count();
+        });
+        return $query;
+    }
+
+
+    static public function counteRecetteByBoulanger()
+    {
+        $annee = session()->get('annee');
+        $query = self::all()->where('annee', $annee)->groupBy('boulanger_id')->map(function ($group) {
+            return $group->count();
+        });
+        return $query;
+    }
+
+
+    static public function counteRecetteBoulanger($boulanger_id)
+    {
+        $annee = session()->get('annee');
+        $query = self::all()->where('annee', $annee)->where('boulanger_id', $boulanger_id)->count();
         return $query;
     }
 

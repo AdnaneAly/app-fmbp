@@ -20,26 +20,28 @@
         <div style="margin-top: 2em" dir="rtl" class="row">
           <div class="col-sm-12">
             <table class="table no-border">
-              <tr>
-                <td style="text-align: left"><strong>الموقع : </strong></td>
-                <td style="text-align: right">{{ boulanger.address }}</td>
-                <td style="text-align: left; font-size: x-large">
-                  <strong> المخبزة : </strong>
-                </td>
-                <td style="text-align: right; font-size: x-large">
-                  {{ boulanger.name }}
-                </td>
-                <td style="text-align: left"><strong>المالك : </strong></td>
-                <td style="text-align: right">{{ boulanger.proprietaire.name }}</td>
-              </tr>
-              <tr>
-                <td style="text-align: left"><strong>المجموعة : </strong></td>
-                <td style="text-align: right"></td>
-                <td></td>
-                <td></td>
-                <td style="text-align: left"><strong>الهاتف : </strong></td>
-                <td style="text-align: right">{{ boulanger.proprietaire.tel }}</td>
-              </tr>
+              <tbody>
+                <tr>
+                  <td style="text-align: left"><strong>الموقع : </strong></td>
+                  <td style="text-align: right">{{ boulanger.address }}</td>
+                  <td style="text-align: left; font-size: x-large">
+                    <strong> المخبزة : </strong>
+                  </td>
+                  <td style="text-align: right; font-size: x-large">
+                    {{ boulanger.name }}
+                  </td>
+                  <td style="text-align: left"><strong>المالك : </strong></td>
+                  <td style="text-align: right">{{ boulanger.proprietaire.name }}</td>
+                </tr>
+                <tr>
+                  <td style="text-align: left"></td>
+                  <td style="text-align: right"></td>
+                  <td></td>
+                  <td></td>
+                  <td style="text-align: left"><strong>الهاتف : </strong></td>
+                  <td style="text-align: right">{{ boulanger.proprietaire.tel }}</td>
+                </tr>
+              </tbody>
             </table>
           </div>
 
@@ -73,7 +75,15 @@
                   <td>{{ index + 1 }}.</td>
                   <td>{{ monthAR }}</td>
                   <td>
-                    {{ recetteImpot(month).length != 1 ? recetteImpot(month).date : "" }}
+                    {{
+                      recetteImpot(month).length != 1
+                        ? recetteImpot(month).type_recette === "NONPAYE" ||
+                          recetteImpot(month).type_recette === "FERMER" ||
+                          recetteImpot(month).type_recette === "EXONERER"
+                          ? ""
+                          : recetteImpot(month).date
+                        : ""
+                    }}
                   </td>
                   <td>
                     {{
@@ -159,9 +169,15 @@
                   </tr>
                   <tr>
                     <th>لم تدفع</th>
-                    <td>{{ boulanger.arriere }}</td>
+                    <td>{{ props.etatscountes.NONPAYE ?? 0 }}</td>
                     <th dir="ltr">
-                      {{ (boulanger.arriere * 55000).toLocaleString() }} UM
+                      {{
+                        (props.etatscountes.NONPAYE > 0
+                          ? props.etatscountes.NONPAYE * 5500
+                          : ""
+                        ).toLocaleString()
+                      }}
+                      UM
                     </th>
                   </tr>
                 </tbody>

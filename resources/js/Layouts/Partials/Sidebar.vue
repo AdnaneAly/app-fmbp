@@ -16,7 +16,7 @@
             }"
           >
             <i class="nav-icon far fa-calendar-alt"></i>
-            <p>Situation</p>
+            <p>الوضعية</p>
           </Link>
         </li>
         <li class="nav-item">
@@ -29,8 +29,8 @@
           >
             <i class="nav-icon fa fa-bold"></i>
             <p>
-              Boulangers
-              <span class="badge badge-info right">4</span>
+              المخابز
+
             </p>
           </Link>
         </li>
@@ -44,13 +44,9 @@
             }"
           >
             <i class="nav-icon fas fa-user"></i>
-            <p>
-              Employeurs
-            </p>
+            <p>العمال</p>
           </Link>
         </li>
-
-
 
         <li
           class="nav-item"
@@ -67,7 +63,7 @@
           >
             <i class="nav-icon fa fa-plus-circle"></i>
             <p>
-              Recettes
+              المداخيل
               <i class="right fas fa-angle-left"></i>
             </p>
           </a>
@@ -81,7 +77,7 @@
                 }"
               >
                 <i class="far fa-circle nav-icon"></i>
-                <p>Impots</p>
+                <p>الجباية</p>
               </Link>
             </li>
           </ul>
@@ -95,7 +91,7 @@
                 }"
               >
                 <i class="far fa-circle nav-icon"></i>
-                <p>Aute recettes</p>
+                <p>مداخيل اخرى</p>
               </Link>
             </li>
           </ul>
@@ -115,7 +111,7 @@
           >
             <i class="nav-icon fas fa-minus-circle"></i>
             <p>
-              Depences
+              المصاريف
               <i class="right fas fa-angle-left"></i>
             </p>
           </a>
@@ -129,7 +125,7 @@
                 }"
               >
                 <i class="far fa-circle nav-icon"></i>
-                <p>Depences quotidienne</p>
+                <p>مصاريف</p>
               </Link>
             </li>
           </ul>
@@ -143,7 +139,7 @@
                 }"
               >
                 <i class="far fa-circle nav-icon"></i>
-                <p>Avance salaire</p>
+                <p>مقدمات</p>
               </Link>
             </li>
           </ul>
@@ -157,45 +153,23 @@
                 }"
               >
                 <i class="far fa-circle nav-icon"></i>
-                <p>Salaire</p>
+                <p>رواتب</p>
               </Link>
             </li>
           </ul>
         </li>
 
-        <li
-          class="nav-item"
-          :class="{
-            'menu-open': $page.component.startsWith('Observation/'),
-          }"
-        >
-          <a
-            href="#"
+        <li class="nav-item">
+          <Link
+            :href="route('observation.index')"
             class="nav-link"
             :class="{
               active: $page.component.startsWith('Observation/'),
             }"
           >
-            <i class="nav-icon fas fa-user"></i>
-            <p>
-              Observations
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <Link
-                :href="route('observation.index')"
-                class="nav-link"
-                :class="{
-                  active: $page.component == 'Observation/Index',
-                }"
-              >
-                <i class="far fa-circle nav-icon"></i>
-                <p>Liste</p>
-              </Link>
-            </li>
-          </ul>
+            <i class="nav-icon fas fa-comment"></i>
+            <p>الملاحظات</p>
+          </Link>
         </li>
 
         <li
@@ -213,7 +187,7 @@
           >
             <i class="nav-icon fas fa-cog"></i>
             <p>
-              Operations
+              الإعدادت
               <i class="right fas fa-angle-left"></i>
             </p>
           </a>
@@ -227,7 +201,7 @@
                 }"
               >
                 <i class="far fa-circle nav-icon"></i>
-                <p>Grades</p>
+                <p>الرتب</p>
               </Link>
             </li>
             <li class="nav-item">
@@ -239,7 +213,7 @@
                 }"
               >
                 <i class="far fa-circle nav-icon"></i>
-                <p>Proprietaires</p>
+                <p>أصحاب المخابز</p>
               </Link>
             </li>
 
@@ -252,7 +226,7 @@
                 }"
               >
                 <i class="far fa-circle nav-icon"></i>
-                <p>Type de depences</p>
+                <p>أنواع المصاريف</p>
               </Link>
             </li>
             <li class="nav-item">
@@ -264,7 +238,7 @@
                 }"
               >
                 <i class="far fa-circle nav-icon"></i>
-                <p>Type de recettes</p>
+                <p>أنواع المداخيل</p>
               </Link>
             </li>
           </ul>

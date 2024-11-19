@@ -36,13 +36,14 @@ class EmployeurRequest extends FormRequest
 
     public function messages(){
         return [
-            'name' => 'Le nom de l\'employeur est obligatoire',
-            'grade_id' => 'Le grade est obligatoire',
-            'montantSalaire' => 'La salaire est obligatoire',
-            'montantSalaire.min' => 'La salaire est doit etre >= 0',
-            'montantSalaire.max' => 'La salaire est doit etre < 500000',
-            'date' => 'Date est obligatoire',
-            'etat' => 'L\'etat est obligatoire'
+            'name' => 'يجب كتابة اسم العامل',
+            'grade_id' => 'يجب تحديد رتبة العامل',
+            'montantSalaire' => 'يجب كتابة راتب العامل',
+            'montantSalaire.min' => 'الراتب يجب ان يكون >= 0',
+            'montantSalaire.max' => 'الراتب يجب ان يكون < 500000',
+            'tel' => 'يجب تحديد الهاتف',
+            'date' => 'يجب تحديد التاريخ',
+            'etat' => 'يجب تحديد وضعية العامل'
         ];
     }
 }

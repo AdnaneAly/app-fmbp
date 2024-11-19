@@ -29,19 +29,19 @@ class AutreRecetteRequest extends FormRequest
             'numeroFacture'     => ['nullable', 'numeric', "unique:autre_recettes,numeroFacture,{$id}","unique:recettes,numeroFacture,{$id}"],
             'date' => ['required', 'date'],
             'description'=> ['nullable', 'string'],
-            'annee'=> ['string'],
+            'annee'=> ['required'],
         ];
     }
 
 
     public function messages(){
         return [
-            'type_recette_id' => 'Le type de recette est obligatoire',
-            'montant' => 'La montant est obligatoire',
-            'montant.min' => 'La montant est doit etre >= 0',
-            'montant.max' => 'La montant est doit etre < 1000000',
-            'numeroFacture.unique' => 'Le numero de facture est doit etre unique',
-            'date' => 'La date est obligatoire',
+            'type_recette_id' => 'يجب تحديد نوع الدخل',
+            'montant' => 'يجب تحديد المبلغ',
+            'montant.min' => 'المبلغ يجب ان يكون اكبر من 0',
+            'montant.max' => 'المبلغ يجب ان يكون اقل من 10000000',
+            'numeroFacture.unique' => 'رقم الوصل موجود ',
+            'date' => 'يجب تحديد التاريخ',
             'annee' => 'L\'annee est obligatoire'
         ];
     }

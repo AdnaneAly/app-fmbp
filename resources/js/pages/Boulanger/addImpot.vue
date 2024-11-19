@@ -31,6 +31,7 @@
                   >
                     <option value="" selected="selected">إختر...</option>
                     <option value="PAYE">دفعت</option>
+                    <option value="NONPAYE">لم تدفع</option>
                     <option value="SEMIPAYE">تسوية</option>
                     <option value="FERMER">مغلقة</option>
                     <option value="EXONERER">إعفاء</option>
@@ -42,10 +43,9 @@
                 <div class="form-group">
                   <label for="InputFacture">رقم الوصل :</label>
                   <input
-                    type="text"
+                    type="number"
                     class="form-control"
                     id="InputFacture"
-                    placeholder="ادخل رقم الوصل هنا..."
                     v-model="form.numeroFacture"
                     :disabled="
                       form.type_recette === 'FERMER' ||
@@ -71,7 +71,6 @@
                     type="number"
                     class="form-control"
                     id="InputAddress"
-                    placeholder="ادخل المبلغ هنا ..."
                     :disabled="form.type_recette !== 'SEMIPAYE'"
                     v-model="form.montant"
                     :class="{
@@ -92,6 +91,11 @@
                     :class="{
                       'is-invalid': form.errors.date,
                     }"
+                    :disabled="
+                      form.type_recette === 'FERMER' ||
+                      form.type_recette === 'NONPAYE' ||
+                      form.type_recette === 'EXONERER'
+                    "
                   />
                   <span v-if="form.errors.date" class="error invalid-feedback">{{
                     form.errors.date
@@ -129,7 +133,7 @@
 </template>
 
 <script setup>
-import { watch, ref } from "vue";
+import { watch } from "vue";
 import { useForm } from "@inertiajs/vue3";
 import { useSwalSuccess, useSwalError } from "../../composables/alert";
 
@@ -208,7 +212,7 @@ const soumettre = () => {
 
 const etatImpot = (event) => {
   if (event.target.value == "PAYE") {
-    form.montant = 55000;
+    form.montant = 5500;
   } else {
     form.montant = 0;
   }

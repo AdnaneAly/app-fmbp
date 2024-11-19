@@ -65,6 +65,11 @@ class ProprietaireController extends Controller
      */
     public function destroy(Proprietaire $proprietaire)
     {
+        $countBoulanger = $proprietaire->boulangers()->count();
+        if($countBoulanger > 0) {
+            return redirect()->back()->withErrors( 'لايمكن مسح هذا المالك لأن لديه مخابز');
+        }
+
         $proprietaire->delete();
         return redirect()->back();
     }

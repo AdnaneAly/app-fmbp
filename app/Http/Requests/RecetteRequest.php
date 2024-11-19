@@ -31,16 +31,17 @@ class RecetteRequest extends FormRequest
             'date'              => ['required', 'date'],
             'month'             => ['required'],
             'description'       => ['nullable', 'string'],
-            'annee'             => ['string'],
+            'annee'             => ['required'],
         ];
     }
 
 
     public function messages(){
         return [
-            'boulanger_id' => 'La boulangerie est obligatoire',
-            'numeroFacture.unique' => 'Le numero de facture est doit etre unique',
-            'date' => 'La date est obligatoire',
+            'boulanger_id' => 'يجب تحديد المخبزة',
+            'type_recette' => 'يجب تحديد حالة الجباية',
+            'numeroFacture.unique' => 'رقم الوصل موجود مسبقا',
+            'date' => 'يجب تحديد تاريخ التسديد',
             'annee' => 'L\'annee est obligatoire'
         ];
     }

@@ -27,7 +27,16 @@ class ObservationRequest extends FormRequest
             'created_by'    => ['required', 'integer', 'exists:users,id'],
             'date'          => ['required', 'date'],
             'message'       => ['required', 'string'],
-            'annee'       => ['required', 'string'],
+            'annee'       => ['required'],
+        ];
+    }
+
+    public function messages(){
+        return [
+            'boulanger_id' => 'يجب تحديد المخبزة',
+            'employeur_id' => 'يجب تحديد العامل',
+            'date' => 'يجب تحديد التاريخ',
+            'message' => 'يجب كتابة الملاحظة',
         ];
     }
 }

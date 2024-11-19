@@ -41,7 +41,7 @@ class HandleInertiaRequests extends Middleware
                     "user" => $request->user() ? [
                         "id" => $request->user()->id,
                         "name" => $request->user()->name,
-                        "created_at" => $request->user()->created_at
+                        "created_at" => $request->user()->created_at,
                     ]: null
                 ];
             }

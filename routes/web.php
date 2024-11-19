@@ -23,10 +23,13 @@ Route::get('/login', [AuthController::class, 'login'])->middleware('guest')->nam
 Route::post('/login', [AuthController::class, 'dologin']);
 Route::delete('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
 Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('home');
-Route::get('/contact', [HomeController::class, 'contact'])->middleware('auth')->name('contact');
-Route::get('/situation', [SituationController::class, 'index'])->middleware('auth')->name('situation.index');
-Route::post('/situation/etat', [SituationController::class, 'etat'])->middleware('auth')->name('situation.etat');
-Route::get('/salaire/print', [SalaireController::class, 'print'])->middleware('auth')->name('salaire.print');
+Route::get('contact', [HomeController::class, 'contact'])->middleware('auth')->name('contact');
+Route::get('situation', [SituationController::class, 'index'])->middleware('auth')->name('situation.index');
+Route::get('situation/printetat', [SituationController::class, 'printetat'])->middleware('auth')->name('situation.printetat');
+Route::get('situation/printrecette', [SituationController::class, 'printrecette'])->middleware('auth')->name('situation.printrecette');
+Route::get('situation/printdepence', [SituationController::class, 'printdepence'])->middleware('auth')->name('situation.printdepence');
+Route::post('situation/etat', [SituationController::class, 'etat'])->middleware('auth')->name('situation.etat');
+Route::get('salaire/print', [SalaireController::class, 'print'])->middleware('auth')->name('salaire.print');
 Route::get('salaireavancer/{id}', [AvanceSalaireController::class, 'getAvanceSalaire'])->middleware('auth')->name('salaireavancer');
 Route::get('avancesalaire/print', [AvanceSalaireController::class, 'print'])->middleware('auth')->name('avancesalaire.print');
 Route::get('depence/print', [DepenceController::class, 'print'])->middleware('auth')->name('depence.print');

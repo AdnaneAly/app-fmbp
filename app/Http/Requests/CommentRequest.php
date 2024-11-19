@@ -26,8 +26,18 @@ class CommentRequest extends FormRequest
             'employeur_id'      => ['required', 'integer', 'exists:employeurs,id'],
             'date'              => ['required', 'date'],
             'message'           => ['required', 'string'],
-            'image'             => ['nullable', 'image', 'max:2000'],
-            'annee'             => ['required', 'string'],
+            'image'             => ['nullable', 'image', 'max:3000'],
+            'annee'             => ['required'],
+        ];
+    }
+
+
+    public function messages(){
+        return [
+            'employeur_id' => 'يجب تحديد المراقب',
+            'date' => 'يجب تحديد التاريخ',
+            'message' => 'يجب كتابة الملاحظة',
+            'image.max' => 'حجم الصورة كبير جدا',
         ];
     }
 }

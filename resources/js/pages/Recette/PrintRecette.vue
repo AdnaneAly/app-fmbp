@@ -67,7 +67,14 @@
                     {{ recette.boulanger.name }}
                   </td>
                   <td>{{ monthImpot[recette.month] }}</td>
-                  <td>{{ recette.date }}</td>
+                  <td>
+                    {{
+                      recette.type_recette === "PAYE" ||
+                      recette.type_recette === "SEMIPAYE"
+                        ? recette.date
+                        : ""
+                    }}
+                  </td>
                   <td>{{ recette.numeroFacture }}</td>
                   <td>
                     <span
@@ -143,6 +150,7 @@ export default {
 <script setup>
 const etatImpot = {
   PAYE: "دفعت",
+  NONPAYE: "لم تدقغ",
   SEMIPAYE: "تسوية",
   FERMER: "مغلقة",
   EXONERER: "إعفاء",

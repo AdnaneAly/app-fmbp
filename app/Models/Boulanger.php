@@ -37,4 +37,10 @@ class Boulanger extends Model
         return $this->belongsTo(Proprietaire::class);
     }
 
+
+    public function recettes()
+    {
+        return $this->hasMany(Recette::class);
+    }
+
 }

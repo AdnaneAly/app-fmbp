@@ -45,7 +45,13 @@
                       <th>{{ monthAR }}</th>
                       <td>
                         {{
-                          recetteImpot(month).length != 1 ? recetteImpot(month).date : ""
+                          recetteImpot(month).length != 1
+                            ? recetteImpot(month).type_recette === "NONPAYE" ||
+                              recetteImpot(month).type_recette === "FERMER" ||
+                              recetteImpot(month).type_recette === "EXONERER"
+                              ? ""
+                              : recetteImpot(month).date
+                            : ""
                         }}
                       </td>
                       <td>
@@ -57,7 +63,7 @@
                       </td>
                       <td>
                         <span
-                          class="badge"
+                          class="badge text-md"
                           :class="
                             recetteImpot(month).type_recette === 'PAYE'
                               ? 'bg-success'
@@ -147,7 +153,7 @@
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from "vue";
+import { onMounted, ref } from "vue";
 import { useSwalConfirm, useSwalError, useSwalSuccess } from "../../composables/alert";
 import { router } from "@inertiajs/vue3";
 import addImpot from "./addImpot.vue";
@@ -155,6 +161,7 @@ import EditImpot from "./EditImpot.vue";
 
 const etatImpot = {
   PAYE: "دفعت",
+  NONPAYE: "لم تدفع",
   SEMIPAYE: "تسوية",
   FERMER: "مغلقة",
   EXONERER: "إعفاء",
@@ -218,17 +225,17 @@ const deleteImpotBoulanger = (id) => {
   router.delete(url, {
     onSuccess: (page) => {
       // afficher un message de succes
-      useSwalSuccess("Le boulangerie supprime avec succés");
+      useSwalSuccess("تم مسح الجباية بنجاح");
     },
     onError: (errors) => {
       // afficher un message d'error
-      useSwalError("Une erreur s'est produite");
+      useSwalError(errors[0]);
     },
   });
 };
 
 const deleteConfimation = (id) => {
-  const message = "Etes vous sur de supprimer cette boulangerie";
+  const message = "هل انت متأكد من مسح هذه الجباية؟";
   useSwalConfirm(message, () => {
     deleteImpotBoulanger(id);
   });
@@ -243,7 +250,6 @@ const recetteImpot = (monthId) => {
   }
   return impots;
 };
-
 const returnTotal = function () {
   var total = 0;
   props.recettes.forEach((element) => {

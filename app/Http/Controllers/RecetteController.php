@@ -158,7 +158,7 @@ class RecetteController extends Controller
 
             DB::commit();
 
-            return redirect()->back();
+            return redirect()->route('boulanger.show', $request->boulanger_id);
 
         } catch (\Exception $e) {
             //Exception $e;
@@ -182,7 +182,7 @@ class RecetteController extends Controller
 
             DB::commit();
 
-            return redirect()->back();
+            return redirect()->route('boulanger.show', $recette->boulanger_id);
 
         } catch (\Exception $e) {
             //Exception $e;

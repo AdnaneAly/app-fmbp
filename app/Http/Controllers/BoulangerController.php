@@ -28,7 +28,9 @@ class BoulangerController extends Controller
             ->latest()
             ->paginate($per_page ?? 5);
         $proprietaires = Proprietaire::all();
-        return inertia('Boulanger/Index', compact('boulangers', 'proprietaires'));
+        $countNonPaye = Recette::counteRecetteType();
+        //dd($countNonPaye);
+        return inertia('Boulanger/Index', compact('boulangers', 'proprietaires', 'countNonPaye'));
     }
 
     /**
@@ -78,6 +80,7 @@ class BoulangerController extends Controller
             })
             ->latest()
             ->paginate($per_page ?? 5);
+
         return inertia('Boulanger/PrintBoulanger', compact('boulangers'));
     }
 
@@ -90,9 +93,11 @@ class BoulangerController extends Controller
         $boulanger = Boulanger::with('proprietaire')->find($request->id);
         $recettes = Recette::where('boulanger_id', $request->id)->orderBy('month', 'asc')->get();
         $etatscountes = Recette::etatRecetteCountes($request->id);
+        $countRecettes = Recette::counteRecetteBoulanger($request->id);
+        //dd($countRecette);
         $etatsmontants = Recette::etatRecetteMontant($request->id);
         //dd($etatsmontants);
-        return inertia('Boulanger/PrintShowBoulanger', compact('boulanger', 'recettes', 'etatscountes', 'etatsmontants'));
+        return inertia('Boulanger/PrintShowBoulanger', compact('boulanger', 'recettes', 'etatscountes', 'etatsmontants','countRecettes'));
     }
 
     /**
@@ -118,6 +123,11 @@ class BoulangerController extends Controller
      */
     public function destroy(Boulanger $boulanger)
     {
+        $countRecettes = $boulanger->recettes()->count();
+        if($countRecettes > 0) {
+            return redirect()->back()->withErrors( 'لايمكن مسح المخبزة لأنها تحتوي على مداخيل');
+        }
+
         $boulanger->delete();
         return redirect()->back();
     }

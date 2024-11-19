@@ -34,11 +34,11 @@ class BoulangerRequest extends FormRequest
 
     public function messages(){
         return [
-            'name' => 'Le nom de la boulangerie est obligatoire',
-            'name.unique' => 'Le nom de la boulangerie doit etre unique',
-            'address' => 'L\'adresse est obligatoire',
-            'proprietaire_id' => 'Proprietaire est obligatoire',
-            'etat' => 'L\'etat est obligatoire'
+            'name' => 'اسم المخبزة إلزامي',
+            'name.unique' => 'إسم المخبزة موجود مسبقا',
+            'address' => 'يجب تحديد مكان المخبزة',
+            'proprietaire_id' => 'يجب تحديد المالك',
+            'etat' => 'يجب تحديد وضعية المخبزة'
         ];
     }
 }

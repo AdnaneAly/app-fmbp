@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -22,7 +23,7 @@ class AuthController extends Controller
         $credentials = $request->validated();
         if(Auth::attempt($credentials)){
             $request->session()->regenerate();
-            //session(['annee' => $request->annee]);
+            session(['annee' => $request->annee]);
             $defaultRoute =  redirect('home');
             //$imtended_route = redirect()->intended($defaultRoute);
 

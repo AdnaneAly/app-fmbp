@@ -30,24 +30,21 @@ class SalaireRequest extends FormRequest
             'montantAS' => ['required', 'numeric','min:0', 'max:500000'],
             'date' => ['required', 'date'],
             'description'=> ['nullable', 'string'],
-            'annee'=> ['required','string'],
+            'annee'=> ['required'],
         ];
     }
 
 
     public function messages(){
         return [
-            'employeur_id' => 'L\'employeur est obligatoire',
-            'nombreJoursTravail' => 'Les nombres Jours Travail est obligatoire',
-            'nombreJoursTravail.min' => 'Les nombres Jours Travail est doit etre >= 0',
-            'nombreJoursTravail.max' => 'Les nombres Jours Travail est doit etre < 31',
-            'montantJoursTravail' => 'La montant Jours Travail est obligatoire',
-            'montantJoursTravail.min' => 'La montant Jours Travail est doit etre >= 0',
-            'montantJoursTravail.max' => 'La montant Jours Travail est doit etre < 500000',
+            'employeur_id' => 'يجب تحديد العامل',
+            'nombreJoursTravail' => 'يجب تحديد عدد ايام العمل',
+            'nombreJoursTravail.min' => 'عدد ايام العمل يجب ان يكون >= 0',
+            'nombreJoursTravail.max' => 'عدد ايام العمل يجب ان يكون <= 31',
             'montantNet' => 'La montant Net est obligatoire',
             'montantNet.min' => 'La montant Net est doit etre >= 0',
             'montantNet.max' => 'La montant Net est doit etre < 500000',
-            'date' => 'La date est obligatoire',
+            'date' => 'يجب تحديد التاريخ',
             'annee' => 'L\'annee est obligatoire'
         ];
     }

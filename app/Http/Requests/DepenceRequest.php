@@ -27,7 +27,7 @@ class DepenceRequest extends FormRequest
             'created_by' => ['required', 'integer','exists:users,id'],
             'montant' => ['numeric', 'min:0', 'max:500000'],
             'date' => ['required', 'date'],
-            'annee'=> ['required','string'],
+            'annee'=> ['required'],
             'description' => ['nullable', 'string'],
         ];
     }

@@ -53,6 +53,14 @@ class DepenceController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request->all());
+        $request->validate([
+            'formData'          => 'required|array',
+            'created_by'        => 'required|integer|exists:users,id',
+            'employeur_id'      => 'nullable',
+            'date'              => 'required|date',
+            'annee'             => 'required',
+        ]);
 
         try {
             //code...

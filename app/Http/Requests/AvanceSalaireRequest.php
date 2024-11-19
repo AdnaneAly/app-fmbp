@@ -27,18 +27,18 @@ class AvanceSalaireRequest extends FormRequest
             'montantAvanceSalaire' => ['required', 'numeric','min:0','max:500000'],
             'date' => ['required', 'date'],
             'description'=> ['nullable'],
-            'annee'=> ['string'],
+            'annee'=> ['required'],
             'etat'=> ['nullable'],
         ];
     }
 
     public function messages(){
         return [
-            'employeur_id' => 'L\'employeur est obligatoire',
-            'montantAvanceSalaire' => 'La montant Avance Salaire est obligatoire',
-            'montantAvanceSalaire.min' => 'La montant Avance Salaire est doit etre >= 0',
-            'montantAvanceSalaire.max' => 'La montant Avance Salaire est doit etre < 500000',
-            'date' => 'La date est obligatoire',
+            'employeur_id' => 'يجب تحديد العامل',
+            'montantAvanceSalaire' => 'يجب تحديد المبلغ المقدم',
+            'montantAvanceSalaire.min' => 'المبلغ المقدم يجب ان يكون >= 0',
+            'montantAvanceSalaire.max' => 'المبلغ المقدم يجب ان يكون < 500000',
+            'date' => 'يجب تحديد التاريخ',
             'etat' => 'L\'etat est obligatoire',
             'annee' => 'L\'annee est obligatoire'
         ];

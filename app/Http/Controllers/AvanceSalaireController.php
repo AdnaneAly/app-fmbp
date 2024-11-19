@@ -171,7 +171,7 @@ class AvanceSalaireController extends Controller
                 return redirect()->back();
             }
 
-            return redirect()->back()->withErrors( 'Obss L\'Etat déja payé on ne peut pas le supprimer');
+            return redirect()->back()->withErrors( 'للأسف ! لايمكن مسح مبلغ مقدم تم تسديده');
 
 
 
