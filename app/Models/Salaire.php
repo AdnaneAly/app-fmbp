@@ -38,6 +38,13 @@ class Salaire extends Model
         return $query;
     }
 
+    static public function montantSalairesSTQ($month)
+    {
+        $annee = session()->get('annee');
+        $query = self::select()->whereMonth('date', $month)->where('annee', $annee)->sum('montantNet');
+        return $query;
+    }
+
     public function employeur()
     {
         return $this->belongsTo(Employeur::class);

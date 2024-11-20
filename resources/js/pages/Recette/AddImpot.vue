@@ -1,4 +1,13 @@
 <template>
+  <button
+    type="button"
+    class="btn btn-block btn-primary"
+    data-toggle="modal"
+    data-target="#addImpotBolanger"
+  >
+    <i class="fa fa-plus"></i> إضافة
+  </button>
+
   <div
     dir="rtl"
     class="modal fade"
@@ -17,6 +26,51 @@
         <div class="modal-body">
           <form action="" @submit.prevent="soumettre" id="addFormImpotBoulanger">
             <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>المخابز :</label>
+                  <select
+                    class="form-control"
+                    style="width: 100%"
+                    v-model="form.boulanger_id"
+                    :class="{
+                      'is-invalid': form.errors.boulanger_id,
+                    }"
+                  >
+                    <option value="" selected="selected">إختر...</option>
+                    <option
+                      v-for="boulanger in props.boulangers"
+                      :value="boulanger.id"
+                      :key="boulanger.id"
+                    >
+                      {{ boulanger.name }}
+                    </option>
+                  </select>
+                  <span v-if="form.errors.boulanger_id" class="error invalid-feedback">{{
+                    form.errors.boulanger_id
+                  }}</span>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="InputImpot">شهر الجباية :</label>
+                  <select v-model="form.month" class="form-control">
+                    <option value="" selected>إختر...</option>
+                    <option value="JANVIER">يناير</option>
+                    <option value="FEVRIER">قبراير</option>
+                    <option value="MARS">مارس</option>
+                    <option value="AVRIL">ابريل</option>
+                    <option value="MAI">مايو</option>
+                    <option value="JUIN">يونيو</option>
+                    <option value="JUILLET">يوليو</option>
+                    <option value="AOUT">اغصطس</option>
+                    <option value="SEPTEMBRE">سبتمبر</option>
+                    <option value="OCTOBRE">اكتوبر</option>
+                    <option value="NOVEMBRE">نوفمبر</option>
+                    <option value="DECEMENBRE">دجمبر</option>
+                  </select>
+                </div>
+              </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label>حالة الجباية :</label>
@@ -82,7 +136,7 @@
                   }}</span>
                 </div>
                 <div class="form-group">
-                  <label for="InputDate">تاريخ العملية : </label>
+                  <label for="InputDate">تاريخ التسديد : </label>
                   <input
                     type="date"
                     class="form-control"
@@ -119,7 +173,7 @@
             </div>
           </form>
         </div>
-        <div class="modal-footer justify-content-between">
+        <div class="modal-footer justify-content-start">
           <button type="submit" form="addFormImpotBoulanger" class="btn btn-success">
             حفظ الجباية
           </button>
@@ -139,6 +193,7 @@ import { useSwalSuccess, useSwalError } from "../../composables/alert";
 
 const emit = defineEmits(["modalClosed"]);
 const date = new Date();
+const anneeActualle = date.getFullYear();
 const formattedDate = date.toISOString().slice(0, 10);
 let monthImpot = "";
 
@@ -158,12 +213,8 @@ const months = {
 };
 
 const props = defineProps({
-  boulanger_id: {
-    type: Number,
-    required: true,
-  },
-  mois: {
-    type: String,
+  boulangers: {
+    type: Object,
     required: true,
   },
   show: {
@@ -171,16 +222,15 @@ const props = defineProps({
     default: false,
   },
 });
-
 const form = useForm({
-  boulanger_id: props.boulanger_id,
+  boulanger_id: "",
   type_recette: "",
   created_by: 1,
   montant: "",
   numeroFacture: "",
   date: formattedDate,
   month: "",
-  annee: "2024",
+  annee: anneeActualle,
   description: "",
 });
 
@@ -205,7 +255,7 @@ const soumettre = () => {
     },
     onError: (errors) => {
       console.log(errors);
-      useSwalError("Une erreur s'est produit");
+      useSwalError(errors[0] ?? "Une erreur s'est produit");
     },
   });
 };

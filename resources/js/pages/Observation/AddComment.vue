@@ -109,7 +109,7 @@
             </div>
           </form>
         </div>
-        <div class="modal-footer justify-content-between">
+        <div class="modal-footer justify-content-start">
           <button type="submit" form="addFormComment" class="btn btn-success">
             حفظ الجباية
           </button>
@@ -129,6 +129,7 @@ import { useSwalSuccess, useSwalError } from "../../composables/alert";
 
 const emit = defineEmits(["modalClosed"]);
 const date = new Date();
+const anneeActualle = date.getFullYear();
 const formattedDate = date.toISOString().slice(0, 10);
 
 const image = ref("");
@@ -159,7 +160,7 @@ const form = useForm({
   image: null,
   message: "",
   date: formattedDate,
-  annee: "2024",
+  annee: anneeActualle,
 });
 
 const openModal = () => {

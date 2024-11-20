@@ -109,7 +109,7 @@
             </div>
           </form>
         </div>
-        <div class="modal-footer justify-content-between">
+        <div class="modal-footer justify-content-start">
           <button type="submit" form="EditFormComment" class="btn btn-success">
             حفظ الجباية
           </button>
@@ -130,7 +130,7 @@ import axios from "axios";
 
 const emit = defineEmits(["modalClosed"]);
 const date = new Date();
-const formattedDate = date.toISOString().slice(0, 10);
+const anneeActualle = date.getFullYear();
 
 const image = ref("");
 
@@ -160,7 +160,7 @@ const form = useForm({
   image: null,
   message: "",
   date: null,
-  annee: "2024",
+  annee: anneeActualle,
 });
 
 const openModal = () => {

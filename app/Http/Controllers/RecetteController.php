@@ -21,6 +21,7 @@ class RecetteController extends Controller
         $monthPaye = $request->monthPaye;
         $month = $request->month;
         $etatImpot = $request->etatImpot;
+        $annee = session()->get('annee');
 
         $recettes = Recette::with('boulanger')
             ->when($numeroFacture, function($query) use($numeroFacture){
@@ -38,9 +39,10 @@ class RecetteController extends Controller
             ->when($etatImpot, function($query) use($etatImpot){
                 $query->where("type_recette", $etatImpot);
             })
+            ->where('annee', $annee)
             ->latest()
-            ->paginate($per_page ?? 10);
-        $boulangers = Boulanger::all();
+            ->paginate($per_page ?? 5);
+        $boulangers = Boulanger::orderBy('name', 'asc')->get();
         return inertia('Recette/Index', compact('recettes', 'boulangers'));
     }
 
@@ -49,7 +51,7 @@ class RecetteController extends Controller
      */
     public function create()
     {
-        $boulangers = Boulanger::all();
+        $boulangers = Boulanger::orderBy('name', 'desc')->get();
         return inertia('Recette/CreateRecette', compact( 'boulangers'));
     }
 
@@ -57,6 +59,46 @@ class RecetteController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(RecetteRequest $request)
+    {
+        try {
+            //code...
+            DB::beginTransaction();
+            //dd($request->formData);
+
+            $data = Recette::where('boulanger_id', $request->boulanger_id)->where('month', $request->month)->first();
+
+            if ( $data !== null ) {
+                return redirect()->back()->withErrors('لا يمكنك اضافة جبايتين في مخبزة واحدة لنفس الشهر!');
+            }
+
+            $option = Recette::create($request->validated());
+
+            $boulanger = Boulanger::find($request->boulanger_id);
+
+            $op = DB::table('boulangers')->where('id', $request->boulanger_id)->update(['arriere' => $boulanger->arriere - 1]);
+
+
+            $recettes = Recette::where('boulanger_id', $request->boulanger_id)->orderBy('month', 'asc')->get();
+
+            DB::commit();
+            $boulangers = Boulanger::all();
+            return inertia('Recette/Index', compact('boulangers', 'recettes'));
+
+        } catch (\Exception $e) {
+            //Exception $e;
+            DB::rollBack();
+            dd($e);
+        }
+
+
+
+    }
+
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function storeRecette(RecetteRequest $request)
     {
         try {
             //code...
@@ -112,6 +154,7 @@ class RecetteController extends Controller
         $monthPaye = $request->monthPaye;
         $month = $request->month;
         $etatImpot = $request->etatImpot;
+        $annee = session()->get('annee');
 
         $recettes = Recette::with('boulanger')
             ->when($numeroFacture, function($query) use($numeroFacture){
@@ -129,6 +172,7 @@ class RecetteController extends Controller
             ->when($etatImpot, function($query) use($etatImpot){
                 $query->where("type_recette", $etatImpot);
             })
+            ->where('annee', $annee)
             ->latest()
             ->paginate($per_page ?? 10);
 

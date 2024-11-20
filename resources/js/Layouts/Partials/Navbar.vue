@@ -12,6 +12,9 @@
       <li class="nav-item d-none d-sm-inline-block">
         <Link :href="route('contact')" class="nav-link">Contact</Link>
       </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <Link :href="route('statistic')" class="nav-link">Statistiques</Link>
+      </li>
     </ul>
 
     <ul class="navbar-nav ml-auto">

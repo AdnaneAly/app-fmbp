@@ -47,7 +47,7 @@
 
                   <div class="col-md-2">
                     <select @change="search" v-model="per_page" class="form-control">
-                      <option selected value="">عدد الصفحات...</option>
+                      <option selected value="">عدد الاسطر...</option>
                       <option value="5">5</option>
                       <option value="10">10</option>
                       <option value="50">50</option>
@@ -196,7 +196,7 @@ const per_page = ref("");
 const props = defineProps({
   boulangers: Object,
   proprietaires: Object,
-  countNonPaye: Array,
+  countNonPaye: Object,
 });
 
 const modalClosed = () => {

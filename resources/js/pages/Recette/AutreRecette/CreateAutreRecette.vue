@@ -121,7 +121,7 @@
             </div>
           </form>
         </div>
-        <div class="modal-footer justify-content-between">
+        <div class="modal-footer justify-content-start">
           <button type="submit" form="createFormAutreRecette" class="btn btn-success">
             حفظ الدخل
           </button>
@@ -140,6 +140,7 @@ import { useForm } from "@inertiajs/vue3";
 import { useSwalSuccess, useSwalError } from "../../../composables/alert";
 
 const date = new Date();
+const anneeActualle = date.getFullYear();
 const formattedDate = date.toISOString().slice(0, 10);
 
 const form = useForm({
@@ -149,7 +150,7 @@ const form = useForm({
   created_by: 1,
   montant: "",
   description: "",
-  annee: "2024",
+  annee: anneeActualle,
 });
 
 const props = defineProps({
@@ -172,7 +173,7 @@ const soumettre = () => {
     onSuccess: (page) => {
       // afficher un message de succes
       closeModel();
-      useSwalSuccess("Le autrerecetteie ajouté avec succés");
+      useSwalSuccess("لقد تم تسجيل الدخل");
       form.reset();
     },
     onError: (errors) => {

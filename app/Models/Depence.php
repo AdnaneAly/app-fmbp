@@ -42,6 +42,14 @@ class Depence extends Model
     }
 
 
+    static public function montantDepenceSTQ($month)
+    {
+        $annee = session()->get('annee');
+        $query = self::select()->whereMonth('date', $month)->where('annee', $annee)->sum('montant');
+        return $query;
+    }
+
+
     public function type_depence()
     {
         return $this->belongsTo(TypeDepence::class);

@@ -146,7 +146,7 @@
             </div>
           </form>
         </div>
-        <div class="modal-footer justify-content-between">
+        <div class="modal-footer justify-content-start">
           <button type="submit" form="createFormAvanceSalaire" class="btn btn-success">
             حفظ العملية
           </button>
@@ -166,7 +166,7 @@ import { useSwalSuccess, useSwalError } from "../../../composables/alert";
 const date = new Date();
 const formattedDate = date.toISOString().slice(0, 10);
 const annee = date.getFullYear();
-console.log(annee);
+
 const form = useForm({
   employeur_id: "",
   montantAvanceSalaire: "",

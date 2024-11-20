@@ -20,6 +20,7 @@ class DepenceController extends Controller
         $type_depence_id = $request->type_depence_id;
         $employeur_id = $request->employeur_id;
         $month = $request->month;
+        $annee = session()->get('annee');
 
         $depences = Depence::with('type_depence', 'employeur')
             ->when($type_depence_id, function($query) use($type_depence_id){
@@ -31,6 +32,7 @@ class DepenceController extends Controller
             ->when($month, function($query) use($month){
                 $query->whereMonth("date", $month);
             })
+            ->where('annee', $annee)
             ->latest()
             ->paginate($per_page ?? 10);
         $typedepences = TypeDepence::all();
@@ -116,6 +118,7 @@ class DepenceController extends Controller
         $type_depence_id = $request->type_depence_id;
         $employeur_id = $request->employeur_id;
         $month = $request->month;
+        $annee = session()->get('annee');
 
         $depences = Depence::with('type_depence', 'employeur')
             ->when($type_depence_id, function($query) use($type_depence_id){
@@ -127,6 +130,7 @@ class DepenceController extends Controller
             ->when($month, function($query) use($month){
                 $query->whereMonth("date", $month);
             })
+            ->where('annee', $annee)
             ->latest()
             ->paginate($per_page ?? 10);
         return inertia('Depence/PrintDepence', compact('depences'));

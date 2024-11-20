@@ -15,4 +15,5 @@ window.Swal = Sweetalert2;
 window.$ = jQuery;
 import "admin-lte/plugins/bootstrap/js/bootstrap.bundle";
 import "admin-lte/dist/js/adminlte";
-import "admin-lte/plugins/select2/js/select2.full"
+import "admin-lte/plugins/select2/js/select2.full.min"
+import "admin-lte/plugins/chart.js/Chart.min"

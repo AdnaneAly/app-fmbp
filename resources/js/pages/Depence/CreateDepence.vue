@@ -147,10 +147,13 @@
                     </table>
                   </div>
                 </div>
-                <div class="card-footer">
+                <div class="card-footer justify-content-start">
                   <button type="submit" form="createFormDepence" class="btn btn-success">
                     حفظ المصاريف
                   </button>
+                  <Link :href="route('depence.index')" class="btn btn-secondary mr-3"
+                    >إلغاء العملية</Link
+                  >
                 </div>
               </form>
             </div>
@@ -164,10 +167,10 @@
 <script setup>
 import { useSwalSuccess, useSwalError } from "../../composables/alert";
 import { reactive, ref } from "vue";
-import { router } from "@inertiajs/vue3";
+import { Link, router } from "@inertiajs/vue3";
 const date = new Date();
 const formattedDate = date.toISOString().slice(0, 10);
-const anneeActual = date.getFullYear();
+const anneeActualle = date.getFullYear();
 const dateDepence = ref(formattedDate);
 
 const forms = reactive([
@@ -203,7 +206,7 @@ const props = defineProps({
 const soumettre = () => {
   const date = dateDepence.value;
   const created_by = 1;
-  const annee = anneeActual;
+  const annee = anneeActualle;
   const formData = forms;
   const url = route("depence.store");
   router.post(

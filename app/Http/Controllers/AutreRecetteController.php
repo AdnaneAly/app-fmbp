@@ -19,6 +19,7 @@ class AutreRecetteController extends Controller
         $numeroFacture = $request->numeroFacture;
         $type_recette_id = $request->type_recette_id;
         $month = $request->month;
+        $annee = session()->get('annee');
 
         $autrerecettes = AutreRecette::with('typerecette')
             ->when($type_recette_id, function($query) use($type_recette_id){
@@ -30,6 +31,7 @@ class AutreRecetteController extends Controller
             ->when($month, function($query) use($month){
                 $query->whereMonth("date", $month);
             })
+            ->where('annee', $annee)
             ->latest()
             ->paginate($per_page ?? 5);
         $boulangers = Boulanger::all();
@@ -75,6 +77,7 @@ class AutreRecetteController extends Controller
         $numeroFacture = $request->numeroFacture;
         $type_recette_id = $request->type_recette_id;
         $month = $request->month;
+        $annee = session()->get('annee');
 
         $autrerecettes = AutreRecette::with('typerecette')
             ->when($type_recette_id, function($query) use($type_recette_id){
@@ -86,6 +89,7 @@ class AutreRecetteController extends Controller
             ->when($month, function($query) use($month){
                 $query->whereMonth("date", $month);
             })
+            ->where('annee', $annee)
             ->latest()
             ->paginate($per_page ?? 5);
         return inertia('Recette/AutreRecette/PrintAutreRecette', compact('autrerecettes'));

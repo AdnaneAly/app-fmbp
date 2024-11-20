@@ -118,7 +118,7 @@
             </div>
           </form>
         </div>
-        <div class="modal-footer justify-content-between">
+        <div class="modal-footer justify-content-start">
           <button form="editForm" type="submit" class="btn btn-success">
             حفظ التعديل
           </button>
@@ -220,6 +220,7 @@ const getImpotBoulangerById = () => {
       editImpotBoulanger.date = response.data.recette.date;
       editImpotBoulanger.month = response.data.recette.month;
       editImpotBoulanger.description = response.data.recette.description;
+      editImpotBoulanger.annee = response.data.recette.annee;
     })
     .catch((error) => {
       console.log(error);

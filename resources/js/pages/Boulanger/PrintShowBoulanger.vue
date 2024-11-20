@@ -267,6 +267,7 @@ export default {
 <script setup>
 const etatImpot = {
   PAYE: "دفعت",
+  NONPAYE: "لم تدفع",
   SEMIPAYE: "تسوية",
   FERMER: "مغلقة",
   EXONERER: "إعفاء",

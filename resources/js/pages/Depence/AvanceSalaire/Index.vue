@@ -60,12 +60,14 @@
                       <option value="12">دجمبر</option>
                     </select>
                   </div>
-                  <div class="col-md-1">
+                  <div class="col-md-2">
                     <select @change="search" v-model="per_page" class="form-control ml-3">
+                      <option value="">عدد الأسطر...</option>
                       <option value="5">5</option>
                       <option value="10">10</option>
                       <option value="50">50</option>
                       <option value="100">100</option>
+                      <option value="500">500</option>
                     </select>
                   </div>
                   <div class="col-md-2 ml-3">
@@ -121,11 +123,11 @@
                       </th>
                       <td>
                         <span
-                          class="badge"
+                          class="badge text-md"
                           :class="
                             avancesalaire.etat === 'paye' ? 'bg-success' : 'bg-danger'
                           "
-                          >{{ avancesalaire.etat }}</span
+                          >{{ etat[avancesalaire.etat] }}</span
                         >
                       </td>
                       <td class="d-flex gap-2 text-left">
@@ -186,8 +188,13 @@ import { router } from "@inertiajs/vue3";
 import EditAvanceSalaire from "./EditAvanceSalaire.vue";
 import CreateAvanceSalaire from "./CreateAvanceSalaire.vue";
 
+const etat = {
+  paye: "تم التسديد",
+  noPaye: "لم يسدد بعد",
+};
+
 const employeur_id = ref("");
-const per_page = ref(5);
+const per_page = ref("");
 const editingAvanceSalaireId = ref(0);
 const showModal = ref(false);
 const etatDepence = ref("");

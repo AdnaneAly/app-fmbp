@@ -153,7 +153,7 @@
             </div>
           </form>
         </div>
-        <div class="modal-footer justify-content-between">
+        <div class="modal-footer justify-content-start">
           <button type="submit" form="createFormEmployeur" class="btn btn-success">
             حفظ العامل
           </button>

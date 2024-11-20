@@ -37,6 +37,14 @@ class AvanceSalaire extends Model
     }
 
 
+    static public function montantAvanceSalairesSTQ($month)
+    {
+        $annee = session()->get('annee');
+        $query = self::select()->whereMonth('date', $month)->where('annee', $annee)->sum('montantAvanceSalaire');
+        return $query;
+    }
+
+
 
     public function employeur()
     {

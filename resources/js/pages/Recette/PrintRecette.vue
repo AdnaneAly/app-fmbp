@@ -78,7 +78,7 @@
                   <td>{{ recette.numeroFacture }}</td>
                   <td>
                     <span
-                      class="badge"
+                      class="badge text-md"
                       :class="
                         recette.type_recette === 'PAYE'
                           ? 'bg-success'

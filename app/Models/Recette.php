@@ -126,6 +126,21 @@ class Recette extends Model
         return $query;
     }
 
+    static public function counteRecettesType($typeRecette)
+    {
+        $annee = session()->get('annee');
+        $query = self::all()->where('annee', $annee)->where('type_recette', $typeRecette)->count();
+        return $query;
+    }
+
+
+    static public function montantRecetteSTQ($month)
+    {
+        $annee = session()->get('annee');
+        $query = self::select()->whereMonth('date', $month)->where('annee', $annee)->sum('montant');
+        return $query;
+    }
+
     public function boulanger()
     {
         return $this->belongsTo(Boulanger::class);

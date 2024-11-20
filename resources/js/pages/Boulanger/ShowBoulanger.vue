@@ -138,7 +138,7 @@
     </section>
   </div>
 
-  <addImpot
+  <CreateImpot
     :mois="addingImpotMois"
     :boulanger_id="props.boulanger.id"
     :show="showModal2"
@@ -156,8 +156,8 @@
 import { onMounted, ref } from "vue";
 import { useSwalConfirm, useSwalError, useSwalSuccess } from "../../composables/alert";
 import { router } from "@inertiajs/vue3";
-import addImpot from "./addImpot.vue";
 import EditImpot from "./EditImpot.vue";
+import CreateImpot from "./CreateImpot.vue";
 
 const etatImpot = {
   PAYE: "دفعت",

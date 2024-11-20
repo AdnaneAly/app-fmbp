@@ -19,6 +19,7 @@ class SalaireController extends Controller
         $per_page = $request->per_page;
         $employeur_id = $request->employeur_id;
         $month = $request->month;
+        $annee = session()->get('annee');
 
         $salaires = Salaire::with( 'employeur')
             ->when($employeur_id, function($query) use($employeur_id){
@@ -27,6 +28,7 @@ class SalaireController extends Controller
             ->when($month, function($query) use($month){
                 $query->whereMonth("date", $month);
             })
+            ->where('annee', $annee)
             ->latest()
             ->paginate($per_page ?? 5);
         $employeurs = Employeur::all();
@@ -95,6 +97,7 @@ class SalaireController extends Controller
         $per_page = $request->per_page;
         $employeur_id = $request->employeur_id;
         $month = $request->month;
+        $annee = session()->get('annee');
 
         $salaires = Salaire::with( 'employeur')
             ->when($employeur_id, function($query) use($employeur_id){
@@ -103,6 +106,7 @@ class SalaireController extends Controller
             ->when($month, function($query) use($month){
                 $query->whereMonth("date", $month);
             })
+            ->where('annee', $annee)
             ->latest()
             ->paginate($per_page ?? 5);
             $grades = Grade::pluck('name', 'id');

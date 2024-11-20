@@ -19,6 +19,7 @@ class ObservationController extends Controller
         $per_page = $request->per_page;
         $boulanger_id = $request->boulanger_id;
         $employeur_id = $request->employeur_id;
+        $annee = session()->get('annee');
 
         $observations = Observation::with('boulanger', 'employeur')
             ->when($search, function($query) use($search){
@@ -30,10 +31,11 @@ class ObservationController extends Controller
             ->when($employeur_id, function($query) use($employeur_id){
                 $query->where("employeur_id", $employeur_id);
             })
+            ->where('annee', $annee)
             ->latest()
             ->paginate($per_page ?? 5);
-        $boulangers = Boulanger::all();
-        $employeurs = Employeur::all();
+        $boulangers = Boulanger::orderBy('name', 'asc')->get();
+        $employeurs = Employeur::orderBy('name', 'asc')->get();
         return inertia('Observation/Index', compact('observations', 'boulangers', 'employeurs'));
     }
 
@@ -78,6 +80,7 @@ class ObservationController extends Controller
         $per_page = $request->per_page;
         $boulanger_id = $request->boulanger_id;
         $employeur_id = $request->employeur_id;
+        $annee = session()->get('annee');
 
         $observations = Observation::with('boulanger', 'employeur')
             ->when($search, function($query) use($search){
@@ -89,6 +92,7 @@ class ObservationController extends Controller
             ->when($employeur_id, function($query) use($employeur_id){
                 $query->where("employeur_id", $employeur_id);
             })
+            ->where('annee', $annee)
             ->latest()
             ->paginate($per_page ?? 5);
         return inertia('Observation/PrintObservation', compact('observations'));
@@ -129,6 +133,10 @@ class ObservationController extends Controller
      */
     public function destroy(Observation $observation)
     {
+        $countComment = $observation->comments()->count();
+        if($countComment > 0) {
+            return redirect()->back()->withErrors( 'للأسف ! لايمكن مسح هذه الملاحظة  ');
+        }
         $observation->delete();
         return redirect()->back();
     }

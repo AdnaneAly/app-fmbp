@@ -2,7 +2,35 @@
   <section dir="rtl" style="text-align: right" class="content-header">
     <div class="card card-cyan card-outline mx-2">
       <div class="card-header">
-        <h4 class="text-cyan"><i class="fas fa-bars"></i> قائمة المداخيل</h4>
+        <div class="card-default">
+          <div class="row">
+            <div class="col-md-10">
+              <h4 class="text-cyan">
+                <i class="fas fa-bars"></i>
+                قائمة الجبايات
+              </h4>
+            </div>
+            <div class="col-md-1 text-left">
+              <Link
+                :href="
+                  route('recette.print', {
+                    per_page,
+                    searchFacture,
+                    boulanger_id,
+                    etatImpot,
+                    month,
+                    monthPaye,
+                  })
+                "
+                class="btn btn-info"
+                ><i class="fa fa-print"></i> سحب</Link
+              >
+            </div>
+            <div class="col-md-1 text-left">
+              <AddImpot :boulangers="props.boulangers" />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <!-- /.container-fluid -->
@@ -82,29 +110,16 @@
                       <option value="EXONERER">إعفاء</option>
                     </select>
                   </div>
-                  <div class="col-md-1">
+                  <div class="col-md-2">
                     <select @change="search" v-model="per_page" class="form-control">
+                      <option value="">عدد الأسطر...</option>
                       <option value="5">5</option>
                       <option value="10">10</option>
                       <option value="50">50</option>
                       <option value="100">100</option>
+                      <option value="500">500</option>
+                      <option value="1000">1000</option>
                     </select>
-                  </div>
-                  <div class="col-md-1">
-                    <Link
-                      :href="
-                        route('recette.print', {
-                          per_page,
-                          searchFacture,
-                          boulanger_id,
-                          etatImpot,
-                          month,
-                          monthPaye,
-                        })
-                      "
-                      class="btn btn-info"
-                      ><i class="fa fa-print"></i> سحب</Link
-                    >
                   </div>
                 </div>
               </div>
@@ -129,7 +144,9 @@
                       <td>
                         {{ recette.boulanger.name }}
                       </td>
-                      <td>{{ monthImpot[recette.month] }}</td>
+                      <td>
+                        {{ monthImpot[recette.month] }}
+                      </td>
                       <td>
                         {{
                           recette.type_recette === "PAYE" ||
@@ -141,7 +158,7 @@
                       <td>{{ recette.numeroFacture }}</td>
                       <td>
                         <span
-                          class="badge"
+                          class="badge text-md"
                           :class="
                             recette.type_recette === 'PAYE'
                               ? 'bg-success'
@@ -218,6 +235,7 @@ import Pagination from "../../Shared/Pagination.vue";
 import EditRecette from "./EditRecette.vue";
 import { useSwalConfirm, useSwalError, useSwalSuccess } from "../../composables/alert";
 import { router } from "@inertiajs/vue3";
+import AddImpot from "./addImpot.vue";
 
 const etatImpotAR = {
   PAYE: "دفعت",
@@ -228,7 +246,7 @@ const etatImpotAR = {
 };
 const monthImpot = {
   JANVIER: "يناير",
-  FEVRIER: "قبراير",
+  FEVRIER: "فبراير",
   MARS: "مارس",
   AVRIL: "ابريل",
   MAI: "مايو",
@@ -246,7 +264,7 @@ const searchFacture = ref("");
 const boulanger_id = ref("");
 const month = ref("");
 const monthPaye = ref("");
-const per_page = ref(10);
+const per_page = ref("");
 const etatImpot = ref("");
 
 const props = defineProps({
@@ -288,7 +306,7 @@ const deleteConfimation = (id) => {
 const returnTotal = function () {
   var total = 0;
   props.recettes.data.forEach((element) => {
-    total += element.montant;
+    total += element.montant || 0;
   });
   return total;
 };

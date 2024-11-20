@@ -78,7 +78,7 @@
                     <span
                       class="badge"
                       :class="avancesalaire.etat === 'paye' ? 'bg-success' : 'bg-danger'"
-                      >{{ avancesalaire.etat === "paye" ? "دفع" : " لم يدفع" }}</span
+                      >{{ etat[avancesalaire.etat] }}</span
                     >
                   </td>
                 </tr>
@@ -140,6 +140,11 @@ const monthAvanceSalaire = ref(urlParams.get("month"));
 const date = new Date();
 const formattedDate = date.toISOString().slice(0, 10);
 const datePrint = ref(formattedDate);
+
+const etat = {
+  paye: "تم التسديد",
+  noPaye: "لم يسدد بعد",
+};
 
 const props = defineProps({
   avancesalaires: Object,

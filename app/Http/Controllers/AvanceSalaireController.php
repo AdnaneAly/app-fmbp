@@ -21,6 +21,7 @@ class AvanceSalaireController extends Controller
         $employeur_id = $request->employeur_id;
         $etatDepence = $request->etatDepence;
         $month = $request->month;
+        $annee = session()->get('annee');
 
         $avancesalaires = AvanceSalaire::with('employeur')
             ->when($employeur_id, function($query) use($employeur_id){
@@ -32,6 +33,7 @@ class AvanceSalaireController extends Controller
             ->when($month, function($query) use($month){
                 $query->whereMonth("date", $month);
             })
+            ->where('annee', $annee)
             ->latest()
             ->paginate($per_page ?? 5);
         $employeurs = Employeur::all();
@@ -90,6 +92,7 @@ class AvanceSalaireController extends Controller
         $employeur_id = $request->employeur_id;
         $etatDepence = $request->etatDepence;
         $month = $request->month;
+        $annee = session()->get('annee');
 
         $avancesalaires = AvanceSalaire::with('employeur')
             ->when($employeur_id, function($query) use($employeur_id){
@@ -101,6 +104,7 @@ class AvanceSalaireController extends Controller
             ->when($month, function($query) use($month){
                 $query->whereMonth("date", $month);
             })
+            ->where('annee', $annee)
             ->latest()
             ->paginate($per_page ?? 100);
             $grades = Grade::pluck('name', 'id');
@@ -142,7 +146,7 @@ class AvanceSalaireController extends Controller
                 return redirect('avancesalaire');
             }
 
-            return redirect()->back()->withErrors( 'Obss L\'Etat déja payé on ne peut pas le modifier');
+            return redirect()->back()->withErrors( 'للأسف : لا يمكن تعديل هذا المبلغ المقدم!');
 
 
 
