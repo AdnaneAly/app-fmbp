@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AvanceSalaire;
 use App\Models\Boulanger;
 use App\Models\Depence;
+use App\Models\Moyenne;
 use App\Models\Recette;
 use App\Models\Salaire;
 use Illuminate\Http\Request;
@@ -35,6 +36,7 @@ class HomeController extends Controller
         for( $j = 1; $j <= 12; $j++){
             $depences[] = (Depence::montantDepenceSTQ($j) +
             AvanceSalaire::montantAvanceSalairesSTQ($j) +
+            Moyenne::montantMoyennesSTQ($j) +
             Salaire::montantSalairesSTQ($j)) / 100;
         }
 

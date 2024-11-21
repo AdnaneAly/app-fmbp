@@ -28,10 +28,7 @@
             }"
           >
             <i class="nav-icon fa fa-bold"></i>
-            <p>
-              المخابز
-
-            </p>
+            <p>المخابز</p>
           </Link>
         </li>
 
@@ -126,6 +123,20 @@
               >
                 <i class="far fa-circle nav-icon"></i>
                 <p>مصاريف</p>
+              </Link>
+            </li>
+          </ul>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <Link
+                :href="route('moyenne.index')"
+                class="nav-link"
+                :class="{
+                  active: $page.component == 'Depence/Moyenne/Index',
+                }"
+              >
+                <i class="far fa-circle nav-icon"></i>
+                <p>مصاريف العتاد</p>
               </Link>
             </li>
           </ul>

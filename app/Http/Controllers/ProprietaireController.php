@@ -11,9 +11,17 @@ class ProprietaireController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $proprietaires = Proprietaire::with('boulangers')->latest()->paginate(4);
+        $per_page = $request->per_page;
+        $search = $request->search;
+
+        $proprietaires = Proprietaire::with('boulangers')
+            ->when($search, function ($query) use ($search) {
+            $query->where("name", "like", "%${search}%");
+        })
+            ->latest()
+            ->paginate($per_page ?? 10);
         return inertia('Operation/Proprietaire/Index', compact('proprietaires'));
     }
 
@@ -42,6 +50,24 @@ class ProprietaireController extends Controller
         //
     }
 
+
+    /**
+     * Display the specified resource.
+     */
+    public function print(Request $request)
+    {
+        $per_page = $request->per_page;
+        $search = $request->search;
+
+        $proprietaires = Proprietaire::with('boulangers')
+            ->when($search, function ($query) use ($search) {
+            $query->where("name", "like", "%${search}%");
+        })
+            ->latest()
+            ->paginate($per_page ?? 10);
+        return inertia('Operation/Proprietaire/PrintProprietaire', compact('proprietaires'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -66,8 +92,8 @@ class ProprietaireController extends Controller
     public function destroy(Proprietaire $proprietaire)
     {
         $countBoulanger = $proprietaire->boulangers()->count();
-        if($countBoulanger > 0) {
-            return redirect()->back()->withErrors( 'لايمكن مسح هذا المالك لأن لديه مخابز');
+        if ($countBoulanger > 0) {
+            return redirect()->back()->withErrors('لايمكن مسح هذا المالك لأن لديه مخابز');
         }
 
         $proprietaire->delete();

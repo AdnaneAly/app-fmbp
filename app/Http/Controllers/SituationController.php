@@ -7,6 +7,7 @@ use App\Models\AvanceSalaire;
 use App\Models\Boulanger;
 use App\Models\Depence;
 use App\Models\Employeur;
+use App\Models\Moyenne;
 use App\Models\Recette;
 use App\Models\Salaire;
 use App\Models\TypeDepence;
@@ -43,6 +44,9 @@ class SituationController extends Controller
                 $data['dupMontantAutreRecette']     = AutreRecette::montantAutreRecette($debut, $fin);
                 $data['dupAutreRecette']            = AutreRecette::counteAutreRecette($debut, $fin);
 
+                $data['dupMontantDepenceMoyenne']   = Moyenne::montantMoyennes($debut, $fin);
+                $data['dupDepenceMoyenne']          = Moyenne::counteMoyenne($debut, $fin);
+
                 $data['dupMontantDepenceSalaire']   = Salaire::montantSalaires($debut, $fin);
                 $data['dupDepenceSalaire']          = Salaire::counteSalaire($debut, $fin);
 
@@ -66,6 +70,9 @@ class SituationController extends Controller
             } elseif ($rapport === 'depences') {
                 $data['dupMontantDepenceSalaire']   = Salaire::montantSalaires($debut, $fin);
                 $data['dupDepenceSalaire']          = Salaire::counteSalaire($debut, $fin);
+
+                $data['dupMontantDepenceMoyenne']   = Moyenne::montantMoyennes($debut, $fin);
+                $data['dupDepenceMoyenne']          = Moyenne::counteMoyenne($debut, $fin);
 
                 $data['dupMontantAvanceSalaire']    = AvanceSalaire::montantAvanceSalaires($debut, $fin);
                 $data['dupAvanceSalaire']           = AvanceSalaire::counteAvanceSalaire($debut, $fin);

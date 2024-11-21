@@ -85,6 +85,16 @@
                       </tr>
 
                       <tr>
+                        <th style="width: 70%">مجموع مصاريف العتاد</th>
+                        <th dir="ltr" style="width: 10%">
+                          {{ props.data.dupDepenceMoyenne }}
+                        </th>
+                        <td dir="ltr" style="width: 20%" class="text-bold">
+                          {{ props.data.dupMontantDepenceMoyenne.toLocaleString() }}
+                        </td>
+                      </tr>
+
+                      <tr>
                         <th style="width: 70%">مجموع مصاريف الرواتب</th>
                         <th dir="ltr" style="width: 10%">
                           {{ props.data.dupDepenceSalaire }}
@@ -181,6 +191,11 @@ const returnTotalDepence = function () {
   Object.entries(props.data.dupMontantDepence).forEach((montant) => {
     total += montant[1];
   });
-  return total + props.data.dupMontantDepenceSalaire + props.data.dupMontantAvanceSalaire;
+  return (
+    total +
+    props.data.dupMontantDepenceSalaire +
+    props.data.dupMontantAvanceSalaire +
+    props.data.dupMontantDepenceMoyenne
+  );
 };
 </script>

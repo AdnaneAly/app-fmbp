@@ -165,7 +165,7 @@ import { useForm } from "@inertiajs/vue3";
 import { useSwalSuccess, useSwalError } from "../../../composables/alert";
 const date = new Date();
 const formattedDate = date.toISOString().slice(0, 10);
-const annee = date.getFullYear();
+const anneeActualle = date.getFullYear();
 
 const form = useForm({
   employeur_id: "",
@@ -175,7 +175,7 @@ const form = useForm({
   date: formattedDate,
   created_by: 1,
   etat: "noPaye",
-  annee: annee,
+  annee: anneeActualle,
   description: "",
 });
 

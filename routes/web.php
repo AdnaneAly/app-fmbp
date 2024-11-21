@@ -9,6 +9,7 @@ use App\Http\Controllers\DepenceController;
 use App\Http\Controllers\EmployeurController;
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MoyenneController;
 use App\Http\Controllers\ObservationController;
 use App\Http\Controllers\ProprietaireController;
 use App\Http\Controllers\RecetteController;
@@ -34,6 +35,8 @@ Route::post('recette/save', [RecetteController::class, 'storeRecette'])->middlew
 Route::get('salaire/print', [SalaireController::class, 'print'])->middleware('auth')->name('salaire.print');
 Route::get('salaireavancer/{id}', [AvanceSalaireController::class, 'getAvanceSalaire'])->middleware('auth')->name('salaireavancer');
 Route::get('avancesalaire/print', [AvanceSalaireController::class, 'print'])->middleware('auth')->name('avancesalaire.print');
+Route::get('proprietaire/print', [ProprietaireController::class, 'print'])->middleware('auth')->name('proprietaire.print');
+Route::get('moyenne/print', [MoyenneController::class, 'print'])->middleware('auth')->name('moyenne.print');
 Route::get('depence/print', [DepenceController::class, 'print'])->middleware('auth')->name('depence.print');
 Route::get('recette/print', [RecetteController::class, 'print'])->middleware('auth')->name('recette.print');
 Route::get('boulanger/print', [BoulangerController::class, 'print'])->middleware('auth')->name('boulanger.print');
@@ -64,6 +67,7 @@ Route::group(["middleware" => "auth"], function(){
     Route::resource('depence', DepenceController::class);
     Route::resource('observation', ObservationController::class);
     Route::resource('comment', CommentController::class);
+    Route::resource('moyenne', MoyenneController::class);
 });
 
 

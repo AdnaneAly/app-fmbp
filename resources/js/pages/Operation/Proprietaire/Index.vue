@@ -15,9 +15,41 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <div class="col-md-1">
-                  <div class="text-right">
-                    <CreateProprietaire />
+                <div class="row">
+                  <div class="col-md-1">
+                    <div class="text-right">
+                      <CreateProprietaire />
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <input
+                      @keyup="search"
+                      v-model="searchProprietaire"
+                      type="text"
+                      class="form-control ml-3"
+                      placeholder="أبحث عن إسم صاحب مخبزة "
+                    />
+                  </div>
+                  <div class="col-md-2">
+                    <select @change="search" v-model="per_page" class="form-control">
+                      <option selected value="">عدد الاسطر...</option>
+                      <option value="5">5</option>
+                      <option value="10">10</option>
+                      <option value="50">50</option>
+                      <option value="100">100</option>
+                    </select>
+                  </div>
+                  <div class="col-md-2 ml-2">
+                    <Link
+                      :href="
+                        route('proprietaire.print', {
+                          per_page,
+                          searchProprietaire,
+                        })
+                      "
+                      class="btn btn-info"
+                      ><i class="fa fa-print"></i> سحب</Link
+                    >
                   </div>
                 </div>
               </div>
@@ -29,7 +61,6 @@
                       <th style="width: 10px">#</th>
                       <th>إسم صاحب المخبزة</th>
                       <th>رقم الهاتف</th>
-                      <th>المكان</th>
                       <th>عدد المخابز</th>
                       <th style="width: 100px">العمليات</th>
                     </tr>
@@ -42,7 +73,6 @@
                       <td>{{ i + 1 }}.</td>
                       <td>{{ proprietaire.name }}</td>
                       <td>{{ proprietaire.tel }}</td>
-                      <td>{{ proprietaire.address }}</td>
                       <td>
                         {{ proprietaire.boulangers.length }}
                       </td>
@@ -95,10 +125,12 @@ import Pagination from "../../../Shared/Pagination.vue";
 import CreateProprietaire from "./CreateProprietaire.vue";
 import EditProprietaire from "./EditProprietaire.vue";
 import { useSwalConfirm, useSwalError, useSwalSuccess } from "../../../composables/alert";
-import { router } from "@inertiajs/vue3";
+import { Link, router } from "@inertiajs/vue3";
 
 const editingProprietaireId = ref(0);
 const showModal = ref(false);
+const searchProprietaire = ref("");
+const per_page = ref("");
 
 const props = defineProps({
   proprietaires: Object,
@@ -134,4 +166,19 @@ const deleteConfimation = (id) => {
     deleteProprietaire(id);
   });
 };
+
+const search = _.throttle(() => {
+  const url = route("operationproprietaire.index", {
+    search: searchProprietaire.value,
+    per_page: per_page.value,
+  });
+  router.get(
+    url,
+    {},
+    {
+      replace: true,
+      preserveState: true,
+    }
+  );
+}, 500);
 </script>
