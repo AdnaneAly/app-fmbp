@@ -17,7 +17,6 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-
                     <button
                         type="button"
                         @click="closeModel"
@@ -29,7 +28,11 @@
                     <h4 class="modal-title">إضافة رتبة جديدة :</h4>
                 </div>
                 <div class="modal-body">
-                    <form action="" @submit.prevent="soumettre" id="createFormGrade">
+                    <form
+                        action=""
+                        @submit.prevent="soumettre"
+                        id="createFormGrade"
+                    >
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -40,11 +43,17 @@
                                         id="InputName"
                                         placeholder="ادخل اسم الرتبة هنا..."
                                         v-model="nameGrade"
-                                        :class="{'is-invalid': nameError != ''}"
+                                        :class="{
+                                            'is-invalid': nameError != '',
+                                        }"
+                                        :autofocus="true"
                                     />
-                                    <span v-if="nameError != ''" class="error invalid-feedback">{{ nameError }}</span>
+                                    <span
+                                        v-if="nameError != ''"
+                                        class="error invalid-feedback"
+                                        >{{ nameError }}</span
+                                    >
                                 </div>
-
 
                                 <!-- /.form-group -->
                             </div>
@@ -52,8 +61,11 @@
                     </form>
                 </div>
                 <div class="modal-footer justify-content-between">
-
-                    <button type="submit" form="createFormGrade" class="btn btn-success">
+                    <button
+                        type="submit"
+                        form="createFormGrade"
+                        class="btn btn-success"
+                    >
                         حفظ الرتبة
                     </button>
                     <button
@@ -72,9 +84,9 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
-import { router } from '@inertiajs/vue3';
-import { useSwalSuccess, useSwalError } from '../../../composables/alert';
+import { onMounted, ref } from "vue";
+import { router } from "@inertiajs/vue3";
+import { useSwalSuccess, useSwalError } from "../../../composables/alert";
 
 const nameError = ref("");
 
@@ -84,7 +96,7 @@ let createModel = "";
 
 onMounted(() => {
     createModel = $("#createGrade");
-})
+});
 
 const closeModel = () => {
     createModel.modal("hide");
@@ -92,25 +104,26 @@ const closeModel = () => {
 };
 
 const soumettre = () => {
-    const name = nameGrade.value
-    const url = route("operationgrade.store")
+    const name = nameGrade.value;
+    const url = route("operationgrade.store");
     router.post(
-                url,
-                {name},
-                {
-                    onSuccess: (page) => {
-                        closeModel();
-                        // afficher un message de succes
-                        useSwalSuccess("لقد تمت إضافة الرتبة بنجاح !");
-                    },
-                    onError: (errors) => {
-                        // afficher un message d'error
-                        if ( errors.name != null ) {
-                            nameError.value = errors.name;
-                        }
-                        useSwalError("Une erreur s'est produite")
-                    }
+        url,
+        { name },
+        {
+            onSuccess: (page) => {
+                closeModel();
+                // afficher un message de succes
+                useSwalSuccess("لقد تمت إضافة الرتبة بنجاح !");
+            },
+            onError: (errors) => {
+                // afficher un message d'error
+                if (errors.name != null) {
+                    nameError.value = errors.name;
                 }
-            )
-}
+                useSwalError("Une erreur s'est produite");
+            },
+        }
+    );
+};
+
 </script>

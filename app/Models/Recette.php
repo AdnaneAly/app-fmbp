@@ -109,16 +109,6 @@ class Recette extends Model
     }
 
 
-    static public function counteRecetteByBoulanger()
-    {
-        $annee = session()->get('annee');
-        $query = self::all()->where('annee', $annee)->groupBy('boulanger_id')->map(function ($group) {
-            return $group->count();
-        });
-        return $query;
-    }
-
-
     static public function counteRecetteBoulanger($boulanger_id)
     {
         $annee = session()->get('annee');

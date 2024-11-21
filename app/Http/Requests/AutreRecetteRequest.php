@@ -23,10 +23,13 @@ class AutreRecetteRequest extends FormRequest
     {
         $id = $this->autrerecette->id ?? "";
         return [
+            'boulanger_id' => ['nullable', 'integer','exists:boulangers,id'],
             'type_recette_id' => ['required', 'integer','exists:type_recettes,id'],
             'created_by' => ['required', 'integer','exists:users,id'],
             'montant' => ['required', 'numeric','min:0','max:1000000'],
             'numeroFacture'     => ['nullable', 'numeric', "unique:autre_recettes,numeroFacture,{$id}","unique:recettes,numeroFacture,{$id}"],
+            'recette_detail' => ['nullable', 'string'],
+            'reference' => ['nullable', 'string'],
             'date' => ['required', 'date'],
             'description'=> ['nullable', 'string'],
             'annee'=> ['required'],

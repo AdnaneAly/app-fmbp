@@ -49,7 +49,7 @@ class MoyenneController extends Controller
      */
     public function show(Moyenne $moyenne)
     {
-        //
+        return inertia('Depence/Moyenne/ShowMoyenne', compact('moyenne'));
     }
 
 
@@ -69,6 +69,17 @@ class MoyenneController extends Controller
             ->latest()
             ->paginate($per_page ?? 10);
         return inertia('Depence/Moyenne/PrintMoyenne', compact('moyennes'));
+    }
+
+
+    /**
+     * Display the specified resource.
+     */
+    public function printDetail(Request $request)
+    {
+        //dd($request->id);
+        $moyenne = Moyenne::find($request->id);
+        return inertia('Depence/Moyenne/PrintShowMoyenne', compact('moyenne'));
     }
 
     /**

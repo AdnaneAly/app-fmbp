@@ -37,12 +37,14 @@ Route::get('salaireavancer/{id}', [AvanceSalaireController::class, 'getAvanceSal
 Route::get('avancesalaire/print', [AvanceSalaireController::class, 'print'])->middleware('auth')->name('avancesalaire.print');
 Route::get('proprietaire/print', [ProprietaireController::class, 'print'])->middleware('auth')->name('proprietaire.print');
 Route::get('moyenne/print', [MoyenneController::class, 'print'])->middleware('auth')->name('moyenne.print');
+Route::get('moyenne/printDetail', [MoyenneController::class, 'printDetail'])->middleware('auth')->name('moyenne.printDetail');
 Route::get('depence/print', [DepenceController::class, 'print'])->middleware('auth')->name('depence.print');
 Route::get('recette/print', [RecetteController::class, 'print'])->middleware('auth')->name('recette.print');
 Route::get('boulanger/print', [BoulangerController::class, 'print'])->middleware('auth')->name('boulanger.print');
 Route::get('boulanger/printDetail', [BoulangerController::class, 'printDetail'])->middleware('auth')->name('boulanger.printDetail');
 Route::get('employeur/print', [EmployeurController::class, 'print'])->middleware('auth')->name('employeur.print');
 Route::get('autrerecette/print', [AutreRecetteController::class, 'print'])->middleware('auth')->name('autrerecette.print');
+Route::get('autrerecette/printDetail', [AutreRecetteController::class, 'printDetail'])->middleware('auth')->name('autrerecette.printDetail');
 Route::get('observation/print', [ObservationController::class, 'print'])->middleware('auth')->name('observation.print');
 Route::get('observation/prints', [ObservationController::class, 'prints'])->middleware('auth')->name('observation.prints');
 Route::post('comment/{comment}', [CommentController::class, 'updateComment'])->middleware('auth')->name('comment.updateComment');

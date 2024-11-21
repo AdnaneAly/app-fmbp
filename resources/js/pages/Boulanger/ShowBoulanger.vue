@@ -30,19 +30,21 @@
                 <table class="table table-sm table-bordered">
                   <thead>
                     <tr>
-                      <th style="width: 5%">الرقم</th>
-                      <th style="width: 20%">تاريخ الجباية</th>
-                      <th style="width: 15%">تاريخ التسديد</th>
-                      <th style="width: 15%">رقم الوصل</th>
+                      <th style="width: 3%">الرقم</th>
+                      <th style="width: 10%">شهر الجباية</th>
+                      <th style="width: 25%"> الملاحظات</th>
+                      <th style="width: 10%">تاريخ التسديد</th>
+                      <th style="width: 10%">رقم الوصل</th>
                       <th style="width: 10%">الحالة</th>
                       <th style="width: 15%">المبلغ المدفوع</th>
-                      <th style="width: 20%">العمليات</th>
+                      <th style="width: 17%">العمليات</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr v-for="(monthAR, month, index) in months" :key="index">
                       <td>{{ index + 1 }}.</td>
                       <th>{{ monthAR }}</th>
+                      <th>{{ recetteImpot(month).description }}</th>
                       <td>
                         {{
                           recetteImpot(month).length != 1

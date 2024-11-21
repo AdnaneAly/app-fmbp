@@ -81,7 +81,7 @@
                     <thead class="thead-light">
                       <tr>
                         <th>وضعية المخابز</th>
-                        <th>عدد الاشهر</th>
+                        <th>العدد</th>
                         <th>المبلغ المدفوع</th>
                       </tr>
                     </thead>

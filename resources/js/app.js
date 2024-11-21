@@ -2,7 +2,6 @@ import "./bootstrap";
 
 import { createApp, h } from "vue";
 import { route, ZiggyVue } from "../../vendor/tightenco/ziggy";
-
 import { createInertiaApp, Link } from "@inertiajs/vue3";
 import MainLayout from "./Layouts/MainLayout.vue";
 

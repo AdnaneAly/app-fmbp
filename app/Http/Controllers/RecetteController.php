@@ -21,6 +21,7 @@ class RecetteController extends Controller
         $monthPaye = $request->monthPaye;
         $month = $request->month;
         $etatImpot = $request->etatImpot;
+        $filter = $request->filter ?? 'boulanger_id';
         $annee = session()->get('annee');
 
         $recettes = Recette::with('boulanger')
@@ -40,6 +41,7 @@ class RecetteController extends Controller
                 $query->where("type_recette", $etatImpot);
             })
             ->where('annee', $annee)
+            ->orderBy($filter, 'asc')
             ->latest()
             ->paginate($per_page ?? 5);
         $boulangers = Boulanger::orderBy('name', 'asc')->get();

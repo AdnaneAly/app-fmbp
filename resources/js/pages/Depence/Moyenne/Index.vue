@@ -66,13 +66,14 @@
                 <table class="table table-bordered">
                   <thead>
                     <tr>
-                      <th style="width: 50px">#</th>
-                      <th>نوع المصروف</th>
-                      <th>الطراز</th>
-                      <th>المرجع أو اللوحة</th>
-                      <th>التاريخ</th>
-                      <th>المبلغ</th>
-                      <th style="width: 100px">العمليات</th>
+                      <th style="width: 5%">#</th>
+                      <th style="width: 15%">نوع المصروف</th>
+                      <th style="width: 15%">الطراز</th>
+                      <th style="width: 15%">المرجع أو اللوحة</th>
+                      <th style="width: 10%">رقم الوصل</th>
+                      <th style="width: 10%">التاريخ</th>
+                      <th style="width: 15%">المبلغ</th>
+                      <th style="width: 15%">العمليات</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -88,10 +89,23 @@
                         {{ moyenne.reference }}
                       </td>
 
+                      <td>{{ moyenne.numeroFacture }}</td>
                       <td>{{ moyenne.date }}</td>
                       <th dir="ltr">{{ moyenne.montant.toLocaleString() }} UM</th>
 
                       <td class="d-flex gap-2 text-left">
+                        <Link
+                          style="margin-left: 10px"
+                          class="btn btn-primary btn-sm"
+                          :href="
+                            route('moyenne.show', {
+                              moyenne: moyenne.id,
+                            })
+                          "
+                        >
+                          <i class="fas fa-folder"> </i>
+                          تفاصيل
+                        </Link>
                         <button
                           style="margin-left: 10px"
                           class="btn btn-info btn-sm"
@@ -110,7 +124,7 @@
                   </tbody>
                   <tfoot>
                     <tr dir="ltr">
-                      <th colspan="5">المجموع الكامل:</th>
+                      <th colspan="6">المجموع الكامل:</th>
                       <th>{{ returnTotal().toLocaleString() }} UM</th>
                       <td></td>
                     </tr>

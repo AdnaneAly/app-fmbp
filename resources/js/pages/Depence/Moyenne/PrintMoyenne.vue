@@ -72,19 +72,34 @@
                   </td>
                 </tr>
               </tbody>
-              <tfoot>
-                <tr>
-                  <th colspan="5">المجموع الكامل</th>
-                  <th dir="ltr">
-                    {{ returnTotalMJT().toLocaleString() }}
-                  </th>
-                </tr>
-              </tfoot>
+
             </table>
           </div>
           <!-- /.col -->
         </div>
+        <br /><br />
         <!-- /.row -->
+
+        <div class="col-6" dir="rtl" style="text-align: right">
+          <strong>معلومات إضافية :</strong>
+
+          <div style="margin-top: 20px">
+            <table border="1" style="text-align: right; width: 100%" class="table-sm">
+              <tbody>
+                <tr>
+                  <th style="width: 50%">العدد</th>
+                  <th dir="ltr">{{ returnTotal() }}</th>
+                </tr>
+                <tr>
+                  <th>المجموع الكامل :</th>
+                  <th dir="ltr">
+                    {{ returnTotalMoyenne().toLocaleString() }} <small>MRU</small>
+                  </th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
         <hr />
 
         <div style="margin-top: 1em" class="col-sm-12">
@@ -133,12 +148,20 @@ const props = defineProps({
   moyennes: Object,
 });
 
-const returnTotalMJT = function () {
+const returnTotalMoyenne = function () {
   var total = 0;
   props.moyennes.data.forEach((element) => {
     total += element.montant;
   });
   return total;
+};
+
+const returnTotal = function () {
+  var n = 0;
+  props.moyennes.data.forEach((element) => {
+    n += 1;
+  });
+  return n;
 };
 
 onMounted(() => {

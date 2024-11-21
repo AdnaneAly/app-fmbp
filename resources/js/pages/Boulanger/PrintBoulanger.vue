@@ -75,16 +75,22 @@
                       >{{ boulanger.etat }}</span
                     >
                   </td>
-                  <th>{{ boulanger.arriere }}</th>
-                  <th>{{ (boulanger.arriere * 55000).toLocaleString() }}</th>
+                  <th>{{ props.countNonPaye[boulanger.id] }}</th>
+                      <th>
+                        {{
+                          (props.countNonPaye[boulanger.id] > 0
+                            ? props.countNonPaye[boulanger.id] * 5500
+                            : ""
+                          ).toLocaleString()
+                        }}
+                      </th>
                 </tr>
               </tbody>
-              <tfoot>
-                <tr>
+              <tr>
                   <th colspan="6">المجموع :</th>
                   <th>{{ returnTotal().toLocaleString() }}</th>
                 </tr>
-              </tfoot>
+
             </table>
           </div>
           <!-- /.col -->
@@ -132,19 +138,22 @@ const datePrint = ref(formattedDate);
 
 const props = defineProps({
   boulangers: Object,
+  countNonPaye: Object,
 });
 
 const returnTotal = function () {
   var total = 0;
   props.boulangers.data.forEach((element) => {
-    total += element.arriere;
+    total += props.countNonPaye[element.id] ?? 0;
   });
-  return total * 55000;
+  return total * 5500;
 };
 
 onMounted(() => {
-  $(document).ready(function () {
-    window.print();
-  });
+    setTimeout(() => {
+        $(document).ready(function () {
+        window.print();
+    });
+    }, 1000)
 });
 </script>

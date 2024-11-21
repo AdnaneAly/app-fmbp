@@ -17,7 +17,7 @@
               <div class="card-header">
                 <div class="row">
                   <div class="col-md-1">
-                    <CreateAutreRecette :typerecettes="props.typerecettes" />
+                    <CreateAutreRecette :typerecettes="props.typerecettes" :boulangers="props.boulangers" />
                   </div>
                   <div class="col-md-2">
                     <select
@@ -93,13 +93,12 @@
                 <table class="table table-bordered">
                   <thead>
                     <tr>
-                      <th style="width: 50px">#</th>
-                      <th>نوع الدخل</th>
-                      <th>ملاحظة</th>
-                      <th>رقم الوصل</th>
-                      <th>التاريخ</th>
-                      <th>المبلغ</th>
-                      <th style="width: 100px">العمليات</th>
+                      <th style="width: 5%">#</th>
+                      <th style="width: 40%">نوع الدخل</th>
+                      <th style="width: 10%">رقم الوصل</th>
+                      <th style="width: 15%">التاريخ</th>
+                      <th style="width: 15%">المبلغ</th>
+                      <th style="width: 15%">العمليات</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -111,14 +110,25 @@
                       <td>
                         {{ autrerecette.typerecette.name }}
                       </td>
-                      <td>{{ autrerecette.description }}</td>
                       <td>{{ autrerecette.numeroFacture }}</td>
                       <td>{{ autrerecette.date }}</td>
                       <th dir="ltr">
                         {{ autrerecette.montant.toLocaleString() }}
-                        UM
+                        <small>MRU</small>
                       </th>
                       <td class="d-flex gap-2 text-left">
+                        <Link
+                          style="margin-left: 10px"
+                          class="btn btn-primary btn-sm"
+                          :href="
+                            route('autrerecette.show', {
+                              autrerecette: autrerecette.id,
+                            })
+                          "
+                        >
+                          <i class="fas fa-folder"> </i>
+                          تفاصيل
+                        </Link>
                         <button
                           @click="openEditAutreRecette(autrerecette.id)"
                           style="margin-left: 10px"
@@ -138,10 +148,10 @@
                   </tbody>
                   <tfoot>
                     <tr>
-                      <th colspan="5">المجموع :</th>
+                      <th colspan="4">المجموع :</th>
                       <th dir="ltr">
                         {{ returnTotal().toLocaleString() }}
-                        UM
+                        <small>MRU</small>
                       </th>
                       <td></td>
                     </tr>
@@ -168,6 +178,7 @@
     :show="showModal"
     @modal-closed="modalClosed"
     :typerecettes="typerecettes"
+    :boulangers="boulangers"
   />
 </template>
 
@@ -189,6 +200,7 @@ const per_page = ref("");
 const props = defineProps({
   autrerecettes: Object,
   typerecettes: Object,
+  boulangers: Object,
 });
 
 const modalClosed = () => {

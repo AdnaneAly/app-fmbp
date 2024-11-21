@@ -4,12 +4,21 @@
       <div class="card-header">
         <div class="card-default">
           <div class="row">
-            <div class="col-md-10">
+            <div class="col-md-7">
               <h4 class="text-cyan">
                 <i class="fas fa-bars"></i>
                 قائمة الجبايات
               </h4>
             </div>
+            <div class="col-md-3">
+                    <input
+                      @keyup="search"
+                      v-model="searchFacture"
+                      type="text"
+                      class="form-control"
+                      placeholder="ادحل رقم الوصل هنا..."
+                    />
+                  </div>
             <div class="col-md-1 text-left">
               <Link
                 :href="
@@ -91,13 +100,12 @@
                     </select>
                   </div>
                   <div class="col-md-2">
-                    <input
-                      @keyup="search"
-                      v-model="searchFacture"
-                      type="text"
-                      class="form-control"
-                      placeholder="ادحل رقم الوصل هنا..."
-                    />
+                    <select @change="search" v-model="filter" class="form-control">
+                      <option value="" selected> الترتيب حسب...</option>
+                      <option value="boulanger_id">إسم المخبزة</option>
+                      <option value="numeroFacture"> رقم الوصل</option>
+                      <option value="type_recette">الحالة</option>
+                    </select>
                   </div>
                   <div class="col-md-2">
                     <select @change="search" v-model="etatImpot" class="form-control">
@@ -235,7 +243,7 @@ import Pagination from "../../Shared/Pagination.vue";
 import EditRecette from "./EditRecette.vue";
 import { useSwalConfirm, useSwalError, useSwalSuccess } from "../../composables/alert";
 import { router } from "@inertiajs/vue3";
-import AddImpot from "./addImpot.vue";
+import AddImpot from "./AddImpot.vue"
 
 const etatImpotAR = {
   PAYE: "دفعت",
@@ -266,6 +274,7 @@ const month = ref("");
 const monthPaye = ref("");
 const per_page = ref("");
 const etatImpot = ref("");
+const filter = ref("");
 
 const props = defineProps({
   recettes: Object,
@@ -319,6 +328,7 @@ const search = _.throttle(() => {
     month: month.value,
     monthPaye: monthPaye.value,
     etatImpot: etatImpot.value,
+    filter: filter.value,
   });
   router.get(
     url,

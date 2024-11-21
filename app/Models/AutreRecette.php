@@ -15,10 +15,13 @@ class AutreRecette extends Model
 
 
     protected $fillable = [
+        'boulanger_id',
         'type_recette_id',
         'created_by',
         'montant',
         'numeroFacture',
+        'recette_detail',
+        'reference',
         'date',
         'annee',
         'description'
@@ -44,5 +47,11 @@ class AutreRecette extends Model
     public function typeRecette()
     {
         return $this->belongsTo(TypeRecette::class);
+    }
+
+
+    public function boulanger()
+    {
+        return $this->belongsTo(Boulanger::class);
     }
 }

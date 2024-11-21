@@ -38,6 +38,7 @@
                   "
                 ></canvas>
               </div>
+
             </div>
             <!-- /.card-body -->
           </div>
@@ -49,6 +50,7 @@
   <section class="content" dir="rtl" style="text-align: right">
     <div class="container-fluid">
       <!-- Small boxes (Stat box) -->
+
       <div class="row">
         <div class="col-lg-2 col-4">
           <!-- small box -->
@@ -177,7 +179,12 @@ const props = defineProps({
   depences: Array,
 });
 
+
 $(function () {
+
+    //Initialize Select2 Elements
+    //$('.select2').select2()
+
   /* ChartJS
    * -------
    * Here we will create a few charts using ChartJS

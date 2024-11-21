@@ -62,9 +62,11 @@ class AutreRecetteController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(AutreRecette $autreRecette)
+    public function show(AutreRecette $autrerecette)
     {
-        //
+        $typerecette = TypeRecette::pluck('name', 'id');
+        $boulanger = Boulanger::pluck('name', 'id');
+        return inertia('Recette/AutreRecette/ShowAutreRecette', compact( 'autrerecette', 'typerecette', 'boulanger'));
     }
 
 
@@ -93,6 +95,16 @@ class AutreRecetteController extends Controller
             ->latest()
             ->paginate($per_page ?? 5);
         return inertia('Recette/AutreRecette/PrintAutreRecette', compact('autrerecettes'));
+    }
+
+
+    /**
+     * Display the specified resource.
+     */
+    public function printDetail(Request $request)
+    {
+        $autrerecette = AutreRecette::with('typerecette', 'boulanger')->find($request->id);
+        return inertia('Recette/AutreRecette/PrintShowAutreRecette', compact('autrerecette'));
     }
 
     /**

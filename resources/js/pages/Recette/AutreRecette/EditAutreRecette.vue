@@ -63,6 +63,53 @@
                     >{{ editAutreRecette.messageError.montant }}</span
                   >
                 </div>
+                <div v-show="editAutreRecette.type_recette_id == 1" class="form-group">
+                  <label> المخبزة المستهدفة :</label>
+                  <select
+                    class="form-control"
+                    style="width: 100%"
+                    v-model="editAutreRecette.boulanger_id"
+                    :class="{
+                      'is-invalid': editAutreRecette.messageError.hasOwnProperty(
+                        'boulanger_id'
+                      ),
+                    }"
+                  >
+                    <option
+                      v-for="item in props.boulangers"
+                      :value="item.id"
+                      :key="item.id"
+                    >
+                      {{ item.name }}
+                    </option>
+                  </select>
+                  <span
+                    v-if="editAutreRecette.messageError.hasOwnProperty('boulanger_id')"
+                    class="error invalid-feedback"
+                    >{{ editAutreRecette.messageError.boulanger_id }}</span
+                  >
+                </div>
+                <div v-show="editAutreRecette.type_recette_id == 4" class="form-group">
+                  <label for="InputDetail">وصف المصروف :</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="InputDetail"
+                    placeholder="ادخل الوصف هنا..."
+                    v-model="editAutreRecette.recette_detail"
+                    :class="{
+                      'is-invalid': editAutreRecette.messageError.hasOwnProperty(
+                        'recette_detail'
+                      ),
+                    }"
+                  />
+                  <span
+                    v-if="editAutreRecette.messageError.hasOwnProperty('recette_detail')"
+                    class="error invalid-feedback"
+                    >{{ editAutreRecette.messageError.date }}</span
+                  >
+                </div>
+
 
                 <!-- /.form-group -->
               </div>
@@ -104,6 +151,27 @@
                     >{{ editAutreRecette.messageError.numeroFacture }}</span
                   >
                 </div>
+                <div v-show="editAutreRecette.type_recette_id == 4" class="form-group">
+                  <label for="InputType">الطراز أو المرجع :</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="InputType"
+                    placeholder="ادخل المرجع هنا..."
+                    v-model="editAutreRecette.reference"
+                    :class="{
+                      'is-invalid': editAutreRecette.messageError.hasOwnProperty(
+                        'reference'
+                      ),
+                    }"
+                  />
+                  <span
+                    v-if="editAutreRecette.messageError.hasOwnProperty('reference')"
+                    class="error invalid-feedback"
+                    >{{ editAutreRecette.messageError.reference }}</span
+                  >
+                </div>
+
               </div>
               <div class="col-md-12">
                 <!-- textarea -->
@@ -152,11 +220,15 @@ const props = defineProps({
     default: false,
   },
   typerecettes: Object,
+  boulangers: Object,
 });
 
 const editAutreRecette = reactive({
   id: "",
+  boulanger_id: "",
   numeroFacture: "",
+  recette_detail: "",
+  reference: "",
   type_recette_id: "",
   montant: "",
   date: null,
@@ -182,7 +254,10 @@ const soumettre = () => {
     url,
     {
       montant: editAutreRecette.montant,
+      boulanger_id: editAutreRecette.boulanger_id,
       numeroFacture: editAutreRecette.numeroFacture,
+      recette_detail: editAutreRecette.recette_detail,
+      reference: editAutreRecette.reference,
       type_recette_id: editAutreRecette.type_recette_id,
       date: editAutreRecette.date,
       description: editAutreRecette.description,
@@ -212,7 +287,10 @@ const getAutreRecetteById = () => {
     .then((response) => {
       editAutreRecette.id = response.data.autreRecette.id;
       editAutreRecette.montant = response.data.autreRecette.montant;
+      editAutreRecette.boulanger_id = response.data.autreRecette.boulanger_id;
       editAutreRecette.numeroFacture = response.data.autreRecette.numeroFacture;
+      editAutreRecette.recette_detail = response.data.autreRecette.recette_detail;
+      editAutreRecette.reference = response.data.autreRecette.reference;
       editAutreRecette.date = response.data.autreRecette.date;
       editAutreRecette.type_recette_id = response.data.autreRecette.type_recette_id;
       editAutreRecette.description = response.data.autreRecette.description;
@@ -222,6 +300,7 @@ const getAutreRecetteById = () => {
       console.log(error);
     });
 };
+
 
 watch(
   () => props.show,

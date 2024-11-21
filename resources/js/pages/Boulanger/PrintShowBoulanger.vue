@@ -63,17 +63,19 @@
               <thead class="thead-light">
                 <tr>
                   <th style="width: 5%">الرقم</th>
-                  <th style="width: 25%">تاريخ الجباية</th>
-                  <th style="width: 25%">تاريخ التسديد</th>
-                  <th style="width: 15%">رقم الوصل</th>
+                  <th style="width: 10%">شهر الجباية</th>
+                  <th style="width: 35%"> الملاحظات</th>
+                  <th style="width: 15%">تاريخ التسديد</th>
+                  <th style="width: 10%">رقم الوصل</th>
                   <th style="width: 10%">الحالة</th>
-                  <th style="width: 20%">المبلغ المدفوع</th>
+                  <th style="width: 15%">المبلغ المدفوع</th>
                 </tr>
               </thead>
               <tbody>
                 <tr v-for="(monthAR, month, index) in monthImpot" :key="index">
                   <td>{{ index + 1 }}.</td>
                   <td>{{ monthAR }}</td>
+                  <td>{{ recetteImpot(month).description }}</td>
                   <td>
                     {{
                       recetteImpot(month).length != 1
@@ -116,18 +118,19 @@
                   <th dir="ltr">
                     {{
                       recetteImpot(month).length != 1
-                        ? recetteImpot(month).montant.toLocaleString() + " UM"
+                        ? recetteImpot(month).montant.toLocaleString() + " MRU"
                         : ""
                     }}
+
                   </th>
                 </tr>
               </tbody>
               <tfoot>
                 <tr dir="ltr">
-                  <th colspan="5">: المجموع الكامل</th>
+                  <th colspan="6">: المجموع الكامل</th>
                   <th>
                     {{ returnTotal().toLocaleString() }}
-                    UM
+                    <small>MRU</small>
                   </th>
                 </tr>
               </tfoot>
@@ -177,7 +180,7 @@
                           : ""
                         ).toLocaleString()
                       }}
-                      UM
+                      <small>MRU</small>
                     </th>
                   </tr>
                 </tbody>
@@ -207,12 +210,12 @@
                   <tr>
                     <th style="width: 50%">دفعت</th>
                     <td>{{ props.etatscountes.PAYE ?? 0 }}</td>
-                    <th dir="ltr">{{ props.etatsmontants.PAYE }} UM</th>
+                    <th dir="ltr">{{ props.etatsmontants.PAYE.toLocaleString() }} <small>MRU</small></th>
                   </tr>
                   <tr>
                     <th>تسوية</th>
                     <td>{{ props.etatscountes.SEMIPAYE ?? 0 }}</td>
-                    <th dir="ltr">{{ props.etatsmontants.SEMIPAYE }} UM</th>
+                    <th dir="ltr">{{ props.etatsmontants.SEMIPAYE.toLocaleString() }} <small>MRU</small></th>
                   </tr>
                   <tr>
                     <th colspan="2">المجموع الكامل :</th>
@@ -221,7 +224,7 @@
                         (props.etatsmontants.PAYE || 0) +
                         (props.etatsmontants.SEMIPAYE || 0)
                       }}
-                      UM
+                      <small>MRU</small>
                     </th>
                   </tr>
                 </tbody>

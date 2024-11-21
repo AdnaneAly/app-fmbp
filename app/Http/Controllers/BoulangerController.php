@@ -67,7 +67,6 @@ class BoulangerController extends Controller
      */
     public function print(Request $request)
     {
-
         $search = $request->search;
         $per_page = $request->per_page;
         $proprietaire_id = $request->proprietaire_id;
@@ -80,8 +79,8 @@ class BoulangerController extends Controller
             })
             ->latest()
             ->paginate($per_page ?? 5);
-
-        return inertia('Boulanger/PrintBoulanger', compact('boulangers'));
+            $countNonPaye = Recette::counteRecetteType();
+        return inertia('Boulanger/PrintBoulanger', compact('boulangers', 'countNonPaye'));
     }
 
 
